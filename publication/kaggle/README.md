@@ -4,11 +4,11 @@ Title: **PMI Bench: SME Data and Code Maintenance**
 Subtitle: **26 synthetic Python/SQL maintenance workflows and 78 paired request variants**
 Suggested tags: artificial intelligence, programming, SQL, small business, data quality.
 
-Use benchmark/DATASET_CARD.md as the description, and export release 0.4.0:
+Use benchmark/DATASET_CARD.md as the description, and export release 0.5.0:
 
 ```bash
-uv run pmi-bench export --output exports/pmi-bench-0.4.0
-uv run python scripts/package_dataset.py exports/pmi-bench-0.4.0 --output exports/pmi-bench-0.4.0.zip
+uv run pmi-bench export --output exports/pmi-bench-0.5.0
+uv run python scripts/package_dataset.py exports/pmi-bench-0.5.0 --output exports/pmi-bench-0.5.0.zip
 ```
 
 The archive includes tasks, starting workspaces, dialogue conformance fixtures,
@@ -26,7 +26,7 @@ only in a deliberate upload staging copy and regenerate its manifest before pack
 No upload or competition has been created here; no Kaggle credentials are required
 for local export. A Kaggle dataset is not a hidden-test competition.
 
-Link GitHub release v0.4.0 and validation evidence. Describe all cases as original
+Link GitHub release v0.5.0 and validation evidence. Describe all cases as original
 AI-assisted operational simulations. Explain 6/20 public partitions, correlated variants,
 public answers, lack of external review and zero model runs. Supplementary dependency
 checks are separate and do not turn this into a full warehouse or scientific benchmark.

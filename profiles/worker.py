@@ -10,7 +10,10 @@ import sys
 import tempfile
 import unittest
 
-sys.path.insert(0, '/submission')
+sys.path.insert(0, '/evaluator')
+tempfile.tempdir = '/scratch'
+from isolated_client import install
+install(json.loads(Path('/control/task.json').read_text()))
 TASK = sys.argv[1]
 
 
@@ -18,19 +21,34 @@ class PostgreSQL:
     """Small documented SQLite-style binding adapter; not a general SQL translator."""
     def __init__(self, schema):
         import psycopg
-        self.connection = psycopg.connect('host=pmi-database dbname=benchmark user=benchmark password=synthetic-fixture-only', autocommit=True)
-        self.connection.execute('DROP SCHEMA public CASCADE; CREATE SCHEMA public')
-        self.connection.execute(schema)
+        administrator = psycopg.connect('host=pmi-database dbname=benchmark user=benchmark password=synthetic-fixture-only', autocommit=True)
+        with administrator:
+            administrator.execute('DROP SCHEMA public CASCADE; CREATE SCHEMA public')
+            administrator.execute(schema)
+            if administrator.execute("SELECT 1 FROM pg_roles WHERE rolname='candidate_fixture'").fetchone() is None:
+                administrator.execute("CREATE ROLE candidate_fixture LOGIN PASSWORD 'synthetic-restricted-fixture'")
+            administrator.execute('REVOKE CREATE ON SCHEMA public FROM PUBLIC; GRANT USAGE ON SCHEMA public TO candidate_fixture; GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA public TO candidate_fixture')
+        self.connection = psycopg.connect('host=pmi-database dbname=benchmark user=candidate_fixture password=synthetic-restricted-fixture',
+                                          autocommit=True, options='-c statement_timeout=5000 -c lock_timeout=5000')
 
     @property
     def in_transaction(self):
         from psycopg.pq import TransactionStatus
         return self.connection.info.transaction_status != TransactionStatus.IDLE
 
+    def validate_sql(self, sql):
+        import re
+        if ';' in sql or not re.match(r'^\s*(SELECT|INSERT|UPDATE|DELETE|BEGIN|COMMIT|ROLLBACK)\b',sql,re.I):
+            from isolated_client import session
+            session.violations.append('Unauthorized PostgreSQL fixture SQL capability')
+            raise ValueError('Fixture SQL operation is outside the profile contract')
+
     def execute(self, sql, parameters=None):
+        self.validate_sql(sql)
         return self.connection.execute(sql.replace('?', '%s'), parameters)
 
     def executemany(self, sql, parameters):
+        self.validate_sql(sql)
         with self.connection.cursor() as cursor:
             cursor.executemany(sql.replace('?', '%s'), parameters)
 
@@ -205,5 +223,8 @@ result = unittest.TestResult()
 with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
     unittest.defaultTestLoader.loadTestsFromTestCase(CLASSES[TASK]).run(result)
 failures = [{'test':t.id().rsplit('.',1)[-1],'detail':detail[-1600:]} for t,detail in result.failures+result.errors]
-print(json.dumps({'task_id':TASK,'tests_run':result.testsRun,'failures':failures,'accepted':result.testsRun==3 and result.wasSuccessful()}))
-raise SystemExit(0 if result.testsRun==3 and result.wasSuccessful() else 1)
+from isolated_client import session
+if session.violations: failures.append({'test':'test_constraint_judge_boundary','detail':'; '.join(session.violations)[:1000]})
+accepted = result.testsRun==3 and result.wasSuccessful() and not session.violations
+print(json.dumps({'task_id':TASK,'tests_run':result.testsRun+1,'failures':failures,'accepted':accepted}))
+raise SystemExit(0 if accepted else 1)

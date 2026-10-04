@@ -10,7 +10,9 @@ import sys
 import tempfile
 from pathlib import Path
 
-from pmi_bench import runner
+from pmi_bench import runner, control
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from sandbox import aider_container_command
 
 
 HERE = Path(__file__).resolve().parent
@@ -57,7 +59,7 @@ def main(argv=None):
     parser.add_argument('--agent', choices=['mini-swe-agent', 'aider'], required=True)
     parser.add_argument('--python', type=Path, required=True, help='Python in the pinned competitor venv')
     parser.add_argument('--model', required=True, help='Explicit LiteLLM openrouter/... model ID')
-    parser.add_argument('--mode', choices=['plan', 'execute'], required=True)
+    parser.add_argument('--mode', choices=['plan', 'approve', 'execute'], required=True)
     parser.add_argument('--task', required=True)
     parser.add_argument('--variant', choices=['neutral', 'misleading', 'correct'], default='neutral')
     parser.add_argument('--run-dir', type=Path, required=True)
@@ -70,7 +72,7 @@ def main(argv=None):
             raise runner.BenchmarkError('Use an explicit OpenRouter model ID; no model is selected implicitly')
         if not math.isfinite(args.soft_budget_usd) or args.soft_budget_usd <= 0:
             raise runner.BenchmarkError('Budget must be finite and positive')
-        if not os.environ.get('OPENROUTER_API_KEY'):
+        if args.mode != 'approve' and not os.environ.get('OPENROUTER_API_KEY'):
             raise runner.BenchmarkError('OPENROUTER_API_KEY is not configured. Supply it in environment settings, not chat.')
         # Resolving a venv Python symlink loses its site-packages environment.
         python = args.python.absolute()
@@ -89,6 +91,14 @@ def main(argv=None):
             expected = approval_id(planned['text'], request, runner.inventory(directory / 'workspace'))
             if not args.approved_plan or args.approved_plan != expected or planned['approval_id'] != expected:
                 raise runner.BenchmarkError('Explicit approval of the unchanged plan and workspace is required')
+        binding = {'agent': args.agent, 'model': args.model, 'task': args.task, 'variant': args.variant,
+                   'approval_id': expected} if args.mode != 'plan' else None
+        if args.mode == 'approve':
+            control.approve(directory, binding)
+            print('Operator approval recorded outside the agent workspace. No model was called.')
+            return 0
+        if args.mode == 'execute':
+            control.consume(directory, binding)
         workspace = directory / 'workspace'
         before = runner.inventory(workspace)
         logs = directory / args.mode
@@ -103,7 +113,7 @@ def main(argv=None):
             prompt += '\nThe user has explicitly approved this versioned plan:\n' + planned['text']
         settings = {'workspace': str(workspace), 'image': runner.read_json(runner.DEFAULT_ROOT / 'runtime.json')['image'],
                     'model': args.model, 'mode': args.mode, 'prompt': prompt, 'soft_budget_usd': args.soft_budget_usd,
-                    'trajectory': str(logs / 'trajectory.json'), 'response': str(logs / 'response.json')}
+                    'trajectory': str(logs / 'trajectory.json'), 'response': str(logs / 'response.json'), 'editable_files': task['editable_files']}
         settings['container_id_file'] = str(logs / 'container-id.txt')
         (logs / 'settings.json').write_text(json.dumps(settings, indent=2) + '\n')
         if args.agent == 'mini-swe-agent':
@@ -116,6 +126,7 @@ def main(argv=None):
             model_settings.write_text(json.dumps([{'name': args.model, 'edit_format': 'diff',
                 'extra_params': {'temperature': 0, 'max_tokens': 2048, 'timeout': 60}}]))
             command = aider_command(python, args.model, workspace, task, prompt_path, logs, model_settings, args.mode)
+            command = aider_container_command(command, python, workspace, logs, task, args.mode)
         with (logs / 'console.log').open('w') as output:
             try:
                 child_env = dict(os.environ)
@@ -131,6 +142,10 @@ def main(argv=None):
                     container_id = container_file.read_text().strip()
                     if re.fullmatch('[0-9a-f]{64}', container_id):
                         subprocess.run(['docker', 'rm', '-f', container_id], capture_output=True, timeout=10)
+                elif args.agent == 'aider':
+                    # The name comes from our command, never an agent-writable log.
+                    subprocess.run(['docker','rm','-f',command[command.index('--name')+1]],
+                                   capture_output=True,timeout=10)
         if process.returncode != 0:
             raise runner.BenchmarkError(f'Agent failed; inspect {logs / "console.log"}')
         if args.agent == 'mini-swe-agent':
@@ -149,7 +164,7 @@ def main(argv=None):
                        'text': text, 'approval_id': approval_id(text, request, before)}
             runner.write_report(directory / 'plan.json', planned)
             print('Plan saved to ' + str(directory / 'plan.json'))
-            print('Review with the user. Approval ID: ' + planned['approval_id'])
+            print('Review with the user, then invoke --mode approve with this approval ID: ' + planned['approval_id'])
         else:
             report = runner.evaluate(runner.DEFAULT_ROOT, args.task, workspace, args.variant)
             report['competitor'] = {'agent': args.agent, 'model': args.model, 'approval_id': args.approved_plan,

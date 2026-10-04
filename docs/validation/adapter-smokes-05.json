@@ -1,0 +1,24 @@
+{
+  "benchmark_version": "0.5.0",
+  "scripted_no_inference": true,
+  "mini-swe-agent": {
+    "version": "2.4.6",
+    "integration": "passed",
+    "plan_workspace_unchanged": true,
+    "execution_in_place_edit": true
+  },
+  "aider": {
+    "version": "0.86.2",
+    "integration": "passed",
+    "real_edit_engine": true,
+    "protected_context_preserved": true
+  },
+  "real_model_runs": 0,
+  "sources": {
+    "competitors/mini_driver.py": "83a39e5135e1914b3097dba2877c26933437769285bb528965b34b84fa67530d",
+    "competitors/smoke_aider.py": "02d17bc3cf90bd4efc77b28431f6e507992c8e7ad02fbe61a180a5ed4562d028",
+    "competitors/smoke_mini.py": "21016c48943d2a109290eadc9cefad8a08989b68fcd5d299f058eb6c51775e26",
+    "competitors/sandbox.py": "86bde56361d1961f99517268b09b858ea5ea767f2f4b70e93673dbaaabd5048d",
+    "competitors/run.py": "3985bcb6dc2d46e21fab7b30a6ee5a5132ba94469d6b91bc43b088c3f4ff27f4"
+  }
+}

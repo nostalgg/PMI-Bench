@@ -1,5 +1,5 @@
 {
-  "benchmark_version": "0.4.0",
+  "benchmark_version": "0.5.0",
   "model": null,
   "status": "deferred_until_benchmark_review",
   "jobs": [

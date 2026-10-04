@@ -37,7 +37,7 @@ def main():
         workspace.mkdir()
         (workspace / 'probe.py').write_text('original\n')
         settings = {'workspace': str(workspace), 'mode': 'plan', 'model': 'scripted-no-inference',
-                    'image': image, 'soft_budget_usd': 1, 'prompt': 'Adapter smoke test only.',
+                    'editable_files': ['probe.py'], 'image': image, 'soft_budget_usd': 1, 'prompt': 'Adapter smoke test only.',
                     'trajectory': str(directory / 'trajectory.json')}
         result = run(settings, ScriptedModel([
             'printf changed > probe.py',

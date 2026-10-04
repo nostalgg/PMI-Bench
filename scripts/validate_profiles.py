@@ -16,7 +16,10 @@ POSTGRES = set(TARGETS)-{'supplier_catalog','temporal_features'}
 
 
 def checked(command, **kwargs):
-    return subprocess.run(command,check=True,capture_output=True,text=True,timeout=60,**kwargs)
+    result = subprocess.run(command,capture_output=True,text=True,timeout=60,**kwargs)
+    if result.returncode:
+        raise runner.BenchmarkError('Profile infrastructure failed: ' + result.stderr[-2000:])
+    return result
 
 
 def calibrate():
@@ -25,10 +28,13 @@ def calibrate():
     if image['Config'].get('Labels',{}).get('org.pmi-bench.requirements-sha256') != config['requirements_sha256']:
         raise runner.BenchmarkError('Rebuild profiles with the committed dependency lock')
     worker_hash = hashlib.sha256((ROOT/'profiles/worker.py').read_bytes()).hexdigest()
+    judge_files = runner.inventory(ROOT/'benchmark/evaluator')
+    judge_files['worker.py'] = worker_hash
     label = 'pmi-profiles-'+uuid.uuid4().hex
     database = label+'-database'
     created_network = created_database = False
     runs = []
+    capability_probe = None
     try:
         checked(['docker','network','create','--internal',label]); created_network = True
         checked(['docker','run','-d','--pull=never','--name',database,'--network',label,'--network-alias','pmi-database','--read-only','--user','70:70','--cap-drop=ALL','--security-opt=no-new-privileges','--memory','256m','--memory-swap','256m','--cpus','1','--pids-limit','64','--tmpfs','/var/lib/postgresql/data:rw,nosuid,nodev,size=134217728,uid=70,gid=70,mode=0700','--tmpfs','/var/run/postgresql:rw,nosuid,nodev,size=1048576,uid=70,gid=70','--env','POSTGRES_USER=benchmark','--env','POSTGRES_DB=benchmark','--env','POSTGRES_PASSWORD=synthetic-fixture-only',config['postgres_image']]); created_database=True
@@ -43,7 +49,7 @@ def calibrate():
             runner.stage_readonly(ROOT/'profiles',folder/'evaluator')
             for task_id, target in TARGETS.items():
                 task=runner.load_task(runner.DEFAULT_ROOT,task_id)
-                for kind in ['baseline','reference','mutation']:
+                for kind in ['baseline','reference','mutation'] + (['capability_attack'] if task_id=='inventory_ledger' else []):
                     prepared=folder/task_id/kind
                     runner.prepare(runner.DEFAULT_ROOT,task_id,'neutral',prepared,reference=kind!='baseline')
                     if kind=='mutation':
@@ -51,30 +57,58 @@ def calibrate():
                         path=prepared/'workspace'/calibration['file'];code=path.read_text()
                         if code.count(calibration['find'])!=1: raise runner.BenchmarkError('Profile mutation no longer matches')
                         path.write_text(code.replace(calibration['find'],calibration['replace']))
+                    if kind=='capability_attack':
+                        path=prepared/'workspace/ledger.py'
+                        source=path.read_text()
+                        source=source.replace('def apply_movements(connection, movements):', '''def apply_movements(connection, movements):
+    for method in ['execute', 'executemany']:
+        try:
+            arguments = ["CREATE TABLE forbidden_probe(value TEXT)"]
+            if method == 'executemany': arguments.append([()])
+            getattr(connection, method)(*arguments)
+        except Exception:
+            pass''')
+                        path.write_text(source)
                     staged=folder/('staged-'+task_id+'-'+kind)
                     runner.stage_readonly(prepared/'workspace',staged)
-                    command=runner.docker_command({'image':image['Id'],'pids_limit':64,'memory':'512m','cpus':'1'},label+'-worker',staged,folder/'evaluator')
-                    if task_id in POSTGRES: command[command.index('--network=none')]='--network='+label
-                    position=command.index(image['Id'])
-                    command[position:position]=['--env','OPENBLAS_NUM_THREADS=1','--env','OMP_NUM_THREADS=1']
-                    command.append(task_id)
-                    result=subprocess.run(command,capture_output=True,text=True,timeout=45)
+                    stage=folder/('run-'+task_id+'-'+kind);stage.mkdir();stage.chmod(0o755)
+                    for name,source in [('submission',staged),('evaluator',ROOT/'benchmark/evaluator'),('bridge',ROOT/'benchmark/bridge')]:
+                        runner.stage_readonly(source,stage/name)
+                    # Profile tests run in the trusted judge; source is never imported there.
+                    (stage/'evaluator/worker.py').chmod(0o644)
+                    (stage/'evaluator/worker.py').write_bytes((ROOT/'profiles/worker.py').read_bytes())
+                    (stage/'evaluator/worker.py').chmod(0o444)
+                    (stage/'control').mkdir();(stage/'control').chmod(0o755)
+                    (stage/'control/task.json').write_text(json.dumps(task));(stage/'control/task.json').chmod(0o444)
+                    result=runner.execute_isolated(
+                        {'image':image['Id'],'pids_limit':64,'memory':'512m','cpus':'1','timeout_seconds':45},
+                        label+'-'+task_id+'-'+kind,stage,task_id,
+                        judge_network=label if task_id in POSTGRES else None,
+                        extra_env=['OPENBLAS_NUM_THREADS=1','OMP_NUM_THREADS=1'])
+                    if not result.stdout:raise runner.BenchmarkError(result.stderr[-2000:])
                     payload=json.loads(result.stdout)
                     failures={f['test'] for f in payload['failures']}
-                    expected=(payload['tests_run']==3 and result.returncode==(0 if kind=='reference' else 1)
+                    expected=(payload['tests_run']==4 and result.returncode==(0 if kind=='reference' else 1)
                               and payload['accepted']==(kind=='reference') and (kind!='mutation' or target in failures))
-                    runs.append({**payload,'candidate_kind':kind,'expected_outcome_observed':expected,
+                    if kind=='capability_attack':
+                        expected=expected and failures=={'test_constraint_judge_boundary'}
+                    evidence={**payload,'candidate_kind':kind,'expected_outcome_observed':expected,
                                  'submission_sha256':runner.digest_map(runner.inventory(staged)),
-                                 'task_sha256':hashlib.sha256(json.dumps(task,sort_keys=True).encode()).hexdigest()})
+                                 'task_sha256':hashlib.sha256(json.dumps(task,sort_keys=True).encode()).hexdigest()}
+                    if kind=='capability_attack': capability_probe=evidence
+                    else: runs.append(evidence)
                     print(task_id,kind,'expected' if expected else 'UNEXPECTED',flush=True)
     finally:
-        subprocess.run(['docker','rm','-f',label+'-worker'],capture_output=True,timeout=10)
         if created_database: subprocess.run(['docker','rm','-f',database],capture_output=True,timeout=10)
         if created_network: subprocess.run(['docker','network','rm',label],capture_output=True,timeout=10)
-    return {'benchmark_version':'0.4.0','track':'supplementary_dependency_conformance','profile_image_id':image['Id'],
+    return {'benchmark_version':'0.5.0','track':'supplementary_dependency_conformance','profile_image_id':image['Id'],
             'postgres_image':config['postgres_image'],'requirements_sha256':config['requirements_sha256'],
-            'worker_sha256':worker_hash,'reference_checks':18,'runs':runs,
-            'self_test_passed':len(runs)==18 and all(r['expected_outcome_observed'] for r in runs),
+            'worker_sha256':worker_hash,'reference_checks':24,'runs':runs,
+            'judge_evaluator_sha256':runner.digest_map(judge_files),
+            'bridge_sha256':runner.digest_map(runner.inventory(ROOT/'benchmark/bridge')),
+            'capability_probe':capability_probe,
+            'self_test_passed':len(runs)==18 and all(r['expected_outcome_observed'] for r in runs)
+                               and capability_probe is not None and capability_probe['expected_outcome_observed'],
             'agent_results':False,'limits':'Small dialect-binding adapter; not full PostgreSQL equivalence, concurrency or operational deployment.'}
 
 

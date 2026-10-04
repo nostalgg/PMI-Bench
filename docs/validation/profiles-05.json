@@ -1,0 +1,291 @@
+{
+  "benchmark_version": "0.5.0",
+  "track": "supplementary_dependency_conformance",
+  "profile_image_id": "sha256:2c3010d08d04b37995a26a8139461a6b63093acf28570a22012a6eb3c944096d",
+  "postgres_image": "postgres@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297",
+  "requirements_sha256": "b59e1557ef521f1170691f3fdc842b8ad185b63b408b4d09d03976640495cd75",
+  "worker_sha256": "31158bb0bf029fe51cae38f99b7844d884af79ae5c1c0baf10d3b5ecc16a9841",
+  "reference_checks": 24,
+  "runs": [
+    {
+      "task_id": "inventory_ledger",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_replay",
+          "detail": "tEqual(self.apply(self.db,[self.move]),0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 149, in <lambda>\n    return lambda *a,**k:session.invoke('call',a,k,module=module_name,function=function)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 106, in invoke\n    if message.get('error'):raise error_from(message['error'])\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: duplicate key value violates unique constraint \"movements_pkey\"\nDETAIL:  Key (event_id)=(delivery) already exists.\nTraceback (most recent call last):\n  File \"/bridge/server.py\", line 69, in main\n    result=getattr(module,request['function'])(*args,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/ledger.py\", line 27, in apply_movements\n    connection.execute('INSERT INTO movements VALUES(?,?,?)', (event_id, sku, delta))\n  File \"/bridge/server.py\", line 35, in <lambda>\n    if name in self.description['methods']: return lambda *a,**k:self.invoke(name,'call',*a,**k)\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/bridge/server.py\", line 31, in invoke\n    error=result['error'];raise ERRORS.get(error['type'],RuntimeError)(error['message'])\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: duplicate key value violates unique constraint \"movements_pkey\"\nDETAIL:  Key (event_id)=(delivery) already exists.\n\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "be663776499ecdd435d3e81d75ef13a201afcc53e58fc83f1f66525a64c03edb",
+      "task_sha256": "d31eaaa8887835ba6ba6d28efe9d0d0fa2c8f4a3c5b4862c34b20dc77d19bc7b"
+    },
+    {
+      "task_id": "inventory_ledger",
+      "tests_run": 4,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "f1bdd396bd7c43ea31d2b8a9efa021f2ddb3838cc9fa73efa1276edd8da1182b",
+      "task_sha256": "d31eaaa8887835ba6ba6d28efe9d0d0fa2c8f4a3c5b4862c34b20dc77d19bc7b"
+    },
+    {
+      "task_id": "inventory_ledger",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_conflict",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 79, in test_conflict\n    with self.assertRaises(ValueError): self.apply(self.db,[{**self.move,'delta':6}])\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "2964fbcab65420eb5dc536eb4e9f06859b91c6afac7186be9345c078137d6298",
+      "task_sha256": "d31eaaa8887835ba6ba6d28efe9d0d0fa2c8f4a3c5b4862c34b20dc77d19bc7b"
+    },
+    {
+      "task_id": "incremental_sync",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_replay",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 97, in test_replay\n    self.assertEqual(self.apply(self.db,[self.event]),0)\nAssertionError: 1 != 0\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "7ad367d26555d09a79242cea126aa76f6ead4ada6faf650a5d3cbaa8cb0a5f06",
+      "task_sha256": "f2042a94fe9c15a68ec90d3aacc79bfd5ed243188d176dd407e091b8bccb45ce"
+    },
+    {
+      "task_id": "incremental_sync",
+      "tests_run": 4,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "70b8221d0e6458832964e7b253340d456901b3cc4ff889e9d35967cfa2048ab4",
+      "task_sha256": "f2042a94fe9c15a68ec90d3aacc79bfd5ed243188d176dd407e091b8bccb45ce"
+    },
+    {
+      "task_id": "incremental_sync",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_order_and_delete",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 101, in test_order_and_delete\n    self.assertEqual(self.db.execute('SELECT * FROM replica').fetchall(),[])\nAssertionError: Lists differ: [('001', 'ok')] != []\n\nFirst list contains 1 additional elements.\nFirst extra element 0:\n('001', 'ok')\n\n- [('001', 'ok')]\n+ []\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "aaac27b9f452c821abdd96c5e3fe36f236adab8b30d5f823161ad2f080c1070a",
+      "task_sha256": "f2042a94fe9c15a68ec90d3aacc79bfd5ed243188d176dd407e091b8bccb45ce"
+    },
+    {
+      "task_id": "scd_history",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_change",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 117, in test_change\n    self.assertEqual(self.apply(self.db,[{'customer_id':'001','name':'New'}],'2024-02-01'),1)\nAssertionError: 0 != 1\n"
+        },
+        {
+          "test": "test_close_absent",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 121, in test_close_absent\n    self.assertEqual(self.apply(self.db,[],'2024-02-01'),1)\nAssertionError: 0 != 1\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "90f4bdb1ca842df439e5d2e2f2ac589885624b06f7ec0781cb5a295f3bf86455",
+      "task_sha256": "578ab14f5c4992b2eb63185ed3733e0d5b5933ee038ad801f8cf4e7ea252b7b1"
+    },
+    {
+      "task_id": "scd_history",
+      "tests_run": 4,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "3907f31df9fe378c33cbe1acf5f164d558035c5cd88d8f7e6e6c1f0be1df1c0e",
+      "task_sha256": "578ab14f5c4992b2eb63185ed3733e0d5b5933ee038ad801f8cf4e7ea252b7b1"
+    },
+    {
+      "task_id": "scd_history",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_close_absent",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 121, in test_close_absent\n    self.assertEqual(self.apply(self.db,[],'2024-02-01'),1)\nAssertionError: 0 != 1\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "212df354d80e7226bd6078c9b8a85bb3fe9e3c2ca21de2e3bd3450f2c5f09b0c",
+      "task_sha256": "578ab14f5c4992b2eb63185ed3733e0d5b5933ee038ad801f8cf4e7ea252b7b1"
+    },
+    {
+      "task_id": "document_cache",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_changed_input",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 146, in test_changed_input\n    self.assertEqual(self.apply(self.db,[{**self.rows[0],'text':'other'}],self.classify,'private'),1)\nAssertionError: 0 != 1\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "5da2244d254302d94f4bfb67b7509c45359221098db817b450f71b8780e9d922",
+      "task_sha256": "b294cf3b14a76ba18c04051da9e310ed4d01ba582e270569382d2603470b5f9c"
+    },
+    {
+      "task_id": "document_cache",
+      "tests_run": 4,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "324a8a03ea0ba6c463004f60f3fd12360bb3aecda930dfadea05d6be75b8f90a",
+      "task_sha256": "b294cf3b14a76ba18c04051da9e310ed4d01ba582e270569382d2603470b5f9c"
+    },
+    {
+      "task_id": "document_cache",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_alignment",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 142, in test_alignment\n    self.assertEqual(self.db.execute('SELECT record_id,label FROM enrichment ORDER BY record_id').fetchall(),[('001','invoice'),('002','credit_note')])\nAssertionError: Lists differ: [('001', 'invoice'), ('002', 'invoice')] != [('001', 'invoice'), ('002', 'credit_note')]\n\nFirst differing element 1:\n('002', 'invoice')\n('002', 'credit_note')\n\n- [('001', 'invoice'), ('002', 'invoice')]\n?                                 - ^^\n\n+ [('001', 'invoice'), ('002', 'credit_note')]\n?                               ++++ ++  ^\n\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "44685744d2c9e323430eb39234bbf1789ca4f6fe7bed830fb5ad6638344a0d35",
+      "task_sha256": "b294cf3b14a76ba18c04051da9e310ed4d01ba582e270569382d2603470b5f9c"
+    },
+    {
+      "task_id": "supplier_catalog",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_dataframe_producer",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 172, in test_dataframe_producer\n    self.assertEqual(self.apply(self.csv,self.db),1)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 149, in <lambda>\n    return lambda *a,**k:session.invoke('call',a,k,module=module_name,function=function)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 106, in invoke\n    if message.get('error'):raise error_from(message['error'])\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Missing supplier columns\nTraceback (most recent call last):\n  File \"/bridge/server.py\", line 69, in main\n    result=getattr(module,request['function'])(*args,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/catalog.py\", line 11, in import_catalog\n    raise ValueError('Missing supplier columns')\nValueError: Missing supplier columns\n\n"
+        },
+        {
+          "test": "test_replay",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 176, in test_replay\n    self.apply(self.csv,self.db); self.apply(self.csv,self.db)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 149, in <lambda>\n    return lambda *a,**k:session.invoke('call',a,k,module=module_name,function=function)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 106, in invoke\n    if message.get('error'):raise error_from(message['error'])\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Missing supplier columns\nTraceback (most recent call last):\n  File \"/bridge/server.py\", line 69, in main\n    result=getattr(module,request['function'])(*args,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/catalog.py\", line 11, in import_catalog\n    raise ValueError('Missing supplier columns')\nValueError: Missing supplier columns\n\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "c8e0f160b99fee6d49980b9c6176b0d49883c23117049f0bc6fce625a69e2b01",
+      "task_sha256": "4a669e5d5a91308264d931a6153f85b8ca618a219c17c87457536cf840d914b2"
+    },
+    {
+      "task_id": "supplier_catalog",
+      "tests_run": 4,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "8943048e844236c1b05450fc17fa1d5415a147937468508452f4f655b5adc897",
+      "task_sha256": "4a669e5d5a91308264d931a6153f85b8ca618a219c17c87457536cf840d914b2"
+    },
+    {
+      "task_id": "supplier_catalog",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_dataframe_producer",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 173, in test_dataframe_producer\n    self.assertEqual(self.row(),('001','updated',250,999,0))\nAssertionError: Tuples differ: ('001', 'updated', 250, 250, 0) != ('001', 'updated', 250, 999, 0)\n\nFirst differing element 3:\n250\n999\n\n- ('001', 'updated', 250, 250, 0)\n?                         ^^^\n\n+ ('001', 'updated', 250, 999, 0)\n?                         ^^^\n\n"
+        },
+        {
+          "test": "test_replay",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 177, in test_replay\n    self.assertEqual(self.row()[0],'001'); self.assertEqual(self.row()[3],999)\n                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 250 != 999\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "5c84d33098ecb52d3648b875756cb22168a97a060ca162e2e9d9e882d283b5db",
+      "task_sha256": "4a669e5d5a91308264d931a6153f85b8ca618a219c17c87457536cf840d914b2"
+    },
+    {
+      "task_id": "temporal_features",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_cutoff_and_labels",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 195, in setUp\n    self.result = self.apply(self.frame.where(self.frame.notna(),None).to_dict('records'),'2024-02-01')\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 149, in <lambda>\n    return lambda *a,**k:session.invoke('call',a,k,module=module_name,function=function)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 106, in invoke\n    if message.get('error'):raise error_from(message['error'])\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Invalid feature input\nTraceback (most recent call last):\n  File \"/bridge/server.py\", line 69, in main\n    result=getattr(module,request['function'])(*args,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/features.py\", line 23, in prepare_features\n    raise ValueError('Invalid feature input') from None\nValueError: Invalid feature input\n\n"
+        },
+        {
+          "test": "test_downstream_pipeline",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 195, in setUp\n    self.result = self.apply(self.frame.where(self.frame.notna(),None).to_dict('records'),'2024-02-01')\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 149, in <lambda>\n    return lambda *a,**k:session.invoke('call',a,k,module=module_name,function=function)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 106, in invoke\n    if message.get('error'):raise error_from(message['error'])\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Invalid feature input\nTraceback (most recent call last):\n  File \"/bridge/server.py\", line 69, in main\n    result=getattr(module,request['function'])(*args,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/features.py\", line 23, in prepare_features\n    raise ValueError('Invalid feature input') from None\nValueError: Invalid feature input\n\n"
+        },
+        {
+          "test": "test_training_imputer_agreement",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 195, in setUp\n    self.result = self.apply(self.frame.where(self.frame.notna(),None).to_dict('records'),'2024-02-01')\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 149, in <lambda>\n    return lambda *a,**k:session.invoke('call',a,k,module=module_name,function=function)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/evaluator/isolated_client.py\", line 106, in invoke\n    if message.get('error'):raise error_from(message['error'])\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Invalid feature input\nTraceback (most recent call last):\n  File \"/bridge/server.py\", line 69, in main\n    result=getattr(module,request['function'])(*args,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/features.py\", line 23, in prepare_features\n    raise ValueError('Invalid feature input') from None\nValueError: Invalid feature input\n\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "f65b83d329b6e3aae2981170afe1ea9dd814b6140197e52c3b03ae23fd04f677",
+      "task_sha256": "0ebb7f16ba8ca5185c9345859d300cf9aef7024f2e634e656496b0f903ce0637"
+    },
+    {
+      "task_id": "temporal_features",
+      "tests_run": 4,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "687b5a327e61acf8e9388e3859e2f4f64bb71316b19f2f3a549af7ab3012fa0f",
+      "task_sha256": "0ebb7f16ba8ca5185c9345859d300cf9aef7024f2e634e656496b0f903ce0637"
+    },
+    {
+      "task_id": "temporal_features",
+      "tests_run": 4,
+      "failures": [
+        {
+          "test": "test_training_imputer_agreement",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 201, in test_training_imputer_agreement\n    self.assertEqual(imputer.statistics_.tolist(),[self.result['medians'][c] for c in columns])\nAssertionError: Lists differ: [3.0, 200.0] != [3.0, 300]\n\nFirst differing element 1:\n200.0\n300\n\n- [3.0, 200.0]\n?       ^  --\n\n+ [3.0, 300]\n?       ^\n\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "8714888ab88838a6bc4cdd1c0cc8581e5ed9580139596061a27ac64b29df9ec8",
+      "task_sha256": "0ebb7f16ba8ca5185c9345859d300cf9aef7024f2e634e656496b0f903ce0637"
+    }
+  ],
+  "judge_evaluator_sha256": "1a3e05386c2ec439206f64f2e4138c8a928d87519ed1691a6fc7a0f895c25ea8",
+  "bridge_sha256": "93e215d19d23135f0c8acf5531de7b5a72525a9de2c94bb046d757c3c61e7f40",
+  "capability_probe": {
+    "task_id": "inventory_ledger",
+    "tests_run": 4,
+    "failures": [
+      {
+        "test": "test_constraint_judge_boundary",
+        "detail": "Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability; Unauthorized PostgreSQL fixture SQL capability"
+      }
+    ],
+    "accepted": false,
+    "candidate_kind": "capability_attack",
+    "expected_outcome_observed": true,
+    "submission_sha256": "2ab5149a340d16f214c5828e1b5f9c977da1e2fad0cc2c1116f307fe61829165",
+    "task_sha256": "d31eaaa8887835ba6ba6d28efe9d0d0fa2c8f4a3c5b4862c34b20dc77d19bc7b"
+  },
+  "self_test_passed": true,
+  "agent_results": false,
+  "limits": "Small dialect-binding adapter; not full PostgreSQL equivalence, concurrency or operational deployment."
+}

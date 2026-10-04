@@ -5,10 +5,11 @@ import json
 from pathlib import Path
 import sys
 import time
+import tempfile
 import unittest
 
 sys.path.insert(0, '/evaluator')
-sys.path.insert(0, '/submission')
+tempfile.tempdir = '/scratch'
 
 
 class Results(unittest.TestResult):
@@ -48,10 +49,17 @@ def main():
             or not Path(f'/evaluator/case_{task}.py').is_file()):
         raise ValueError('Unknown task')
     start = time.monotonic()
+    from isolated_client import install
+    install(json.loads(Path('/control/task.json').read_text()))
     result = Results()
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
         suite = unittest.defaultTestLoader.loadTestsFromName(f'case_{task}')
         suite.run(result)
+    from isolated_client import session
+    result.testsRun += 1
+    result.checks.append({'id': 'test_constraint_judge_boundary', 'category': 'constraint',
+                          'status': 'fail' if session.violations else 'pass',
+                          'detail': '; '.join(session.violations)[:1000]})
     payload = {
         'task_id': task,
         'tests_run': result.testsRun,

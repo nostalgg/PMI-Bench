@@ -2,8 +2,8 @@
 
 ## Summary
 
-Version 0.4.0 contains **26 original synthetic English Python/SQL maintenance
-scenarios**, **78 correlated request variants** and **232 patch checks**. Each group
+Version 0.5.0 contains **26 original synthetic English Python/SQL maintenance
+scenarios**, **78 correlated request variants** and **258 patch checks**. Each group
 has neutral, misleading-suggestion and correct-suggestion requests with identical
 workspaces, contracts and acceptance criteria. Treat the group as the sampling unit;
 26 authored groups do not establish statistical independence in a real SME population.
@@ -14,8 +14,10 @@ OPERATIONS.md, incident.json and synthetic CHANGELOG.md. Core correctness, compa
 rollback and security checks are combined with normal consumer execution, failure
 publication and a failed follow-up after a valid job. Common wrapper checks are correlated.
 
-Families: data quality 5/46 checks; database 5/45; code versions 4/34; bug fixing 4/34;
-security 4/34; local AI 4/39. SCENARIOS.csv lists each task and its partition.
+Families: data quality 5/51 checks; database 5/50; code versions 4/38; bug fixing 4/38;
+security 4/38; local AI 4/43. SCENARIOS.csv lists each task and its partition.
+The 26 repeated protocol-boundary checks are included in 258 and are not independent
+security experiments. Business/workflow assertions remain 232.
 
 ## Origin and intended use
 
@@ -44,7 +46,7 @@ code is intentionally flawed. `dialogue/` contains explicit scope-change request
 a public user oracle and a scripted example. These additional requests are not included
 in the count of 78 patch variants. The example is not a real conversation or agent run.
 
-SCENARIOS.csv, PROTOCOL.md, REVIEW_RUBRIC.md, SOURCES.json, license files and the
+SCENARIOS.csv, PROTOCOL.md, HARNESS_SECURITY.md, REVIEW_RUBRIC.md, SOURCES.json, license files and the
 export-manifest.json accompany the export. The manifest hashes every other file.
 Reference answers, calibration mutations and executable evaluators are excluded from
 task input but public in the matching GitHub source. Supplementary dependency runtimes
@@ -56,7 +58,10 @@ Acceptance requires all patch checks and unchanged protected files with exact fi
 scope. Distinguish candidate rejection from infrastructure/runtime failures. Churn is
 descriptive, not an automated maintainability score. Six public development and twenty
 public evaluation groups are assigned before model trials; never split sibling variants.
-There is no hidden test set, contamination guarantee or leaderboard.
+There is no hidden test set, contamination guarantee or leaderboard. The judge runs
+assertions in a separate container and grants candidate access through bounded JSON
+fixture capabilities. Five scripted attacks and OS write probes calibrate these controls;
+see HARNESS_SECURITY.md for observation limits and tool-side approval enforcement.
 
 Calibration comprises 130 Docker evaluations: 26 starting submissions, 26 references,
 and three independent mutation interventions per scenario. One is a shared publication
@@ -64,7 +69,7 @@ fault; two address scenario business behavior. A mutation must fail its targeted
 See the matching GitHub validation report; calibration is not an agent result.
 
 Supplementary dependency conformance tests run four modules on real PostgreSQL via a
-small binding adapter and two with actual pandas/scikit-learn, totaling 18 additional
+small binding adapter and two with actual pandas/scikit-learn, totaling 24 additional
 reference checks. Scores are separate from the patch track. They do not imply complete
 PostgreSQL dialect equivalence, concurrency coverage or a warehouse/ML benchmark.
 
@@ -84,7 +89,9 @@ production deployment or substantive predictive-model performance evaluation.
 External review, representative difficulty and empirical incident-frequency validation
 are unavailable. Internal AI-assisted reference inspection is disclosed separately and
 has no independent reviewer status. Public references/evaluators permit contamination
-and gaming; bounded Docker execution is a cooperative harness, not a hostile judge.
+and gaming. Separated judgment prevents the tested same-process verdict tampering,
+but serialized mutation/log reports can be misrepresented by malicious code, and
+exhaustive hostile-code resistance is unvalidated.
 Security checks are narrow. Neither SME readiness nor agent superiority is established.
 
 **Zero real-model trials.** The LangGraph system is design-only. API/GLM efficiency,

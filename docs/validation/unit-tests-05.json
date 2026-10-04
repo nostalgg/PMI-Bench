@@ -1,0 +1,21 @@
+{
+  "benchmark_version": "0.5.0",
+  "command": "uv run python -m unittest discover -s tests -v",
+  "observed_tests": 34,
+  "passed": 34,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "actual_docker_boundary_probe": true,
+  "paid_calls": 0,
+  "test_sources": {
+    "tests/test_competitors.py": "19184c144b6392115d5e1685d41612e450920ed6892d8222a34d3bd34eed6a95",
+    "tests/test_runner.py": "0f86fd0d47827e3d73c94cc9a5e82e46d295f949b5cf1b7a89736dfadeab262e",
+    "tests/test_dialogue.py": "fe837fac244a34454e0944d8a46be4230daf5969c6f5044c4d070a691f26ca3c",
+    "tests/test_control.py": "ad1182d0862ba5d8a67f71c0a33ee7e0b112f3aaba1a4a1e71d0067861dcee85"
+  },
+  "log_summary": [
+    "Ran 34 tests in 5.492s",
+    "OK"
+  ]
+}

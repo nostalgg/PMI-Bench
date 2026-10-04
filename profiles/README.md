@@ -12,17 +12,25 @@ Python/SQLite track; it does not add independent scenarios or alter its acceptan
 | supplier_catalog | pandas spreadsheet producer + SQLite | string IDs/prices, replay, rejected batch |
 | temporal_features | pandas + scikit-learn consumer/oracle | training-only imputation, downstream estimator, split/label separation |
 
-The worker imports candidate business modules inside Docker. Each profile is calibrated
-on its flawed start, reference and targeted core mutation: 18 runs, 18 reference checks,
+The judge imports no candidate modules: a separate endpoint executes them through
+bounded JSON calls and fixture capabilities. Each profile also checks protocol boundaries.
+Each profile is calibrated on its flawed start, reference and targeted core mutation:
+18 runs, 24 reference checks,
 12 rejected starts/mutations. Incremental sync uses the second core mutation (descending
 sequence order): PostgreSQL automatically rolls back an aborted transaction, making
 the SQLite commit-on-error mutation ineffective there. This illustrates dialect semantics.
+One additional capability attack attempts forbidden SQL through both execute and
+executemany, catches the denials and continues correctly. The sticky boundary failure
+must still reject it; this probe is separate from the 18 domain calibration runs.
 
 PostgreSQL receives original synthetic schemas, using BIGINT for SQLite's 64-bit
 integer contract. The narrow adapter replaces '?' placeholders with '%s', exposes
 transaction state and sends explicit BEGIN/COMMIT/ROLLBACK. It is not a general SQL
 translator; schema_migration's PRAGMA and SQLite date SQL are not evaluated here.
-No concurrency, privileges/roles, lock contention or warehouse/dbt behavior is tested.
+The fixture role is restricted to data operations; administrative setup stays with the
+judge. SQL uses a narrow statement allowlist and five-second statement/lock timeouts.
+Complete role-denial behavior, concurrency, lock contention and warehouse/dbt operations
+are not domain benchmark tasks here.
 
 Pandas produces supplier input with string identifiers; pandas/scikit-learn consume
 feature output and independently compute train-only medians. The candidate need not
@@ -42,7 +50,9 @@ Docker builds are not claimed bit-for-bit portable. Third-party binaries are not
 Scientific cases have no network. PostgreSQL runs without published ports on an internal
 Docker network with scratch data, a **public synthetic test credential**, resource bounds,
 nonroot user and dropped capabilities. Candidate containers cannot reach the Internet
-but can connect to the temporary database. This differs from core network=none isolation.
+and have no direct route to the database. Only the trusted judge connects to PostgreSQL;
+candidate operations pass through enumerated callbacks. This differs from core loopback
+fixtures sharing the candidate's network namespace.
 Do not substitute production databases or secrets. The harness cleans up its own
 containers/network on normal completion and exceptions; after interruption inspect
 only containers/networks named pmi-profiles-* before removing them.

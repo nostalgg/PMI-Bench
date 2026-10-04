@@ -36,20 +36,28 @@ The following model placeholder must be replaced with a verified catalog ID:
 ```bash
 uv run python competitors/run.py --agent mini-swe-agent --python /tmp/pmi-mini-venv/bin/python --model 'openrouter/<verified-glm-id>' --mode plan --task invoice_import --variant neutral --run-dir runs/mini-invoice
 # Read runs/mini-invoice/plan.json with the user. Continue only after explicit approval.
+uv run python competitors/run.py --agent mini-swe-agent --python /tmp/pmi-mini-venv/bin/python --model 'openrouter/<verified-glm-id>' --mode approve --task invoice_import --variant neutral --run-dir runs/mini-invoice --approved-plan '<printed-and-approved-id>'
 uv run python competitors/run.py --agent mini-swe-agent --python /tmp/pmi-mini-venv/bin/python --model 'openrouter/<verified-glm-id>' --mode execute --task invoice_import --variant neutral --run-dir runs/mini-invoice --approved-plan '<printed-and-approved-id>'
 ```
 
 For Aider use --agent aider and --python /tmp/pmi-aider-venv/bin/python, with a separate
 run directory. The plan ID binds the plan, request and unchanged initial file hashes.
-The gate records an approval assertion, not authenticated identity. Changed plans or
-files require a fresh plan and approval. It does not automate multi-turn brainstorming.
+The approve command needs no provider key and calls no model. It stores a private,
+HMAC-bound, one-use controller record outside all agent mounts. Execute consumes it;
+the public hash alone is insufficient. This records trusted operator authorization,
+not authenticated human identity. Changed plans or files require a fresh plan and
+approval. It does not automate multi-turn brainstorming.
 
-Planning in mini mounts the workspace read-only; Aider uses ask mode and a post-run
-unchanged-workspace check. Execution uses only task workspace/input, never evaluator
+Planning mounts the workspace read-only for both agents. Execution mounts only the
+declared existing editable files writable over a read-only workspace: write in place,
+do not delete/rename files or create files/directories. This blocks transient protected
+edits as well as final scope violations. Execution uses only task workspace/input, never evaluator
 or references. mini command execution is inside nonroot Docker without network or
-model credentials. Aider edits local copied files with automatic lint/test/shell,
+model credentials. Aider's model/edit process runs inside a nonroot container with
+provider network access and its API key, with automatic lint/test/shell,
 URL detection, Git commits and analytics disabled; candidate code is not run on host.
-Final patches are evaluated by the same isolated Docker benchmark harness.
+Final patches are evaluated by a separate judge and candidate-container pair.
+See [threat model and observation limits](../benchmark/HARNESS_SECURITY.md).
 
 Both request temperature zero, 2048 output tokens and a 900-second phase timeout.
 mini has 20 steps and --soft-budget-usd (default 1) estimated post-call stop threshold:
@@ -63,7 +71,6 @@ with provider billing before publishing a cost comparison. Aider logs might incl
 local prompts and responses; keep them under ignored runs/ and review before sharing.
 Only synthetic task data should be used for the campaign.
 
-Scope violations reject extra files, even temporary files left by an agent. Remove
-temporary scratch during the approved run, not after inspecting evaluator outcomes.
+Use /tmp for scratch; the task directory cannot acquire extra files in these adapters.
 Interrupted or failed runs remain failures/errors, not successful scores. The wrappers
 do not resume failed phases automatically; use fresh run directories for explicit retries.

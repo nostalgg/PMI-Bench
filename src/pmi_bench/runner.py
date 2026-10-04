@@ -196,6 +196,75 @@ def stage_readonly(source: Path, destination: Path):
             (Path(parent) / file).chmod(0o444)
 
 
+def isolated_commands(runtime, name, stage):
+    """Separate PID/mount namespaces; share only scratch, RPC and loopback fixtures."""
+    candidate = docker_command(runtime, name + '-candidate', stage / 'submission', stage / 'bridge')
+    candidate = [arg.replace('dst=/evaluator,readonly', 'dst=/bridge,readonly')
+                 if arg.startswith('type=bind,') else arg for arg in candidate]
+    candidate[candidate.index('/evaluator/worker.py')] = '/bridge/server.py'
+    candidate.insert(2, '--detach')
+    candidate.insert(3, '--log-driver=none')
+    judge = docker_command(runtime, name, stage / 'submission', stage / 'evaluator')
+    judge[judge.index('--network=none')] = '--network=container:' + name + '-candidate'
+    for command in [candidate, judge]:
+        position = command.index(runtime['image'])
+        command[position:position] = [
+            '--mount', f'type=volume,src={name}-channel,dst=/channel' + (',readonly' if command is judge else ''),
+            '--mount', f'type=volume,src={name}-scratch,dst=/scratch',
+        ]
+    position = judge.index(runtime['image'])
+    judge[position:position] = ['--mount', f'type=bind,src={stage / "bridge"},dst=/bridge,readonly',
+                               '--mount', f'type=bind,src={stage / "control"},dst=/control,readonly']
+    return candidate, judge
+
+
+def execute_isolated(runtime, name, stage, task_id, judge_network=None, extra_env=()):
+    """Bound every writable mount and always release this run's resources."""
+    volumes = []
+    try:
+        for suffix, size in [('channel', 1048576), ('scratch', 67108864)]:
+            volume = name + '-' + suffix
+            created = subprocess.run(['docker', 'volume', 'create', '--driver', 'local',
+                '--opt', 'type=tmpfs', '--opt', 'device=tmpfs', '--opt',
+                f'o=size={size},uid=65534,gid=65534,mode=1777', volume],
+                capture_output=True, text=True, timeout=15)
+            if created.returncode:
+                raise BenchmarkError('Shared tmpfs creation failed: ' + created.stderr[-1000:])
+            volumes.append(volume)
+        candidate, judge = isolated_commands(runtime, name, stage)
+        if judge_network:
+            judge[judge.index('--network=container:' + name + '-candidate')] = '--network=' + judge_network
+        position = judge.index(runtime['image'])
+        judge[position:position] = [part for value in extra_env for part in ['--env', value]]
+        launched = subprocess.run(candidate, capture_output=True, text=True, timeout=45)
+        if launched.returncode:
+            raise BenchmarkError('Candidate container failed to start: ' + launched.stderr[-1000:])
+        deadline = time.monotonic() + 10
+        while True:
+            ready = subprocess.run(['docker', 'exec', name + '-candidate', 'python', '-I', '-B', '-c',
+                'from pathlib import Path; raise SystemExit(0 if Path("/channel/execution.sock").is_socket() else 1)'],
+                capture_output=True, timeout=5)
+            if ready.returncode == 0:
+                break
+            if time.monotonic() >= deadline:
+                raise BenchmarkError('Execution endpoint failed to start')
+            time.sleep(.05)
+        return subprocess.run(judge + [task_id], capture_output=True, text=True,
+                              timeout=runtime['timeout_seconds'])
+    finally:
+        subprocess.run(['docker', 'rm', '-f', name, name + '-candidate'],
+                       capture_output=True, timeout=10)
+        for volume in volumes:
+            deadline = time.monotonic() + 5
+            while True:
+                removed = subprocess.run(['docker', 'volume', 'rm', volume], capture_output=True, text=True, timeout=5)
+                if removed.returncode == 0:
+                    break
+                if time.monotonic() >= deadline:
+                    raise BenchmarkError('Shared volume cleanup failed: ' + removed.stderr[-1000:])
+                time.sleep(.1)
+
+
 def validate_payload(task, payload, exit_code):
     expected = {c['id']: c['category'] for c in task['checks']}
     checks = payload.get('checks', [])
@@ -227,6 +296,8 @@ def evaluate(root: Path, task_id: str, submission: Path, variant='neutral'):
         'submission_sha256': digest_map(files), 'submission_files': files,
         'task_sha256': hashlib.sha256(json.dumps(task, sort_keys=True).encode()).hexdigest(),
         'evaluator_sha256': digest_map(inventory(root / 'evaluator')),
+        'bridge_sha256': digest_map(inventory(root / 'bridge')),
+        'judge_isolation': 'separate_container_no_candidate_imports',
         'scope_violations': violations, 'checks': [], 'accepted': False,
         'patch_statistics': patch_statistics(root, task, submission),
         'agent_behavior': {'plan_approval': 'not_measured', 'sycophancy': 'not_measured',
@@ -244,13 +315,16 @@ def evaluate(root: Path, task_id: str, submission: Path, variant='neutral'):
         stage.chmod(0o755)
         stage_readonly(submission, stage / 'submission')
         stage_readonly(root / 'evaluator', stage / 'evaluator')
+        stage_readonly(root / 'bridge', stage / 'bridge')
+        (stage / 'control').mkdir(mode=0o755)
+        (stage / 'control').chmod(0o755)
+        (stage / 'control/task.json').write_text(json.dumps(task))
+        (stage / 'control/task.json').chmod(0o444)
         # Recheck the staged snapshot rather than racing evaluation against live edits.
         if inventory(stage / 'submission') != files:
             raise BenchmarkError('Submission changed while it was being staged')
-        command = docker_command(runtime, name, stage / 'submission', stage / 'evaluator') + [task_id]
         try:
-            process = subprocess.run(command, capture_output=True, text=True,
-                                     timeout=runtime['timeout_seconds'], check=False)
+            process = execute_isolated(runtime, name, stage, task_id)
         except subprocess.TimeoutExpired:
             report.update(status='timeout', error='Container exceeded the wall-clock limit')
         else:
@@ -266,13 +340,7 @@ def evaluate(root: Path, task_id: str, submission: Path, variant='neutral'):
                     report['accepted'] = all(c['status'] == 'pass' for c in checks)
                     report['status'] = 'passed' if report['accepted'] else 'failed'
                 except (BenchmarkError, ValueError, TypeError, AttributeError) as exc:
-                    report.update(status='evaluation_error', error=str(exc))
-        finally:
-            # Clean up only the container named for this run, including on timeout.
-            try:
-                subprocess.run(['docker', 'rm', '-f', name], capture_output=True, timeout=10, check=False)
-            except (OSError, subprocess.TimeoutExpired):
-                pass
+                    report.update(status='evaluation_error', error=str(exc), judge_stderr=process.stderr[-2000:])
     report['wall_seconds'] = round(time.monotonic() - start, 3)
     report['counts'] = {status: sum(c['status'] == status for c in report['checks'])
                         for status in ['pass', 'fail', 'error', 'skip']}
@@ -364,7 +432,7 @@ def export_dataset(root: Path, destination: Path):
             shutil.copytree(source, destination / 'workspaces' / task['task_id'])
     shutil.copyfile(root / 'DATASET_CARD.md', destination / 'DATASET_CARD.md')
     shutil.copyfile(root / 'SOURCES.json', destination / 'SOURCES.json')
-    for document in ['SCENARIOS.csv', 'PROTOCOL.md', 'REVIEW_RUBRIC.md']:
+    for document in ['SCENARIOS.csv', 'PROTOCOL.md', 'REVIEW_RUBRIC.md', 'HARNESS_SECURITY.md']:
         shutil.copyfile(root / document, destination / document)
     for document in ['LICENSE', 'LICENSE-DATA', 'LICENSING.md']:
         shutil.copyfile(root.parent / document, destination / document)

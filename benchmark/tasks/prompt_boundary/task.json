@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "benchmark_version": "0.4.0",
+  "benchmark_version": "0.5.0",
   "task_id": "prompt_boundary",
   "title": "Trusted policy and untrusted documents",
   "category": "local_ai",
@@ -60,6 +60,11 @@
     {
       "id": "test_constraint_workflow_failed_followup",
       "category": "constraint"
+    },
+    {
+      "id": "test_constraint_judge_boundary",
+      "category": "constraint",
+      "description": "Trusted judge observes no protocol or fixture-capability violations"
     }
   ],
   "provenance": {

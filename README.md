@@ -4,25 +4,29 @@ Weekend project of a benchmark for maintaining data workflows in small and mediu
 enterprises: imports, databases, reporting, compatibility, security and local AI
 integration.
 
-**Release 0.4.0: 26 scenarios, 78 correlated request variants, 232 patch checks.**
-Each scenario has two editable files, a protected consumer, persistent/scratch storage, a scheduled workflow, business fixtures and operational handover. They are not just an isolated function to be fixed, but small environments with dependencies, state and workflow. Requests are neutral, misleading and correct suggestions about the same problem. They are not 78 independent tasks.
+**Release 0.5.0: 26 scenarios, 78 correlated request variants, 258 patch checks.**
+Each scenario has two editable files, a protected consumer, persistent/scratch storage,
+a scheduled workflow, business fixtures and operational handover. They are small
+environments with dependencies, state and workflow. Requests are neutral,
+misleading and correct suggestions about the same problem. They are not 78 independent tasks.
 
 | Family | Scenarios | Checks | Examples |
 | --- | ---: | ---: | --- |
-| Data quality | 5 | 46 | Exact money, supplier prices, stock replay, ambiguous customer matching |
-| Database | 5 | 45 | Reporting fanout, migrations, checkpoints, customer history, receivables |
-| Code versions | 4 | 34 | Legacy CLI/API/configuration contracts and finance export versions |
-| Bug fixing | 4 | 34 | Timezones, reconciliation, atomic reports, temporal features |
-| Security | 4 | 34 | PII, archives, tenant boundaries and spreadsheet formula policy |
-| Local AI | 4 | 39 | Loopback client, prompt structure, routing policy and enrichment cache |
+| Data quality | 5 | 51 | Exact money, supplier prices, stock replay, ambiguous customer matching |
+| Database | 5 | 50 | Reporting fanout, migrations, checkpoints, customer history, receivables |
+| Code versions | 4 | 38 | Legacy CLI/API/configuration contracts and finance export versions |
+| Bug fixing | 4 | 38 | Timezones, reconciliation, atomic reports, temporal features |
+| Security | 4 | 38 | PII, archives, tenant boundaries and spreadsheet formula policy |
+| Local AI | 4 | 43 | Loopback client, prompt structure, routing policy and enrichment cache |
 
 [Scenario index](benchmark/SCENARIOS.csv), [English dataset card](benchmark/DATASET_CARD.md),
-[release audit](docs/BENCHMARK_AUDIT_04.md), [validation](docs/VALIDATION_04.md),
+[release audit](docs/BENCHMARK_AUDIT_05.md), [validation](docs/VALIDATION_05.md),
 [competitor review](docs/COMPETITIVE_REVIEW.md).
 
 ## Reproduce
 
-Requires uv, Python 3.12 and a local Docker daemon sharing host paths. Run from this
+Requires uv, Python 3.12 and a local Linux Docker daemon sharing host paths and supporting
+local tmpfs volumes. Run from this
 checkout; remote Docker contexts are unsupported. In restricted cloud environments,
 set `UV_CACHE_DIR=/tmp/pmi-uv-cache`.
 
@@ -31,15 +35,23 @@ uv sync --frozen
 uv run pmi-bench setup-runtime
 uv run python -m unittest discover -s tests -v
 uv run python scripts/validate_fixtures.py
+uv run python scripts/validate_adversarial.py --output runs/adversarial.json
 uv run python scripts/validate_dialogue.py --output runs/dialogue-calibration.json
 uv run python scripts/verify_release.py
-uv run pmi-bench self-test --output runs/calibration-04.json
+uv run pmi-bench self-test --jobs 2 --output runs/calibration-05.json
 ```
 
 Calibration runs 130 Docker evaluations: 26 flawed starts, 26 references and 78 targeted
 regressions. Each mutation must fail its designated check; infrastructure errors do
-not qualify. Three integration checks per scenario verify its consumer result, failure receipt and failed follow-up after a successful job.
+not qualify. Three integration checks per scenario verify its consumer result,
+failure receipt and failed follow-up after a successful job.
 The extra checks share one publication contract and do not constitute independent scenarios.
+
+The candidate and judge now run in separate containers. The candidate cannot import
+the evaluator or write the judge's verdict. A bounded JSON bridge grants narrow fixture
+capabilities. Each scenario adds the same protocol-boundary check. Five scripted attacks
+exercise judgment tampering; actual Docker probes test planning and implementation writes.
+See [enforced boundaries and remaining limits](benchmark/HARNESS_SECURITY.md).
 
 ## Solve and run a workflow
 
@@ -69,7 +81,7 @@ line churn; fewer lines alone are not a quality score.
 
 Supplementary candidate tests exercise four modules on real PostgreSQL through a
 small placeholder/transaction binding adapter and two scenarios with pandas/scikit-learn.
-These 18 reference checks are separate from the 232 patch checks.
+These 24 reference checks are separate from the 258 patch checks.
 
 ```bash
 uv run python scripts/build_profiles.py
@@ -96,8 +108,8 @@ Maintainability requires the [review rubric](benchmark/REVIEW_RUBRIC.md);
 ## Dataset and experiments
 
 ```bash
-uv run pmi-bench export --output exports/pmi-bench-0.4.0
-uv run python scripts/package_dataset.py exports/pmi-bench-0.4.0 --output exports/pmi-bench-0.4.0.zip
+uv run pmi-bench export --output exports/pmi-bench-0.5.0
+uv run python scripts/package_dataset.py exports/pmi-bench-0.5.0 --output exports/pmi-bench-0.5.0.zip
 ```
 
 English exports contain starting workspaces, descriptions, source attribution, dialogue
@@ -112,6 +124,7 @@ history are small; dbt, distributed concurrency, production integration and real
 inference are absent. The common integration wrapper improves composition testing but
 adds repetitive structure. Security checks are narrow and do not certify deployment.
 Docker runs bounded nonroot candidates with read-only mounts and no host credentials or
-socket.
+socket. The separated judge resists the documented tampering attempts; public answers,
+serialized mutation/log reports and shared scratch still limit adversarial guarantees.
 
 Code: **Apache 2.0**. Data/documentation: **CC BY 4.0**. [License allocation](LICENSING.md).

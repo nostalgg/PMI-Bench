@@ -5,6 +5,7 @@ import tempfile
 from pathlib import Path
 
 from run import aider_command
+from sandbox import aider_container_command
 
 
 def main():
@@ -28,6 +29,7 @@ def main():
                                 {'editable_files': ['probe.py']}, replay, logs, settings, 'execute')
         index = command.index('--message-file')
         command[index:index+2] = ['--apply', str(replay)]
+        command = aider_container_command(command, args.python.absolute(), workspace, logs, {'editable_files': ['probe.py']}, 'execute', network='none')
         result = subprocess.run(command, cwd=workspace, text=True, capture_output=True, timeout=60)
         if result.returncode or (workspace / 'probe.py').read_text() != 'value = 2\n':
             raise RuntimeError('Aider replay failed: ' + result.stdout[-2000:] + result.stderr[-2000:])

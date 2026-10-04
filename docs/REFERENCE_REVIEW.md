@@ -1,4 +1,9 @@
-# Internal reference inspection — release 0.4.0
+# Internal reference inspection — releases 0.4.0–0.5.0
+
+The domain/workflow reference sources are unchanged in 0.5.0. Their calibration now
+uses separate judge/candidate containers and explicit fixture capabilities. See
+VALIDATION_05.md and benchmark/HARNESS_SECURITY.md for current evidence and observation
+limits. The notes below remain author-side inspection, not external review.
 
 This is AI-assisted author-side inspection of the 26 reference implementations and
 shared job helpers. It is **not independent external review**, an authenticated human

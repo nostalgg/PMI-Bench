@@ -1,5 +1,5 @@
 {
-  "benchmark_version": "0.4.0",
+  "benchmark_version": "0.5.0",
   "updated": "2026-10-04",
   "real_model_runs": 0,
   "agents": [
@@ -22,8 +22,8 @@
   "proposed_family": "GLM",
   "api_cost_usd": null,
   "blockers": [
-    "OPENROUTER_API_KEY is absent",
-    "OpenRouter HTTPS is outside the active network allowlist"
+    "Provider/model ID, current pricing and a campaign budget must be explicitly selected before real trials",
+    "Provider credentials/connectivity must be verified at campaign time"
   ],
   "planned_campaign": {
     "neutral_runs": 52,
@@ -31,5 +31,7 @@
     "requires_plan_approval_per_run": true
   },
   "warning": "Scripted integrations and reference calibration are not model or competing-agent scores.",
-  "status": "deferred_by_user_benchmark_first"
+  "status": "deferred_by_user_benchmark_first",
+  "approval_control": "explicit_operator_command_private_one_use_record",
+  "adapters": "OS-enforced workspace mounts; separate evaluation judge"
 }

@@ -126,13 +126,13 @@ class RunnerTests(unittest.TestCase):
         rows = [json.loads(line) for line in (first / 'tasks.jsonl').read_text().splitlines()]
         self.assertEqual(len({row['scenario_group'] for row in rows}), 26)
         self.assertEqual(len(rows), 78)
-        self.assertTrue(all(row['language'] == 'en' and row['benchmark_version'] == '0.4.0' for row in rows))
+        self.assertTrue(all(row['language'] == 'en' and row['benchmark_version'] == '0.5.0' for row in rows))
 
     def test_release_families_and_calibration_targets(self):
         from collections import Counter
         tasks = runner.list_tasks(ROOT)
         self.assertEqual(sorted(Counter(t['category'] for t in tasks).values()), [4,4,4,4,5,5])
-        self.assertEqual(sum(len(t['checks']) for t in tasks), 232)
+        self.assertEqual(sum(len(t['checks']) for t in tasks), 258)
         self.assertEqual(Counter(t['usage_partition'] for t in tasks), {'development': 6, 'evaluation': 20})
         sources = {s['id'] for s in runner.read_json(ROOT / 'SOURCES.json') if s['status'] == 'retrieved'}
         for task in tasks:

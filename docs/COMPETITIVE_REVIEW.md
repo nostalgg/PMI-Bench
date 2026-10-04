@@ -38,3 +38,14 @@ Use one currently available GLM provider/model ID for initial comparisons. An ag
 experiment and a model experiment answer different questions; changing both at once
 would confound attribution. Pinned dependencies differ between mini and Aider and
 native tool access differs; disclose those differences and record actual usage.
+
+## Release 0.5.0 update
+
+Assertions now run in a separate judge container, with bounded JSON fixture access.
+The core count is 258 including 26 repeated boundary checks; supplementary references
+have 24 checks. Both competitor adapters enforce read-only planning and restricted
+in-place implementation writes, plus private one-use operator approval. Aider runs its
+model/edit process inside Docker with provider access; mini's tools are offline and its
+model process is on the host. These are remaining comparison confounds, not equal
+tool or security surfaces. Five scripted attacks calibrate boundaries, without adding
+model-performance evidence. No GLM or LangGraph experiment has been run.

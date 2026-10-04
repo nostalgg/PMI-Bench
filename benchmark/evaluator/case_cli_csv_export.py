@@ -15,7 +15,8 @@ class CLITests(unittest.TestCase):
         self.source.write_text('id,amount_cents\n001,29\n002,300\n')
 
     def run_cli(self,*args):
-        return subprocess.run([sys.executable,'-I','-B','/submission/tool.py',*map(str,args)],capture_output=True,text=True,timeout=5)
+        from isolated_client import session
+        return session.cli(*args)
 
     def test_legacy_positional_contract(self):
         result=self.run_cli(self.source,self.output)

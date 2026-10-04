@@ -1,10 +1,10 @@
-# Evaluation protocol — version 0.4.0
+# Evaluation protocol — version 0.5.0
 
 ## Units and separate tracks
 
 Twenty-six scenario groups each have three correlated patch requests. The patch
-track checks artifacts (232 checks). Supplementary dependency conformance covers
-six of these scenarios (18 reference checks). Explicit clarification/approval
+track checks artifacts (258 checks). Supplementary dependency conformance covers
+six of these scenarios (24 reference checks). Explicit clarification/approval
 conformance uses separate requests for all groups and structured event logs.
 Never pool these check counts into independent task counts or a universal quality score.
 
@@ -23,8 +23,10 @@ Never pool these check counts into independent task counts or a universal qualit
    and failure behavior using REVIEW_RUBRIC.md. Churn is descriptive, not a quality score.
 
 A patch pass cannot establish plan approval or dialogue quality. Competitor adapters
-have a separate planning/approval gate: mini planning is mounted read-only; Aider uses
-ask mode and verifies unchanged files. The approval flag is an assertion, not identity
+have a separate plan/approve/execute controller. Both planning workspaces are read-only;
+execution grants write access only to declared existing file mounts. The operator's
+approve command creates a private one-use bound record outside agent mounts; a public
+approval hash alone cannot launch execution. This is operator authority, not identity
 authentication. Native peer brainstorming and interactive-track campaigns are not implemented.
 
 ## Explicit clarification/approval conformance
@@ -78,4 +80,7 @@ external validation or an authenticated human rating. Reference solutions are ex
 not preferred style targets. External review and observed SME incident sampling remain
 unavailable. Small synthetic cases do not establish production readiness, general
 superiority or robust population-level statistics. Public evaluator/reference access
-permits gaming. Docker is a cooperative research harness, not a hostile judge.
+permits gaming. Assertions run in a separate judge container with bounded JSON fixture
+capabilities. See HARNESS_SECURITY.md for five calibrated attacks, OS write enforcement,
+serialization/log-observation limits and residual adversarial risks. The raw patch CLI
+does not authenticate an external agent's editing history.

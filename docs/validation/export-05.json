@@ -1,0 +1,8 @@
+{
+  "benchmark_version": "0.5.0",
+  "zip": "exports/pmi-bench-0.5.0-portfolio.zip",
+  "sha256": "13c21d73f01011fe3d3e3ad7024cc12dedf2c2dbfdb25ca72a4cd1e0e2a653dc",
+  "files": 337,
+  "two_exports_identical": true,
+  "published": false
+}

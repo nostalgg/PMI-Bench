@@ -44,7 +44,7 @@ def calibrate():
             except BenchmarkError as exc: negatives[label]={'rejected':True,'reason':str(exc)}
             else: raise AssertionError(f'{task_id}/{label}: invalid transcript accepted')
         runs.append({'task_id':task_id,'valid':valid,'negative_logs':negatives})
-    return {'version':'0.4.0','scripted_protocol_calibration':True,'agent_runs':0,
+    return {'version':'0.5.0','scripted_protocol_calibration':True,'agent_runs':0,
             'valid_logs':len(runs),'invalid_logs_rejected':5*len(runs),
             'auditor_sha256':digest_map({p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (Path(__file__).resolve().parents[1]/'src/pmi_bench').glob('*.py')}),
             'runs':runs}

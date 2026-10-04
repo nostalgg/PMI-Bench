@@ -14,6 +14,23 @@ spec.loader.exec_module(competitors)
 
 
 class CompetitorTests(unittest.TestCase):
+    def test_operator_approval_needs_no_model_key_or_process(self):
+        from pmi_bench import runner
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp) / 'run'
+            request = runner.prepare(runner.DEFAULT_ROOT, 'invoice_import', 'neutral', directory)
+            plan = {'agent':'aider', 'model':'openrouter/explicit-model', 'task':'invoice_import',
+                    'variant':'neutral', 'text':'Validate input before changing the database.'}
+            plan['approval_id'] = competitors.approval_id(plan['text'], request, runner.inventory(directory / 'workspace'))
+            (directory / 'plan.json').write_text(json.dumps(plan))
+            with mock.patch.dict(os.environ, {}, clear=True), mock.patch('subprocess.run') as execute:
+                result = competitors.main(['--agent','aider','--python',os.sys.executable,
+                    '--model',plan['model'],'--mode','approve','--task',plan['task'],
+                    '--run-dir',str(directory),'--approved-plan',plan['approval_id']])
+            self.assertEqual(result, 0)
+            self.assertTrue((directory / 'controller/approval.json').is_file())
+            execute.assert_not_called()
+
     def test_prompt_or_empty_response_is_not_a_plan(self):
         prompt_only = 'TO LLM 2026-10-04\nUSER propose a plan\nLLM RESPONSE 2026-10-04\n'
         self.assertEqual(competitors.aider_responses(prompt_only), '')
@@ -49,7 +66,8 @@ class CompetitorTests(unittest.TestCase):
             (directory / 'plan.json').write_text(json.dumps(plan))
             with mock.patch.dict(os.environ, {'OPENROUTER_API_KEY': 'synthetic-presence-only'}), mock.patch('subprocess.run') as execute:
                 result = competitors.main(['--agent', 'aider', '--python', str(Path(os.sys.executable)),
-                    '--model', plan['model'], '--mode', 'execute', '--task', plan['task'], '--run-dir', str(directory)])
+                    '--model', plan['model'], '--mode', 'execute', '--task', plan['task'], '--run-dir', str(directory),
+                    '--approved-plan', plan['approval_id']])
             self.assertEqual(result, 2)
             self.assertFalse((directory / 'execute').exists())
             execute.assert_not_called()

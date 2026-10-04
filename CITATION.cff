@@ -3,7 +3,7 @@ message: "Please cite this version and preserve the applicable license notices."
 title: "PMI Bench: SME Data and Code Maintenance"
 authors:
   - name: "nostalgg and contributors"
-version: 0.4.0
+version: 0.5.0
 date-released: 2026-10-04
 repository-code: "https://github.com/nostalgg/Agentic-codebase"
 license:
