@@ -1,0 +1,8 @@
+[
+  {
+    "invoice_id": "001",
+    "amount_cents": 29,
+    "currency": "EUR",
+    "status": "issued"
+  }
+]

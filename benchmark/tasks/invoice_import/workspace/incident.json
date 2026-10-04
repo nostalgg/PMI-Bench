@@ -1,0 +1,16 @@
+{
+  "scenario_id": "invoice_import",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "Finance scheduler retries a delivered CSV after an interruption, and later deliveries correct already issued invoices.",
+  "business_risk": "A replay must not duplicate rows or suppress legitimate corrections.",
+  "accepted_change_boundary": [
+    "importer.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-csv",
+    "python-sqlite"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

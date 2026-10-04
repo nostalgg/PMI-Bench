@@ -1,0 +1,16 @@
+{
+  "scenario_id": "csv_formula",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "Customer-provided contact notes are downloaded by administrators and opened in spreadsheet software. CSV quoting alone does not neutralize formula prefixes.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "contacts.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "owasp-csv",
+    "python-csv"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

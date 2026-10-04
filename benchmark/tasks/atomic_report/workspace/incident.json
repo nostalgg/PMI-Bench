@@ -1,0 +1,15 @@
+{
+  "scenario_id": "atomic_report",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "An admin dashboard reads the daily CSV while the batch runs. Validation failures must not replace the last usable report with partial output.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "publish.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-csv"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

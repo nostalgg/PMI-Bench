@@ -1,0 +1,13 @@
+{
+  "scenario_id": "config_upgrade",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "A configuration loader must support both legacy cron settings and the new nested client schema.",
+  "business_risk": "Milliseconds interpreted as seconds cause long outages; mutation leaks into other consumers.",
+  "accepted_change_boundary": [
+    "configuration.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

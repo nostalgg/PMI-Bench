@@ -1,0 +1,18 @@
+{
+  "as_of": "2024-03-31",
+  "invoice": {
+    "invoice_id": "INV-001",
+    "amount_cents": 10000,
+    "due_on": "2024-03-01"
+  },
+  "payments": [
+    {
+      "amount_cents": 3000,
+      "paid_on": "2024-03-15"
+    },
+    {
+      "amount_cents": 7000,
+      "paid_on": "2024-04-02"
+    }
+  ]
+}

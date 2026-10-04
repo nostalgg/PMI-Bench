@@ -1,0 +1,888 @@
+{
+  "benchmark_version": "0.1.0",
+  "runs": [
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "d24429c23d81487a9286aed941b15e75",
+      "created_at": "2026-10-04T12:02:18.959191+00:00",
+      "task_id": "invoice_import",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "cca3407409635f97ee4f1832260492821be62cd73ed21dd8675ad570cd832b50",
+      "submission_files": {
+        "PROJECT.md": "55b47e50997166dcd016b69cc0de472dbef36cc57a9c31e1996fb8febd6e3d04",
+        "importer.py": "03a8ab39f77c0453df1b300fbf599bcb269f97b8455e5f595f0e9ca07985428a",
+        "sample.csv": "d063a7400ca1990bc3420f13411bda6a1eb28f9e9b42311d68596f323ddb2898"
+      },
+      "task_sha256": "4dff91ea906bd984c27f82150da4475f3a2a4161e51208a27b3b86b25dc6c7b3",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_file_atomic",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised : ('', 'C', '1', 'paid')"
+        },
+        {
+          "id": "test_constraint_missing_headers_atomic",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_sql_safe_identifiers",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_and_reordered_headers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_insert_preserves_identifiers",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [(' 0007 ', ' 001 ', 12000, ' paid '), ('A', 'B', 0, 'issued')] != [('0007', '001', 12000, 'paid'), ('A', 'B', 0, 'issued')]\n\nFirst differing element 0:\n(' 0007 ', ' 001 ', 12000, ' paid ')\n('0007', '001', 12000, 'paid')\n\n- [(' 0007 ', ' 001 ', 12000, ' paid '), ('A', 'B', 0, 'issued')]\n?    -    -    -   -           -    -\n\n+ [('0007', '001', 12000, 'paid'), ('A', 'B', 0, 'issued')]"
+        },
+        {
+          "id": "test_property_generated_batches",
+          "category": "correctness",
+          "status": "error",
+          "detail": "IntegrityError: UNIQUE constraint failed: invoices.invoice_id"
+        },
+        {
+          "id": "test_repeat_updates_last_wins",
+          "category": "correctness",
+          "status": "error",
+          "detail": "IntegrityError: UNIQUE constraint failed: invoices.invoice_id"
+        },
+        {
+          "id": "test_unrelated_rows_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 1.727,
+      "counts": {
+        "pass": 3,
+        "fail": 3,
+        "error": 2,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 2,
+          "total": 5
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 3
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "1e7f4e0786244f04b083139ddecbbccb",
+      "created_at": "2026-10-04T12:02:20.688895+00:00",
+      "task_id": "invoice_import",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "6e5fd553b128c52ea6f82cdc3bd5f42c27c9828cd7f9ab36004fc3e009fc2767",
+      "submission_files": {
+        "PROJECT.md": "55b47e50997166dcd016b69cc0de472dbef36cc57a9c31e1996fb8febd6e3d04",
+        "importer.py": "1cc5e406d04d5ae2cce6ad6aeba27ae3f681a4bcf9ff3b3bf7783e6e4f96b3b0",
+        "sample.csv": "d063a7400ca1990bc3420f13411bda6a1eb28f9e9b42311d68596f323ddb2898"
+      },
+      "task_sha256": "4dff91ea906bd984c27f82150da4475f3a2a4161e51208a27b3b86b25dc6c7b3",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_file_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_missing_headers_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_sql_safe_identifiers",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_and_reordered_headers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_insert_preserves_identifiers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_property_generated_batches",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_repeat_updates_last_wins",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_unrelated_rows_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.767,
+      "counts": {
+        "pass": 8,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 5,
+          "total": 5
+        },
+        "constraint": {
+          "passed": 3,
+          "total": 3
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "95d32e22e7114b91bd0705a9c33e5bd1",
+      "created_at": "2026-10-04T12:02:23.458520+00:00",
+      "task_id": "invoice_import",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "a86b01c87988fefde206636bcc7f43f215cd096da9bc1a92fd06518532140edf",
+      "submission_files": {
+        "PROJECT.md": "55b47e50997166dcd016b69cc0de472dbef36cc57a9c31e1996fb8febd6e3d04",
+        "importer.py": "31ad9ce539fd469c92c690d9885bf268b5d1f123d0e2859527e1d45f5c18d257",
+        "sample.csv": "d063a7400ca1990bc3420f13411bda6a1eb28f9e9b42311d68596f323ddb2898"
+      },
+      "task_sha256": "4dff91ea906bd984c27f82150da4475f3a2a4161e51208a27b3b86b25dc6c7b3",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_file_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_missing_headers_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_sql_safe_identifiers",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_and_reordered_headers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_insert_preserves_identifiers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_property_generated_batches",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('00[33 chars]', 'C1', 24888, 'cancelled'), ('0002', 'C3', 5[414 chars]ed')] != [('00[33 chars]', 'C3', 37510, 'paid'), ('0002', 'C2', 386, '[400 chars]ed')]\n\nFirst differing element 1:\n('0001', 'C1', 24888, 'cancelled')\n('0001', 'C3', 37510, 'paid')\n\nDiff is 1154 characters long. Set self.maxDiff to None to see it."
+        },
+        {
+          "id": "test_repeat_updates_last_wins",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('A', 'C', 100, 'issued'), ('B', 'D', 1, 'paid')] != [('A', 'C', 130, 'paid'), ('B', 'D', 1, 'paid')]\n\nFirst differing element 0:\n('A', 'C', 100, 'issued')\n('A', 'C', 130, 'paid')\n\n- [('A', 'C', 100, 'issued'), ('B', 'D', 1, 'paid')]\n?              ^     ----\n\n+ [('A', 'C', 130, 'paid'), ('B', 'D', 1, 'paid')]\n?              ^    ++\n"
+        },
+        {
+          "id": "test_unrelated_rows_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.698,
+      "counts": {
+        "pass": 6,
+        "fail": 2,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 5
+        },
+        "constraint": {
+          "passed": 3,
+          "total": 3
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "a78c8d675aac44f6b537aff06fa35c10",
+      "created_at": "2026-10-04T12:02:26.158071+00:00",
+      "task_id": "local_ai_client",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "d7a419af8a029d66be99b9c52a38aff7f12d97f3f77d8a27e4aa3848ef3c3526",
+      "submission_files": {
+        "PROJECT.md": "e8031a1b90309a44143693adfe8bedae6f98cdb20f20f7454fe845182e965752",
+        "client.py": "2c5de3bed792b26602fda7a34cb8dea659338552253aab7f0a66cc3df7d9945b"
+      },
+      "task_sha256": "7319d2087068c67e184379e76c7978e0a0da1d47c28b4f5c52efae48f35b8913",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_configured_model_and_endpoint",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 'default-model' != 'company-model-v2'\n- default-model\n+ company-model-v2\n"
+        },
+        {
+          "id": "test_constraint_ignore_proxy",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [{'method': 'POST', 'path': 'http://127.0.[153 chars]on'}] != []\n\nFirst list contains 1 additional elements.\nFirst extra element 0:\n{'method': 'POST', 'path': 'http://127.0.0.1:39939/v1/chat/completions', 'body': b'{\"model\": \"default-model\", \"messages\": [{\"role\": \"user\", \"content\": \"test\"}]}', 'content_type': 'application/json'}\n\n+ []\n- [{'body': b'{\"model\": \"default-model\", \"messages\": [{\"role\": \"user\", \"conten'\n-           b't\": \"test\"}]}',\n-   'content_type': 'application/json',\n-   'method': 'POST',\n-   'path': 'http://127.0.0.1:39939/v1/chat/completions'}]"
+        },
+        {
+          "id": "test_constraint_no_fallback",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_redirect",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: LocalAIError not raised"
+        },
+        {
+          "id": "test_constraint_no_sensitive_error_or_logs",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: 'SYNTHETIC_PRIVATE_INPUT_9843' unexpectedly found in 'Traceback (most recent call last):\\n  File \"/submission/client.py\", line 25, in summarize\\n    return json.load(response)[\"choices\"][0][\"message\"][\"content\"]\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/__init__.py\", line 293, in load\\n    return loads(fp.read(),\\n           ^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/__init__.py\", line 346, in loads\\n    return _default_decoder.decode(s)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/decoder.py\", line 338, in decode\\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/decoder.py\", line 356, in raw_decode\\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\\n\\nThe above exception was the direct cause of the follo"
+        },
+        {
+          "id": "test_constraint_reject_invalid_configuration",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_reject_nonlocal_urls",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised : https://example.com:443/v1"
+        },
+        {
+          "id": "test_constraint_timeout_no_retry",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_invalid_responses",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: LocalAIError not raised"
+        },
+        {
+          "id": "test_localhost_and_slash",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 4.433,
+      "counts": {
+        "pass": 3,
+        "fail": 7,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 2,
+          "total": 7
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "3377246cb0bd49fc9837caeb8b5d2004",
+      "created_at": "2026-10-04T12:02:30.593453+00:00",
+      "task_id": "local_ai_client",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "6eba251fc0d472a8e418224efec596a99fe96a2c0c7cbbd3fbb859bbc0402bb7",
+      "submission_files": {
+        "PROJECT.md": "e8031a1b90309a44143693adfe8bedae6f98cdb20f20f7454fe845182e965752",
+        "client.py": "4923ec5f2d6c7b872688ea266d5481522a4170f6eb5a683e3b6210019c1e1562"
+      },
+      "task_sha256": "7319d2087068c67e184379e76c7978e0a0da1d47c28b4f5c52efae48f35b8913",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_configured_model_and_endpoint",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_ignore_proxy",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_fallback",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_redirect",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_sensitive_error_or_logs",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_invalid_configuration",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_nonlocal_urls",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_timeout_no_retry",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_invalid_responses",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_localhost_and_slash",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 4.657,
+      "counts": {
+        "pass": 10,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 7,
+          "total": 7
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "1a86f2e291b4495ca869b3b7e66c7bc0",
+      "created_at": "2026-10-04T12:02:35.252084+00:00",
+      "task_id": "local_ai_client",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "5b3bf2ace24284f70fa493a0c2b6dd1a390ca3126aa7b2e5a723cc3ad8ee30db",
+      "submission_files": {
+        "PROJECT.md": "e8031a1b90309a44143693adfe8bedae6f98cdb20f20f7454fe845182e965752",
+        "client.py": "3bf80cf9e064c63cdcc9db860e00e8b92baad297be8e1192057bb84eca03763b"
+      },
+      "task_sha256": "7319d2087068c67e184379e76c7978e0a0da1d47c28b4f5c52efae48f35b8913",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_configured_model_and_endpoint",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_ignore_proxy",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_fallback",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_redirect",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: LocalAIError not raised"
+        },
+        {
+          "id": "test_constraint_no_sensitive_error_or_logs",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_invalid_configuration",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_nonlocal_urls",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_timeout_no_retry",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_invalid_responses",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_localhost_and_slash",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 4.133,
+      "counts": {
+        "pass": 9,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 6,
+          "total": 7
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "019d6eae1c2a4a5c8a587e37fa6f3029",
+      "created_at": "2026-10-04T12:02:39.388240+00:00",
+      "task_id": "sales_report",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "61433094810f4ccead56e44b312a781cf29923fe75da0e5f21a8bc3773805f2d",
+      "submission_files": {
+        "PROJECT.md": "cfdd7326cc0a573c32540a068299e867a58ea61fc7d50d014e6ba726aaaddc4c",
+        "report.sql": "809b1cb5fb5c510728cfe020f97acf45373d988771d220d0e6c54cfe2f36db01",
+        "sample.sql": "6db34654f471be1a2392f7e095dd692cbad215ff8742b72ae0736ec441e84764",
+        "schema.sql": "3ca30141f1fc0fb34804786198023763449a3f61d5f00a1775131d6b73b6f635"
+      },
+      "task_sha256": "53ccd961295348fda2549fc88453ab550f40dfd2f4f6d1dba68ab05750471e99",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_read_only_query",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_customers_without_paid_orders",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [] != [('A', 'None', 0, 0, 0, 0), ('B', 'Cancell[76 chars], 0)]\n\nSecond list contains 4 additional elements.\nFirst extra element 0:\n('A', 'None', 0, 0, 0, 0)\n\n- []\n+ [('A', 'None', 0, 0, 0, 0),\n+  ('B', 'Cancelled', 0, 0, 0, 0),\n+  ('C', 'Pending', 0, 0, 0, 0),\n+  ('D', 'Empty order', 1, 0, 0, 0)]"
+        },
+        {
+          "id": "test_empty_database",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_equal_amount_events",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C', 'Shop', 4, 2000, 400, 1600)] != [('C', 'Shop', 1, 1000, 200, 800)]\n\nFirst differing element 0:\n('C', 'Shop', 4, 2000, 400, 1600)\n('C', 'Shop', 1, 1000, 200, 800)\n\n- [('C', 'Shop', 4, 2000, 400, 1600)]\n?                ^  ^     ^    ^^\n\n+ [('C', 'Shop', 1, 1000, 200, 800)]\n?                ^  ^     ^    ^\n"
+        },
+        {
+          "id": "test_multiple_orders_and_names",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: False is not true : Counts and cents must be integers"
+        },
+        {
+          "id": "test_property_generated_data",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C01', 'Name1', 1, 1992, 298, 1694), ('C02',[224 chars]605)] != [('C00', 'Name0', 2, 0, 0, 0), ('C01', 'Name1'[309 chars], 0)]\n\nFirst differing element 0:\n('C01', 'Name1', 1, 1992, 298, 1694)\n('C00', 'Name0', 2, 0, 0, 0)\n\nSecond list contains 3 additional elements.\nFirst extra element 7:\n('C07', 'Name1', 2, 3025, 1339, 1686)\n\nDiff is 880 characters long. Set self.maxDiff to None to see it."
+        },
+        {
+          "id": "test_totals_with_fanout",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C', 'Shop', 4, 4000, 600, 3400)] != [('C', 'Shop', 1, 2000, 300, 1700)]\n\nFirst differing element 0:\n('C', 'Shop', 4, 4000, 600, 3400)\n('C', 'Shop', 1, 2000, 300, 1700)\n\n- [('C', 'Shop', 4, 4000, 600, 3400)]\n?                ^  ^     ^    ^^\n\n+ [('C', 'Shop', 1, 2000, 300, 1700)]\n?                ^  ^     ^    ^^\n"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 3.034,
+      "counts": {
+        "pass": 2,
+        "fail": 5,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 6
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "3f268a5a2c4e4470919fe1712eeadd74",
+      "created_at": "2026-10-04T12:02:42.432217+00:00",
+      "task_id": "sales_report",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "71ef5ea8ab5d2fe27894feaf3690da42604665bfd2ac8ba2aa135fad01e169cc",
+      "submission_files": {
+        "PROJECT.md": "cfdd7326cc0a573c32540a068299e867a58ea61fc7d50d014e6ba726aaaddc4c",
+        "report.sql": "d85edf6fc7790b33b62d5f586471b866ff64a3f483b22caf2845e82885184396",
+        "sample.sql": "6db34654f471be1a2392f7e095dd692cbad215ff8742b72ae0736ec441e84764",
+        "schema.sql": "3ca30141f1fc0fb34804786198023763449a3f61d5f00a1775131d6b73b6f635"
+      },
+      "task_sha256": "53ccd961295348fda2549fc88453ab550f40dfd2f4f6d1dba68ab05750471e99",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_read_only_query",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_customers_without_paid_orders",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_database",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_equal_amount_events",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_multiple_orders_and_names",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_property_generated_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_totals_with_fanout",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.971,
+      "counts": {
+        "pass": 7,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 6,
+          "total": 6
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.1.0",
+      "run_id": "d84525c9768b4f0cad6c4894622019af",
+      "created_at": "2026-10-04T12:02:45.405834+00:00",
+      "task_id": "sales_report",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "424c3ba03a052adb63fe381c6588ccda0c0988ef3a121384f9cede20fbbd7a44",
+      "submission_files": {
+        "PROJECT.md": "cfdd7326cc0a573c32540a068299e867a58ea61fc7d50d014e6ba726aaaddc4c",
+        "report.sql": "af257faed00b7c5dec4f870626b09dbb3be6a04d8d13c566fd132f083818ced4",
+        "sample.sql": "6db34654f471be1a2392f7e095dd692cbad215ff8742b72ae0736ec441e84764",
+        "schema.sql": "3ca30141f1fc0fb34804786198023763449a3f61d5f00a1775131d6b73b6f635"
+      },
+      "task_sha256": "53ccd961295348fda2549fc88453ab550f40dfd2f4f6d1dba68ab05750471e99",
+      "evaluator_sha256": "311cc78180ff32415009e6ddf3e68ffaaa0bb84086479d8320656273d1cf560c",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_read_only_query",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_customers_without_paid_orders",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_database",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_equal_amount_events",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C', 'Shop', 1, 500, 200, 300)] != [('C', 'Shop', 1, 1000, 200, 800)]\n\nFirst differing element 0:\n('C', 'Shop', 1, 500, 200, 300)\n('C', 'Shop', 1, 1000, 200, 800)\n\n- [('C', 'Shop', 1, 500, 200, 300)]\n?                   ^         ^\n\n+ [('C', 'Shop', 1, 1000, 200, 800)]\n?                   ^^         ^\n"
+        },
+        {
+          "id": "test_multiple_orders_and_names",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_property_generated_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_totals_with_fanout",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C', 'Shop', 1, 1000, 300, 700)] != [('C', 'Shop', 1, 2000, 300, 1700)]\n\nFirst differing element 0:\n('C', 'Shop', 1, 1000, 300, 700)\n('C', 'Shop', 1, 2000, 300, 1700)\n\n- [('C', 'Shop', 1, 1000, 300, 700)]\n?                   ^\n\n+ [('C', 'Shop', 1, 2000, 300, 1700)]\n?                   ^          +\n"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.22,
+      "counts": {
+        "pass": 5,
+        "fail": 2,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 4,
+          "total": 6
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    }
+  ],
+  "self_test_passed": true
+}

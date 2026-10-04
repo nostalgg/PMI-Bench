@@ -1,0 +1,3 @@
+# Existing consumer; preserve both path styles.
+0 2 * * * python tool.py /srv/intake/incoming.csv /srv/reports/report.jsonl
+# New service: python tool.py --input incoming.csv --output report.jsonl --dry-run

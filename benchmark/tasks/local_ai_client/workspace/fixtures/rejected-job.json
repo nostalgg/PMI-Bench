@@ -1,0 +1,8 @@
+{
+  "job_id": "local_ai_client-rejected",
+  "input": {
+    "mode": "invalid",
+    "model": "private",
+    "text": "sensitive-sentinel"
+  }
+}

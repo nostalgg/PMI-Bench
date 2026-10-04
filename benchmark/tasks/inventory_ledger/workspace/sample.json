@@ -1,0 +1,12 @@
+[
+  {
+    "event_id": "scanner-0001",
+    "sku": "001",
+    "delta": 5
+  },
+  {
+    "event_id": "scanner-0001",
+    "sku": "001",
+    "delta": 5
+  }
+]

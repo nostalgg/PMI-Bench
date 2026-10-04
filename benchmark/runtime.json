@@ -1,0 +1,9 @@
+{
+  "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+  "source_tag": "python:3.12.12-slim-bookworm",
+  "python_version": "3.12.12",
+  "timeout_seconds": 45,
+  "memory": "256m",
+  "cpus": "1",
+  "pids_limit": 64
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "customer_matching",
+  "title": "CRM identity matching with ambiguity",
+  "category": "data_quality",
+  "language": "en",
+  "editable_files": [
+    "matching.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "Administration joins an ERP customer master to a CRM import. Shared office addresses must not silently merge two legal customers. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "Administration joins an ERP customer master to a CRM import. Shared office addresses must not silently merge two legal customers. I suggest: Pick the first customer when an address matches more than one. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "Administration joins an ERP customer master to a CRM import. Shared office addresses must not silently merge two legal customers. Consider: Keep ambiguous identities visible for human reconciliation. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Master/incoming are lists of exact customer_id/email and source_id/email dicts respectively. IDs are nonempty strings unique within their own list; emails are strings, possibly empty. Normalize matching emails by outer strip and Unicode casefold, without changing original inputs. A nonempty normalized email matching exactly one master customer produces {source_id,customer_id}. Multiple matches produce unresolved {source_id,reason:ambiguous,candidates:[sorted customer IDs]}; zero matches, including empty email, produce reason:not_found and empty candidates. Preserve incoming order separately within matches/unresolved. Return {matches:list,unresolved:list}; no fuzzy/name matching, deduplication or arbitrary winner. Invalid rows/duplicate IDs raise ValueError. Do not mutate inputs."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_normalized_email",
+      "category": "correctness",
+      "description": "Normalized email"
+    },
+    {
+      "id": "test_ambiguous_not_arbitrarily_assigned",
+      "category": "correctness",
+      "description": "Ambiguous not arbitrarily assigned"
+    },
+    {
+      "id": "test_empty_email_never_matches",
+      "category": "correctness",
+      "description": "Empty email never matches"
+    },
+    {
+      "id": "test_source_order_and_no_mutation",
+      "category": "correctness",
+      "description": "Source order and no mutation"
+    },
+    {
+      "id": "test_constraint_duplicate_identifiers",
+      "category": "constraint",
+      "description": "Constraint duplicate identifiers"
+    },
+    {
+      "id": "test_constraint_invalid_rows",
+      "category": "constraint",
+      "description": "Constraint invalid rows"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "matching.py",
+    "find": "key = row['email'].strip().casefold()",
+    "replace": "key = row['email'].strip()",
+    "target_check": "test_normalized_email"
+  },
+  "business_context": {
+    "workflow": "Administration joins an ERP customer master to a CRM import. Shared office addresses must not silently merge two legal customers.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "matching.py",
+      "find": "key = row['email'].strip().casefold()",
+      "replace": "key = row['email'].strip()",
+      "target_check": "test_normalized_email"
+    },
+    {
+      "id": "business_secondary",
+      "file": "matching.py",
+      "find": "if key:",
+      "replace": "if True:",
+      "target_check": "test_empty_email_never_matches"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "scenario_id": "export_schema",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "An external accountant still consumes the v1 CSV while an internal warehouse expects v2. A shared exporter must avoid a breaking schema change.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "exporter.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-csv"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

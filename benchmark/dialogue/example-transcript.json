@@ -1,0 +1,59 @@
+{
+  "fixture_kind": "scripted_reference_snapshot",
+  "binding": {
+    "task_id": "invoice_import",
+    "request_sha256": "55bbfa610d1583d55b362dd1ae366573bd996440591a84e3632da05395600795",
+    "workspace_sha256": "6ed3a3ba238208ba9d8c2fd52c12f81c98480066c03edc934ab670f01a33ff57"
+  },
+  "events": [
+    {
+      "type": "question",
+      "role": "assistant",
+      "decision_id": "contract_authority",
+      "text": "Should we preserve the existing business contract, or commission a separate scope change?"
+    },
+    {
+      "type": "answer",
+      "role": "user",
+      "decision_id": "contract_authority",
+      "choice": "preserve_contract"
+    },
+    {
+      "type": "plan",
+      "role": "assistant",
+      "plan": {
+        "version": 1,
+        "editable_files": [
+          "importer.py",
+          "workflow.py"
+        ],
+        "steps": [
+          "Inspect the existing callers and documented invariants.",
+          "Repair the business operation and job failure/publication contract.",
+          "Validate normal execution, rejected input and preservation of prior results."
+        ]
+      }
+    },
+    {
+      "type": "approve",
+      "role": "user",
+      "approval_id": "6a8ca9fea956fc001ec54829ab2f523804370f68efe9ff490330b1f69b742461"
+    },
+    {
+      "type": "edit",
+      "role": "assistant",
+      "approval_id": "6a8ca9fea956fc001ec54829ab2f523804370f68efe9ff490330b1f69b742461",
+      "before_sha256": "6ed3a3ba238208ba9d8c2fd52c12f81c98480066c03edc934ab670f01a33ff57",
+      "after_sha256": "eb9987de5142e80c1678ec5e91f6e7fb589156f844cb81fb97f4a866c32f1db1",
+      "changed_files": [
+        "importer.py",
+        "workflow.py"
+      ]
+    },
+    {
+      "type": "final",
+      "role": "assistant",
+      "text": "The approved contract is preserved; patch tests must be evaluated separately."
+    }
+  ]
+}

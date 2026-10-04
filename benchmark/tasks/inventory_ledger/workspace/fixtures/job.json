@@ -1,0 +1,17 @@
+{
+  "job_id": "inventory_ledger-sample",
+  "input": {
+    "movements": [
+      {
+        "event_id": "scan-1",
+        "sku": "001",
+        "delta": 5
+      },
+      {
+        "event_id": "scan-1",
+        "sku": "001",
+        "delta": 5
+      }
+    ]
+  }
+}

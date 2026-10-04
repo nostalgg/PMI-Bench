@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "atomic_report",
+  "title": "Atomic publication of finance reports",
+  "category": "bug_fixing",
+  "language": "en",
+  "editable_files": [
+    "publish.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "An admin dashboard reads the daily CSV while the batch runs. Validation failures must not replace the last usable report with partial output. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "An admin dashboard reads the daily CSV while the batch runs. Validation failures must not replace the last usable report with partial output. I suggest: Stream directly into the final file and leave it for inspection if validation fails. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "An admin dashboard reads the daily CSV while the batch runs. Validation failures must not replace the last usable report with partial output. Consider: Publish only a fully validated complete report, preserving the previous artifact on failure. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Rows list of exact customer_id and amount_cents: nonempty string ID, nonboolean signed-64 integer amount (negative corrections allowed). Aggregate by exact customer ID and sort lexicographically; every running aggregate must fit signed 64-bit. CSV header customer_id,amount_cents, LF endings, correctly escaped IDs. Empty list publishes header only. Validate all rows before writing. Stage a complete file in the destination directory and replace destination atomically; existing destination remains intact on validation/staging/replace failure, remove staging leftovers. Reject a symlink destination with ValueError. Invalid input/overflow raises ValueError; filesystem failures may propagate OSError. Parent exists and is trusted, no concurrent writers; full directory fsync/power-loss durability is outside this task. Do not mutate input."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_aggregates_and_order",
+      "category": "correctness",
+      "description": "Aggregates and order"
+    },
+    {
+      "id": "test_replace_and_cleanup",
+      "category": "correctness",
+      "description": "Replace and cleanup"
+    },
+    {
+      "id": "test_constraint_invalid_late_row_preserves_report",
+      "category": "constraint",
+      "description": "Constraint invalid late row preserves report"
+    },
+    {
+      "id": "test_constraint_overflow_preserves_report",
+      "category": "constraint",
+      "description": "Constraint overflow preserves report"
+    },
+    {
+      "id": "test_constraint_symlink_target_preserved",
+      "category": "constraint",
+      "description": "Constraint symlink target preserved"
+    },
+    {
+      "id": "test_empty_and_quoted_identifiers",
+      "category": "correctness",
+      "description": "Empty and quoted identifiers"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "publish.py",
+    "find": "if path.is_symlink():",
+    "replace": "if False:",
+    "target_check": "test_constraint_symlink_target_preserved"
+  },
+  "business_context": {
+    "workflow": "An admin dashboard reads the daily CSV while the batch runs. Validation failures must not replace the last usable report with partial output.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-csv"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "publish.py",
+      "find": "if path.is_symlink():",
+      "replace": "if False:",
+      "target_check": "test_constraint_symlink_target_preserved"
+    },
+    {
+      "id": "business_secondary",
+      "file": "publish.py",
+      "find": "for key in sorted(totals)",
+      "replace": "for key in totals",
+      "target_check": "test_aggregates_and_order"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

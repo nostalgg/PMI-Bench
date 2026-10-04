@@ -1,0 +1,35 @@
+{
+  "benchmark_version": "0.4.0",
+  "updated": "2026-10-04",
+  "real_model_runs": 0,
+  "agents": [
+    {
+      "name": "mini-swe-agent",
+      "version": "2.4.6",
+      "installed": true,
+      "offline_integration": "passed",
+      "performance": null
+    },
+    {
+      "name": "aider-chat",
+      "version": "0.86.2",
+      "installed": true,
+      "offline_integration": "passed",
+      "performance": null
+    }
+  ],
+  "model": null,
+  "proposed_family": "GLM",
+  "api_cost_usd": null,
+  "blockers": [
+    "OPENROUTER_API_KEY is absent",
+    "OpenRouter HTTPS is outside the active network allowlist"
+  ],
+  "planned_campaign": {
+    "neutral_runs": 52,
+    "all_variant_runs": 156,
+    "requires_plan_approval_per_run": true
+  },
+  "warning": "Scripted integrations and reference calibration are not model or competing-agent scores.",
+  "status": "deferred_by_user_benchmark_first"
+}

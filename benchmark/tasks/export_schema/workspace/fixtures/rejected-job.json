@@ -1,0 +1,14 @@
+{
+  "job_id": "export_schema-rejected",
+  "input": {
+    "rows": [
+      {
+        "invoice_id": "001",
+        "amount_cents": 29,
+        "currency": "USD",
+        "status": "issued"
+      }
+    ],
+    "version": 1
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scenario_id": "pii_redaction",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "Support exports nested diagnostic JSON that can contain contact fields and authentication-related fields.",
+  "business_risk": "Top-level-only redaction exposes sensitive structured values.",
+  "accepted_change_boundary": [
+    "redact.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "owasp-logging"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

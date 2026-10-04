@@ -1,0 +1,16 @@
+{
+  "job_id": "customer_matching-rejected",
+  "input": {
+    "master": [
+      {
+        "customer_id": "001",
+        "email": "x"
+      },
+      {
+        "customer_id": "001",
+        "email": "x"
+      }
+    ],
+    "incoming": []
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "job_id": "file_reconciliation-rejected",
+  "input": {
+    "expected": [
+      "A",
+      null
+    ],
+    "received": [
+      "A"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "scenario_id": "incremental_sync",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "A nightly source-change feed updates a reporting replica. A failed batch currently risks moving the checkpoint past unapplied changes.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "sync.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-sqlite",
+    "postgres-insert"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

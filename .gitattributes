@@ -1,0 +1,2 @@
+# Preserve intentional Windows CSV dialect fixtures and their frozen byte hashes.
+*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

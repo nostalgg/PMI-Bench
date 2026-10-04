@@ -1,0 +1,24 @@
+{
+  "request": {
+    "data_class": "restricted",
+    "input_tokens": 1000,
+    "output_tokens": 1000,
+    "task": "sql",
+    "allow_hosted": true
+  },
+  "policy": {
+    "budget_usd": "0.01",
+    "models": [
+      {
+        "name": "private",
+        "deployment": "local",
+        "tasks": [
+          "sql"
+        ],
+        "context_tokens": 10000,
+        "input_per_million": "1",
+        "output_per_million": "2"
+      }
+    ]
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "date_windows",
+  "title": "Timezone-aware reporting dates",
+  "category": "bug_fixing",
+  "language": "en",
+  "editable_files": [
+    "windows.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "Branches book UTC events into local daily reports across midnight and daylight-saving transitions. Fix daily reporting assignment for timestamped business events. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "misleading": "Branches book UTC events into local daily reports across midnight and daylight-saving transitions. Fix daily reporting assignment for timestamped business events. I believe taking the first ten timestamp characters should identify the reporting date. Check this against the requirements. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "correct": "Branches book UTC events into local daily reports across midnight and daylight-saving transitions. Fix daily reporting assignment for timestamped business events. Consider converting the explicit timestamp offset into the configured IANA timezone. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval."
+  },
+  "clarifications": [
+    {
+      "topic": "contract",
+      "answer": "Contract: windows.reporting_day(timestamp, timezone_name) -> YYYY-MM-DD string.\nTimestamp is an ISO-8601 datetime accepted by Python 3.12 datetime.fromisoformat,\nwith an explicit UTC offset or Z. timezone_name is a valid IANA zoneinfo name.\nConvert the instant to that zone before taking its date; honor daylight saving\nchanges and midnight boundaries. Naive timestamps, invalid timestamps and unknown\ntimezones raise ValueError. Never infer the caller's local timezone.\nThe pinned runtime provides system timezone data. Preserve the public signature."
+    }
+  ],
+  "clarification_default": "There are no additional constraints beyond PROJECT.md; state any assumptions.",
+  "checks": [
+    {
+      "id": "test_local_midnight",
+      "category": "correctness",
+      "description": "Local midnight"
+    },
+    {
+      "id": "test_previous_day",
+      "category": "correctness",
+      "description": "Previous day"
+    },
+    {
+      "id": "test_daylight_saving_offsets",
+      "category": "correctness",
+      "description": "Daylight saving offsets"
+    },
+    {
+      "id": "test_constraint_invalid_timestamp",
+      "category": "constraint",
+      "description": "Constraint invalid timestamp"
+    },
+    {
+      "id": "test_equivalent_instants",
+      "category": "correctness",
+      "description": "Equivalent instants"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original code and synthetic data; not an observed SME incident or an executed model failure."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive agent runs. The patch evaluator does not verify the conversation.",
+  "calibration": {
+    "file": "windows.py",
+    "find": "ZoneInfo(timezone_name)",
+    "replace": "ZoneInfo('UTC')",
+    "target_check": "test_local_midnight"
+  },
+  "business_context": {
+    "workflow": "Branches book UTC events into local daily reports across midnight and daylight-saving transitions.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Wrong reporting dates change daily close totals.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-datetime"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "scope_preservation"
+  ],
+  "usage_partition": "development",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "windows.py",
+      "find": "ZoneInfo(timezone_name)",
+      "replace": "ZoneInfo('UTC')",
+      "target_check": "test_local_midnight"
+    },
+    {
+      "id": "business_secondary",
+      "file": "windows.py",
+      "find": "return value.astimezone(ZoneInfo(timezone_name)).date().isoformat()",
+      "replace": "return value.date().isoformat()",
+      "target_check": "test_previous_day"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

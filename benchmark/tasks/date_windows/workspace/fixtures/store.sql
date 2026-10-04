@@ -1,0 +1,1 @@
+-- No database in this scenario.

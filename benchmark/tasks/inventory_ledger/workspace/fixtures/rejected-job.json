@@ -1,0 +1,12 @@
+{
+  "job_id": "inventory_ledger-rejected",
+  "input": {
+    "movements": [
+      {
+        "event_id": "scan-1",
+        "sku": "missing",
+        "delta": 5
+      }
+    ]
+  }
+}

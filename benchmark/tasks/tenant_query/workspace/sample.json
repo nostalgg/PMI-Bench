@@ -1,0 +1,14 @@
+[
+  {
+    "tenant_id": "A",
+    "order_id": "001",
+    "amount_cents": 300,
+    "created_at": "2024-01-01"
+  },
+  {
+    "tenant_id": "B",
+    "order_id": "001",
+    "amount_cents": 999,
+    "created_at": "2024-01-01"
+  }
+]

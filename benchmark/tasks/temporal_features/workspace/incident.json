@@ -1,0 +1,15 @@
+{
+  "scenario_id": "temporal_features",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "A small finance team prototypes next-period revenue prediction. Imputing from all months makes validation optimistic by leaking future information.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "features.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "sklearn-pitfalls"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

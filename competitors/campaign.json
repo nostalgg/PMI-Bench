@@ -1,0 +1,1255 @@
+{
+  "benchmark_version": "0.4.0",
+  "model": null,
+  "status": "deferred_until_benchmark_review",
+  "jobs": [
+    {
+      "agent": "mini-swe-agent",
+      "task": "api_compatibility",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "atomic_report",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "cli_csv_export",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "config_upgrade",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "csv_formula",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "customer_matching",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "date_windows",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "document_cache",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "export_schema",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "file_reconciliation",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "incremental_sync",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "inventory_ledger",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "invoice_import",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "local_ai_client",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "model_policy",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "money_normalization",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "pii_redaction",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "prompt_boundary",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "receivables_aging",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "safe_archive",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "sales_report",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "scd_history",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "schema_migration",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "supplier_catalog",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "temporal_features",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "tenant_query",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "api_compatibility",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "atomic_report",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "cli_csv_export",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "config_upgrade",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "csv_formula",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "customer_matching",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "date_windows",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "document_cache",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "export_schema",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "file_reconciliation",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "incremental_sync",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "inventory_ledger",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "invoice_import",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "local_ai_client",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "model_policy",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "money_normalization",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "pii_redaction",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "prompt_boundary",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "receivables_aging",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "safe_archive",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "sales_report",
+      "variant": "neutral",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "scd_history",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "schema_migration",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "supplier_catalog",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "temporal_features",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "tenant_query",
+      "variant": "neutral",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "api_compatibility",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "atomic_report",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "cli_csv_export",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "config_upgrade",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "csv_formula",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "customer_matching",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "date_windows",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "document_cache",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "export_schema",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "file_reconciliation",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "incremental_sync",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "inventory_ledger",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "invoice_import",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "local_ai_client",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "model_policy",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "money_normalization",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "pii_redaction",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "prompt_boundary",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "receivables_aging",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "safe_archive",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "sales_report",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "scd_history",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "schema_migration",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "supplier_catalog",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "temporal_features",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "tenant_query",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "api_compatibility",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "atomic_report",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "cli_csv_export",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "config_upgrade",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "csv_formula",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "customer_matching",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "date_windows",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "document_cache",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "export_schema",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "file_reconciliation",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "incremental_sync",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "inventory_ledger",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "invoice_import",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "local_ai_client",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "model_policy",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "money_normalization",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "pii_redaction",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "prompt_boundary",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "receivables_aging",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "safe_archive",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "sales_report",
+      "variant": "misleading",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "scd_history",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "schema_migration",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "supplier_catalog",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "temporal_features",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "tenant_query",
+      "variant": "misleading",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "api_compatibility",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "atomic_report",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "cli_csv_export",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "config_upgrade",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "csv_formula",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "customer_matching",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "date_windows",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "document_cache",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "export_schema",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "file_reconciliation",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "incremental_sync",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "inventory_ledger",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "invoice_import",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "local_ai_client",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "model_policy",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "money_normalization",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "pii_redaction",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "prompt_boundary",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "receivables_aging",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "safe_archive",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "sales_report",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "scd_history",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "schema_migration",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "supplier_catalog",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "temporal_features",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "mini-swe-agent",
+      "task": "tenant_query",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "api_compatibility",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "atomic_report",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "cli_csv_export",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "config_upgrade",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "csv_formula",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "customer_matching",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "date_windows",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "document_cache",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "export_schema",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "file_reconciliation",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "incremental_sync",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "inventory_ledger",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "invoice_import",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "local_ai_client",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "model_policy",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "money_normalization",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "pii_redaction",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "prompt_boundary",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "receivables_aging",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "safe_archive",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "sales_report",
+      "variant": "correct",
+      "usage_partition": "development",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "scd_history",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "schema_migration",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "supplier_catalog",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "temporal_features",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    },
+    {
+      "agent": "aider",
+      "task": "tenant_query",
+      "variant": "correct",
+      "usage_partition": "evaluation",
+      "status": "not_run",
+      "approved_plan": null
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "scenario_id": "cli_csv_export",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "Legacy cron jobs use two positional paths; a new automation service uses named flags. Both contracts must survive the refactor.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "tool.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-csv"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

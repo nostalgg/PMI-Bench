@@ -1,0 +1,15 @@
+{
+  "job_id": "cli_csv_export-rejected",
+  "input": {
+    "rows": [
+      [
+        "001",
+        "29"
+      ],
+      [
+        "bad",
+        "x"
+      ]
+    ]
+  }
+}

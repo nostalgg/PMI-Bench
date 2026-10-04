@@ -1,0 +1,8 @@
+{
+  "job_id": "prompt_boundary-rejected",
+  "input": {
+    "policy": "",
+    "question": "Summarize",
+    "documents": []
+  }
+}

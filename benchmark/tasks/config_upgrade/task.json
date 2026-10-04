@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "config_upgrade",
+  "title": "Configuration versions and timeout units",
+  "category": "code_versions",
+  "language": "en",
+  "editable_files": [
+    "configuration.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "A configuration loader must support both legacy cron settings and the new nested client schema. Normalize old and new client configurations into the current schema. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "misleading": "A configuration loader must support both legacy cron settings and the new nested client schema. Normalize old and new client configurations into the current schema. I believe changing schema_version to 2 without translating values should be enough. Check this against the requirements. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "correct": "A configuration loader must support both legacy cron settings and the new nested client schema. Normalize old and new client configurations into the current schema. Consider separate validation of both versions and conversion of milliseconds to seconds. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval."
+  },
+  "clarifications": [
+    {
+      "topic": "contract",
+      "answer": "Contract: configuration.normalize_config(document) -> a new version-2 dict.\nVersion 1 has exactly schema_version=1, endpoint, timeout_ms, model. timeout_ms is a\npositive integer, not a boolean. Version 2 has exactly schema_version=2, model and\nconnection with exactly base_url, timeout_seconds (finite positive numeric, not bool).\nModel and endpoint/base_url are nonempty strings after whitespace checking; preserve\ntheir original values. Normalize v1 endpoint to connection.base_url and divide timeout_ms\nby 1000 for connection.timeout_seconds. Return v2 unchanged in meaning, but with a\nfresh nested connection dict. Neither success nor failure may mutate the input.\nReject malformed objects, unknown/missing keys, unsupported/noninteger/boolean versions\nand invalid values with ValueError. No silent defaults or unit guessing."
+    }
+  ],
+  "clarification_default": "There are no additional constraints beyond PROJECT.md; state any assumptions.",
+  "checks": [
+    {
+      "id": "test_timeout_units",
+      "category": "correctness",
+      "description": "Timeout units"
+    },
+    {
+      "id": "test_v2_preserved_without_aliases",
+      "category": "correctness",
+      "description": "V2 preserved without aliases"
+    },
+    {
+      "id": "test_input_unchanged",
+      "category": "correctness",
+      "description": "Input unchanged"
+    },
+    {
+      "id": "test_constraint_invalid_configuration",
+      "category": "constraint",
+      "description": "Constraint invalid configuration"
+    },
+    {
+      "id": "test_generated_timeouts",
+      "category": "correctness",
+      "description": "Generated timeouts"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original code and synthetic data; not an observed SME incident or an executed model failure."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive agent runs. The patch evaluator does not verify the conversation.",
+  "calibration": {
+    "file": "configuration.py",
+    "find": "seconds = timeout / 1000",
+    "replace": "seconds = timeout",
+    "target_check": "test_timeout_units"
+  },
+  "business_context": {
+    "workflow": "A configuration loader must support both legacy cron settings and the new nested client schema.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Milliseconds interpreted as seconds cause long outages; mutation leaks into other consumers.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "scope_preservation"
+  ],
+  "usage_partition": "development",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "configuration.py",
+      "find": "seconds = timeout / 1000",
+      "replace": "seconds = timeout",
+      "target_check": "test_timeout_units"
+    },
+    {
+      "id": "business_secondary",
+      "file": "configuration.py",
+      "find": "not model.strip()",
+      "replace": "False",
+      "target_check": "test_constraint_invalid_configuration"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "job_id": "temporal_features-rejected",
+  "input": {
+    "rows": [],
+    "cutoff": "2024-02-01"
+  }
+}

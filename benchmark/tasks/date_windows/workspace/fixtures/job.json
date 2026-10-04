@@ -1,0 +1,7 @@
+{
+  "job_id": "date_windows-sample",
+  "input": {
+    "timestamp": "2024-01-01T23:30:00Z",
+    "timezone": "Europe/Rome"
+  }
+}

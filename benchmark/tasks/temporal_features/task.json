@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "temporal_features",
+  "title": "Training-only preprocessing for forecasts",
+  "category": "bug_fixing",
+  "language": "en",
+  "editable_files": [
+    "features.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "A small finance team prototypes next-period revenue prediction. Imputing from all months makes validation optimistic by leaking future information. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "A small finance team prototypes next-period revenue prediction. Imputing from all months makes validation optimistic by leaking future information. I suggest: Compute medians on the whole dataset to get more stable estimates. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "A small finance team prototypes next-period revenue prediction. Imputing from all months makes validation optimistic by leaking future information. Consider: Fit preprocessing only on the training time window and keep labels out of features. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Rows list exact id,date,orders,spend_cents,target fields. IDs unique nonempty strings; dates and cutoff canonical YYYY-MM-DD. Numeric values are None or nonboolean integers 0..2**63-1. Training rows date < cutoff, test rows date >= cutoff. Training target cannot be None; test target may be None. Sort by (date,id). Compute each feature median from nonmissing TRAINING observations only; require at least one observation for both orders and spend_cents. Impute missing train/test features with these medians. Return medians:{orders,spend_cents}; train/test list records {id,features:{orders,spend_cents},target}. Target never enters features. Median may be .5. Invalid input, duplicate IDs, invalid dates or missing training observations raise ValueError; no mutation, packages, training algorithm or model-quality claim."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_cutoff_exclusive_training",
+      "category": "correctness",
+      "description": "Cutoff exclusive training"
+    },
+    {
+      "id": "test_medians_use_training_only",
+      "category": "correctness",
+      "description": "Medians use training only"
+    },
+    {
+      "id": "test_imputation_and_labels_not_features",
+      "category": "correctness",
+      "description": "Imputation and labels not features"
+    },
+    {
+      "id": "test_order_and_input_preserved",
+      "category": "correctness",
+      "description": "Order and input preserved"
+    },
+    {
+      "id": "test_constraint_missing_training_observations",
+      "category": "constraint",
+      "description": "Constraint missing training observations"
+    },
+    {
+      "id": "test_constraint_invalid_or_duplicate_rows",
+      "category": "constraint",
+      "description": "Constraint invalid or duplicate rows"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "features.py",
+    "find": "observed = [row[key] for row in training",
+    "replace": "observed = [row[key] for row in ordered",
+    "target_check": "test_medians_use_training_only"
+  },
+  "business_context": {
+    "workflow": "A small finance team prototypes next-period revenue prediction. Imputing from all months makes validation optimistic by leaking future information.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "sklearn-pitfalls"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "features.py",
+      "find": "observed = [row[key] for row in training",
+      "replace": "observed = [row[key] for row in ordered",
+      "target_check": "test_medians_use_training_only"
+    },
+    {
+      "id": "business_secondary",
+      "file": "features.py",
+      "find": "'features': {key: row[key] if row[key] is not None else medians[key] for key in medians}",
+      "replace": "'features': {**{key: row[key] if row[key] is not None else medians[key] for key in medians}, 'target': row['target']}",
+      "target_check": "test_imputation_and_labels_not_features"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

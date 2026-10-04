@@ -1,0 +1,22 @@
+{
+  "benchmark_version": "0.3.0",
+  "scenario_groups": 26,
+  "request_variants": 78,
+  "automated_checks": 154,
+  "usage_partition_scenario_counts": {
+    "development": 6,
+    "evaluation": 20
+  },
+  "export_files": 147,
+  "all_hashes_verified": true,
+  "zip_matches_export": true,
+  "zip_sha256": "728b15545d9870b4b9d2eebd14e4d18506eaa7d7e515d600bc642ab3be7f70e1",
+  "fixtures": {
+    "schema_databases_validated": 8,
+    "workspace_json_files_validated": 40,
+    "new_csv_fixtures_validated": 2
+  },
+  "real_model_runs": 0,
+  "publication_status": "draft_not_uploaded",
+  "external_subject_matter_review": "pending"
+}

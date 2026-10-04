@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "api_compatibility",
+  "title": "Vendor API pagination compatibility",
+  "category": "code_versions",
+  "language": "en",
+  "editable_files": [
+    "adapter.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "A vendor SDK changed from numbered pages to cursor pages; sparse intermediate pages still carry continuation cursors. Make record collection work with both supported vendor API versions. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "misleading": "A vendor SDK changed from numbered pages to cursor pages; sparse intermediate pages still carry continuation cursors. Make record collection work with both supported vendor API versions. I believe an empty page should always mean the end of pagination. Check this against the requirements. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "correct": "A vendor SDK changed from numbered pages to cursor pages; sparse intermediate pages still carry continuation cursors. Make record collection work with both supported vendor API versions. Consider explicit version adapters and termination based on each API cursor contract. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval."
+  },
+  "clarifications": [
+    {
+      "topic": "contract",
+      "answer": "Contract: adapter.collect_records(client, max_pages=100) -> list.\nclient.api_version is 1 or 2. V1 calls list_records(page=1,2,...) returning a dict\nwith items:list and has_more:bool. Stop only when has_more is false. V2 calls\nfetch_page(cursor=None) first, then the returned next_cursor; Page in vendor_v2.py\nhas results:list and next_cursor:str|None. Stop only at None. Empty intermediate pages\nare valid. Preserve all records and duplicates in source order. Do not mutate pages.\nReject unsupported versions and max_pages not a positive integer (bool invalid) with\nValueError. Raise ValueError on repeated v2 cursors or if another page would exceed\nmax_pages. No retries or new dependencies. vendor_v2.py is protected. Well-formed\nvendor responses are assumed; this task concerns API version compatibility."
+    }
+  ],
+  "clarification_default": "There are no additional constraints beyond PROJECT.md; state any assumptions.",
+  "checks": [
+    {
+      "id": "test_legacy_pagination",
+      "category": "correctness",
+      "description": "Legacy pagination"
+    },
+    {
+      "id": "test_modern_empty_intermediate_page",
+      "category": "correctness",
+      "description": "Modern empty intermediate page"
+    },
+    {
+      "id": "test_duplicates_and_order_preserved",
+      "category": "correctness",
+      "description": "Duplicates and order preserved"
+    },
+    {
+      "id": "test_constraint_pagination_bounds",
+      "category": "constraint",
+      "description": "Constraint pagination bounds"
+    },
+    {
+      "id": "test_input_pages_unchanged",
+      "category": "correctness",
+      "description": "Input pages unchanged"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original code and synthetic data; not an observed SME incident or an executed model failure."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive agent runs. The patch evaluator does not verify the conversation.",
+  "calibration": {
+    "file": "adapter.py",
+    "find": "if response.next_cursor is None:",
+    "replace": "if not response.results or response.next_cursor is None:",
+    "target_check": "test_modern_empty_intermediate_page"
+  },
+  "business_context": {
+    "workflow": "A vendor SDK changed from numbered pages to cursor pages; sparse intermediate pages still carry continuation cursors.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Stopping at an empty page silently omits records.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "adapter.py",
+      "find": "if response.next_cursor is None:",
+      "replace": "if not response.results or response.next_cursor is None:",
+      "target_check": "test_modern_empty_intermediate_page"
+    },
+    {
+      "id": "business_secondary",
+      "file": "adapter.py",
+      "find": "records.extend(response.results)",
+      "replace": "records.extend(sorted(set(response.results)))",
+      "target_check": "test_duplicates_and_order_preserved"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

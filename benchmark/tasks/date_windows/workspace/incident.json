@@ -1,0 +1,15 @@
+{
+  "scenario_id": "date_windows",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "Branches book UTC events into local daily reports across midnight and daylight-saving transitions.",
+  "business_risk": "Wrong reporting dates change daily close totals.",
+  "accepted_change_boundary": [
+    "windows.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-datetime"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

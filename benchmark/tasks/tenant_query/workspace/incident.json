@@ -1,0 +1,16 @@
+{
+  "scenario_id": "tenant_query",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "One accounting service stores multiple companies in the same database. A flexible sort endpoint must not broaden access to another company.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "queries.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-sqlite",
+    "owasp-authorization"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

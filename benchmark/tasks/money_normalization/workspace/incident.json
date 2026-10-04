@@ -1,0 +1,15 @@
+{
+  "scenario_id": "money_normalization",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "An accounting connector imports European monetary strings, including refunds and high-value cumulative balances.",
+  "business_risk": "A one-cent drift or locale misread breaks reconciliation.",
+  "accepted_change_boundary": [
+    "money.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-csv"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

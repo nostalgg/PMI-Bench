@@ -1,0 +1,13 @@
+{
+  "job_id": "document_cache-rejected",
+  "input": {
+    "records": [
+      {
+        "record_id": "001",
+        "text": "Changed synthetic invoice"
+      }
+    ],
+    "model": "private",
+    "response_model": "wrong"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "job_id": "tenant_query-rejected",
+  "input": {
+    "tenant": "",
+    "sort": "created_at",
+    "direction": "asc"
+  }
+}

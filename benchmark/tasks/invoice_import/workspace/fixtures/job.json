@@ -1,0 +1,19 @@
+{
+  "job_id": "invoice_import-sample",
+  "input": {
+    "rows": [
+      [
+        "001",
+        "C01",
+        "29",
+        "paid"
+      ],
+      [
+        "001",
+        "C01",
+        "30",
+        "paid"
+      ]
+    ]
+  }
+}

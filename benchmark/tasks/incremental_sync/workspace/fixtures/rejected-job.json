@@ -1,0 +1,13 @@
+{
+  "job_id": "incremental_sync-rejected",
+  "input": {
+    "changes": [
+      {
+        "sequence": 3,
+        "record_id": "001",
+        "operation": "delete",
+        "value": "not-null"
+      }
+    ]
+  }
+}

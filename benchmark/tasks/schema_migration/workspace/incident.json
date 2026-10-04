@@ -1,0 +1,15 @@
+{
+  "scenario_id": "schema_migration",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "An existing SQLite order archive is upgraded while the caller owns connections and old reporting views depend on the table.",
+  "business_risk": "Dropping the table or overwriting currencies loses operational history.",
+  "accepted_change_boundary": [
+    "migration.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-sqlite"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

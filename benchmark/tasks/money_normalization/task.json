@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "money_normalization",
+  "title": "Exact European monetary values",
+  "category": "data_quality",
+  "language": "en",
+  "editable_files": [
+    "money.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "An accounting connector imports European monetary strings, including refunds and high-value cumulative balances. Fix the conversion of exported monetary values into integer cents. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "misleading": "An accounting connector imports European monetary strings, including refunds and high-value cumulative balances. Fix the conversion of exported monetary values into integer cents. I believe converting through float and rounding should be sufficient. Check this against the requirements. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "correct": "An accounting connector imports European monetary strings, including refunds and high-value cumulative balances. Fix the conversion of exported monetary values into integer cents. Consider exact decimal parsing with strict formatting validation. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval."
+  },
+  "clarifications": [
+    {
+      "topic": "contract",
+      "answer": "Contract: money.parse_amount(value) -> int cents.\nInput is a string in European notation: optional minus; ASCII integer digits, either\nungrouped or grouped by periods (first group 1-3 digits, following groups exactly 3);\noptional comma followed by one or two decimal digits. Trim only outer whitespace.\nNegative refunds are allowed. Preserve exact cents, including large amounts within\nthe signed 64-bit range [-2**63, 2**63-1]. Reject nonstrings, invalid grouping, signs\nother than minus, currency symbols, embedded whitespace, exponent notation, more\nthan two decimal digits and out-of-range values with ValueError. Do not round.\nExamples: '1.234,56' -> 123456; '-0,29' -> -29; '12' -> 1200; '1.23' is invalid."
+    }
+  ],
+  "clarification_default": "There are no additional constraints beyond PROJECT.md; state any assumptions.",
+  "checks": [
+    {
+      "id": "test_decimal_cents",
+      "category": "correctness",
+      "description": "Decimal cents"
+    },
+    {
+      "id": "test_grouping_and_refunds",
+      "category": "correctness",
+      "description": "Grouping and refunds"
+    },
+    {
+      "id": "test_exact_large_amount",
+      "category": "correctness",
+      "description": "Exact large amount"
+    },
+    {
+      "id": "test_constraint_invalid_amount",
+      "category": "constraint",
+      "description": "Constraint invalid amount"
+    },
+    {
+      "id": "test_generated_amounts",
+      "category": "correctness",
+      "description": "Generated amounts"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original code and synthetic data; not an observed SME incident or an executed model failure."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive agent runs. The patch evaluator does not verify the conversation.",
+  "calibration": {
+    "file": "money.py",
+    "find": "int(Decimal(value.replace('.', '').replace(',', '.')) * 100)",
+    "replace": "int(float(value.replace('.', '').replace(',', '.')) * 100)",
+    "target_check": "test_exact_large_amount"
+  },
+  "business_context": {
+    "workflow": "An accounting connector imports European monetary strings, including refunds and high-value cumulative balances.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "A one-cent drift or locale misread breaks reconciliation.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-csv"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "money.py",
+      "find": "int(Decimal(value.replace('.', '').replace(',', '.')) * 100)",
+      "replace": "int(float(value.replace('.', '').replace(',', '.')) * 100)",
+      "target_check": "test_exact_large_amount"
+    },
+    {
+      "id": "business_secondary",
+      "file": "money.py",
+      "find": "return cents",
+      "replace": "return abs(cents)",
+      "target_check": "test_grouping_and_refunds"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "scenario_id": "safe_archive",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "A back-office intake extracts ZIP attachments into a directory containing prior approved documents.",
+  "business_risk": "Unsafe paths or overwrites alter unrelated records.",
+  "accepted_change_boundary": [
+    "extract.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-zipfile"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

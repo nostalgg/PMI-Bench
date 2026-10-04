@@ -1,0 +1,13 @@
+{
+  "job_id": "supplier_catalog-sample",
+  "input": {
+    "rows": [
+      [
+        "001",
+        "Replacement",
+        "250",
+        "0"
+      ]
+    ]
+  }
+}

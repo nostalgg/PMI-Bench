@@ -1,0 +1,52 @@
+name: Benchmark validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.12.19'
+          python-version: '3.12'
+      - run: uv sync --frozen
+      - run: uv run pmi-bench setup-runtime
+      - run: uv run python -m unittest discover -s tests -v
+      - run: uv run python scripts/validate_fixtures.py
+      - run: uv run python scripts/validate_dialogue.py --output runs/ci-dialogue.json
+      - run: uv run python scripts/verify_release.py
+      - run: uv run pmi-bench self-test --jobs 2 --output runs/ci-calibration.json
+      - run: uv run pmi-bench export --output exports/ci-dataset
+      - run: uv run python scripts/package_dataset.py exports/ci-dataset --output exports/ci-dataset.zip
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: core-evidence
+          path: |
+            runs/
+            exports/*.zip
+  dependency-profiles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.12.19'
+          python-version: '3.12'
+      - run: uv sync --frozen
+      - run: uv run pmi-bench setup-runtime
+      - run: uv run python scripts/build_profiles.py
+      - run: uv run python scripts/validate_profiles.py --output runs/ci-profiles.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: profile-evidence
+          path: runs/

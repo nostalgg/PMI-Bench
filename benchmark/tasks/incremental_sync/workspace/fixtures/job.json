@@ -1,0 +1,19 @@
+{
+  "job_id": "incremental_sync-sample",
+  "input": {
+    "changes": [
+      {
+        "sequence": 2,
+        "record_id": "001",
+        "operation": "delete",
+        "value": null
+      },
+      {
+        "sequence": 1,
+        "record_id": "001",
+        "operation": "upsert",
+        "value": "new"
+      }
+    ]
+  }
+}

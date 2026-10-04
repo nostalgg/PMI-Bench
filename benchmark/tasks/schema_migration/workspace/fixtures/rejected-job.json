@@ -1,0 +1,6 @@
+{
+  "job_id": "schema_migration-rejected",
+  "input": {
+    "future_schema": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "job_id": "document_cache-sample",
+  "input": {
+    "records": [
+      {
+        "record_id": "001",
+        "text": "Synthetic invoice"
+      },
+      {
+        "record_id": "002",
+        "text": "Synthetic credit"
+      }
+    ],
+    "model": "private",
+    "response_model": "private"
+  }
+}

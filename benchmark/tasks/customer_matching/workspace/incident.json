@@ -1,0 +1,13 @@
+{
+  "scenario_id": "customer_matching",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "Administration joins an ERP customer master to a CRM import. Shared office addresses must not silently merge two legal customers.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "matching.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

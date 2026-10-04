@@ -1,0 +1,4 @@
+invoice_id,customer_id,amount_cents,status
+0007,001,12500,issued
+0008,002,9900,paid
+0007,001,12000,paid

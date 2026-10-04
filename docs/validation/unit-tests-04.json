@@ -1,0 +1,17 @@
+{
+  "benchmark_version": "0.4.0",
+  "command": "uv run python -m unittest discover -s tests -v",
+  "observed_tests": 29,
+  "passed": 29,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "actual_docker_boundary_probe": true,
+  "paid_calls": 0,
+  "log_summary": [
+    "----------------------------------------------------------------------",
+    "Ran 29 tests in 5.055s",
+    "",
+    "OK"
+  ]
+}

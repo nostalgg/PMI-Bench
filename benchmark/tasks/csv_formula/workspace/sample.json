@@ -1,0 +1,8 @@
+[
+  {
+    "customer_id": "001",
+    "name": "Synthetic",
+    "email": "x@example.invalid",
+    "notes": "=HYPERLINK(\"https://example.invalid\")"
+  }
+]

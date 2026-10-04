@@ -1,0 +1,1 @@
+CREATE TABLE orders(id TEXT PRIMARY KEY,status TEXT NOT NULL); INSERT INTO orders VALUES('001','paid'); PRAGMA user_version=1;

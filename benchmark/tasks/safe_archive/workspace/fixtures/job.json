@@ -1,0 +1,11 @@
+{
+  "job_id": "safe_archive-sample",
+  "input": {
+    "entries": [
+      [
+        "folder/a.txt",
+        "synthetic"
+      ]
+    ]
+  }
+}

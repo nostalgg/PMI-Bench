@@ -1,0 +1,16 @@
+{
+  "scenario_id": "local_ai_client",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "A private document assistant calls a separately managed loopback model endpoint; environment proxy settings were inherited from other jobs.",
+  "business_risk": "Redirects, proxies and verbose errors can breach the agreed data boundary.",
+  "accepted_change_boundary": [
+    "client.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-urllib",
+    "owasp-logging"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

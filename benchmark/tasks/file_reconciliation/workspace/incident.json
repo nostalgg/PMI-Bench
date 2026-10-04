@@ -1,0 +1,15 @@
+{
+  "scenario_id": "file_reconciliation",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "An administrative batch contains repeated references for distinct events; delivery reconciliation currently deduplicates them.",
+  "business_risk": "Duplicates cannot be discarded without losing an event.",
+  "accepted_change_boundary": [
+    "reconcile.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-csv"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

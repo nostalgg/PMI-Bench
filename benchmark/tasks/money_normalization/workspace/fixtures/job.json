@@ -1,0 +1,9 @@
+{
+  "job_id": "money_normalization-sample",
+  "input": {
+    "amounts": [
+      "1.234,56",
+      "-0,29"
+    ]
+  }
+}

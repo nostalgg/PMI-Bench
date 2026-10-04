@@ -1,0 +1,14 @@
+{
+  "job_id": "export_schema-sample",
+  "input": {
+    "rows": [
+      {
+        "invoice_id": "001",
+        "amount_cents": 29,
+        "currency": "EUR",
+        "status": "issued"
+      }
+    ],
+    "version": 1
+  }
+}

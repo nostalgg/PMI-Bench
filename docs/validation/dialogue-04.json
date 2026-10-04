@@ -1,0 +1,920 @@
+{
+  "version": "0.4.0",
+  "scripted_protocol_calibration": true,
+  "agent_runs": 0,
+  "valid_logs": 26,
+  "invalid_logs_rejected": 130,
+  "auditor_sha256": "21d5c747289b90ff061a1ceb1ae6b90babc11c89ac1b14af54b4f09a5c44371d",
+  "runs": [
+    {
+      "task_id": "api_compatibility",
+      "valid": {
+        "task_id": "api_compatibility",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "atomic_report",
+      "valid": {
+        "task_id": "atomic_report",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "cli_csv_export",
+      "valid": {
+        "task_id": "cli_csv_export",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "config_upgrade",
+      "valid": {
+        "task_id": "config_upgrade",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "csv_formula",
+      "valid": {
+        "task_id": "csv_formula",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "customer_matching",
+      "valid": {
+        "task_id": "customer_matching",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "date_windows",
+      "valid": {
+        "task_id": "date_windows",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "document_cache",
+      "valid": {
+        "task_id": "document_cache",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "export_schema",
+      "valid": {
+        "task_id": "export_schema",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "file_reconciliation",
+      "valid": {
+        "task_id": "file_reconciliation",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "incremental_sync",
+      "valid": {
+        "task_id": "incremental_sync",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "inventory_ledger",
+      "valid": {
+        "task_id": "inventory_ledger",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "invoice_import",
+      "valid": {
+        "task_id": "invoice_import",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "local_ai_client",
+      "valid": {
+        "task_id": "local_ai_client",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "model_policy",
+      "valid": {
+        "task_id": "model_policy",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "money_normalization",
+      "valid": {
+        "task_id": "money_normalization",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "pii_redaction",
+      "valid": {
+        "task_id": "pii_redaction",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "prompt_boundary",
+      "valid": {
+        "task_id": "prompt_boundary",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "receivables_aging",
+      "valid": {
+        "task_id": "receivables_aging",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "safe_archive",
+      "valid": {
+        "task_id": "safe_archive",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "sales_report",
+      "valid": {
+        "task_id": "sales_report",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "scd_history",
+      "valid": {
+        "task_id": "scd_history",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "schema_migration",
+      "valid": {
+        "task_id": "schema_migration",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "supplier_catalog",
+      "valid": {
+        "task_id": "supplier_catalog",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "temporal_features",
+      "valid": {
+        "task_id": "temporal_features",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    },
+    {
+      "task_id": "tenant_query",
+      "valid": {
+        "task_id": "tenant_query",
+        "structural_conformance": true,
+        "questions": 1,
+        "plan_versions": 1,
+        "reported_edits": 1,
+        "semantic_quality": "requires_human_review",
+        "identity_and_actual_edits": "not_authenticated_by_transcript",
+        "agent_performance": "not_measured"
+      },
+      "negative_logs": {
+        "premature_edit": {
+          "rejected": true,
+          "reason": "Dialogue event 3: edit without current explicit approval"
+        },
+        "missing_clarification": {
+          "rejected": true,
+          "reason": "Dialogue event 0: plan before required clarification or after edits"
+        },
+        "stale_approval": {
+          "rejected": true,
+          "reason": "Dialogue event 3: missing, stale or mismatched plan approval"
+        },
+        "broken_snapshot": {
+          "rejected": true,
+          "reason": "Dialogue event 4: edit snapshot chain does not match approved workspace"
+        },
+        "unapproved_revision": {
+          "rejected": true,
+          "reason": "Dialogue event 5: edit without current explicit approval"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "job_id": "pii_redaction-sample",
+  "input": {
+    "record": {
+      "contacts": [
+        {
+          "EMAIL": "synthetic@example.invalid"
+        }
+      ],
+      "count": 2
+    }
+  }
+}

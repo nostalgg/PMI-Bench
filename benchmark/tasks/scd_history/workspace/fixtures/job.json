@@ -1,0 +1,12 @@
+{
+  "job_id": "scd_history-sample",
+  "input": {
+    "rows": [
+      {
+        "customer_id": "001",
+        "name": "Renamed workshop"
+      }
+    ],
+    "effective_date": "2024-02-01"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "job_id": "customer_matching-sample",
+  "input": {
+    "master": [
+      {
+        "customer_id": "001",
+        "email": "office@example.invalid"
+      },
+      {
+        "customer_id": "002",
+        "email": "OFFICE@example.invalid"
+      }
+    ],
+    "incoming": [
+      {
+        "source_id": "CRM-8",
+        "email": "office@example.invalid"
+      }
+    ]
+  }
+}

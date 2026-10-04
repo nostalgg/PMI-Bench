@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "receivables_aging",
+  "title": "As-of receivables with partial payments",
+  "category": "database",
+  "language": "en",
+  "editable_files": [
+    "aging.sql",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "The accountant runs a month-end receivables report. Future payments and join fanout currently hide overdue balances. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "The accountant runs a month-end receivables report. Future payments and join fanout currently hide overdue balances. I suggest: Use all available payments, including those posted after the reporting date. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "The accountant runs a month-end receivables report. Future payments and join fanout currently hide overdue balances. Consider: Aggregate payments by invoice under the as-of cutoff before bucketing balances. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Use schema.sql. report_config contains one canonical as_of date. Return customer_id,not_due_cents,days_1_30_cents,days_31_60_cents,days_61_plus_cents in that order, one row per customer sorted by textual ID. Include only issued invoices with issued_on <= as_of. Paid amount is sum of posted payments dated <= as_of for each invoice. Outstanding = max(invoice.amount_cents-paid,0); equal-valued payment events remain distinct. Days late = calendar date difference as_of-due_on. Due today/future: not_due; 1-30,31-60,61+ have inclusive boundaries. Include zero-balance customers, output integer cents, never NULL or float. Dates are canonical, amounts nonnegative integers, foreign IDs valid; no credit/tax/FX inference. Preserve data and schema; exactly one read-only query."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_partial_payments_and_cutoff",
+      "category": "correctness",
+      "description": "Partial payments and cutoff"
+    },
+    {
+      "id": "test_bucket_boundaries",
+      "category": "correctness",
+      "description": "Bucket boundaries"
+    },
+    {
+      "id": "test_paid_overpaid_void_and_future_invoices",
+      "category": "correctness",
+      "description": "Paid overpaid void and future invoices"
+    },
+    {
+      "id": "test_customers_without_invoices",
+      "category": "correctness",
+      "description": "Customers without invoices"
+    },
+    {
+      "id": "test_generated_against_python_oracle",
+      "category": "correctness",
+      "description": "Generated against python oracle"
+    },
+    {
+      "id": "test_constraint_read_only",
+      "category": "constraint",
+      "description": "Constraint read only"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "aging.sql",
+    "find": "BETWEEN 1 AND 30",
+    "replace": "BETWEEN 0 AND 30",
+    "target_check": "test_bucket_boundaries"
+  },
+  "business_context": {
+    "workflow": "The accountant runs a month-end receivables report. Future payments and join fanout currently hide overdue balances.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-sqlite",
+      "python-datetime"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "aging.sql",
+      "find": "BETWEEN 1 AND 30",
+      "replace": "BETWEEN 0 AND 30",
+      "target_check": "test_bucket_boundaries"
+    },
+    {
+      "id": "business_secondary",
+      "file": "aging.sql",
+      "find": "p.status='posted'",
+      "replace": "p.status IN ('posted','void')",
+      "target_check": "test_partial_payments_and_cutoff"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

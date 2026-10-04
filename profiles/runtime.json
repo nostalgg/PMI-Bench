@@ -1,0 +1,7 @@
+{
+  "base_image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+  "profile_image": "pmi-bench-profiles:0.4.0",
+  "postgres_image": "postgres@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297",
+  "postgres_source_tag": "postgres:16.10-alpine",
+  "requirements_sha256": "b59e1557ef521f1170691f3fdc842b8ad185b63b408b4d09d03976640495cd75"
+}

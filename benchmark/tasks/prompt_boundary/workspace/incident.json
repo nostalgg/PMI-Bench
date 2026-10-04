@@ -1,0 +1,15 @@
+{
+  "scenario_id": "prompt_boundary",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "An internal assistant combines administrator policy with retrieved documents containing instruction-like text.",
+  "business_risk": "Document content must remain untrusted input rather than a system message.",
+  "accepted_change_boundary": [
+    "prompts.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "owasp-prompt-boundary"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

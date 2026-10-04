@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "inventory_ledger",
+  "title": "Replay-safe warehouse movements",
+  "category": "data_quality",
+  "language": "en",
+  "editable_files": [
+    "ledger.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "Handheld scanners resend deliveries and returns after connection loss. Stock and the movement audit trail must agree. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "Handheld scanners resend deliveries and returns after connection loss. Stock and the movement audit trail must agree. I suggest: Retries are rare, so apply every received movement. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "Handheld scanners resend deliveries and returns after connection loss. Stock and the movement audit trail must agree. Consider: Treat immutable event IDs as replay boundaries and persist the audit record with stock. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Caller-owned idle SQLite connection; movements is a list of exact event_id,sku,delta dicts. IDs/SKUs are nonempty strings. Delta is a nonboolean nonzero integer with absolute value <=1,000,000. Each event ID identifies an immutable (sku,delta) payload. Identical within-batch/replayed events apply once; conflicting payloads reject the whole batch. Every SKU must already exist; preserve other stock. Stock may be negative due to delayed delivery records, but must fit signed 64-bit integers. Insert movements and adjust stock in one transaction; return newly applied event count. Invalid input/unknown SKU/conflict/overflow raises ValueError, no partial writes. Reject active caller transactions without committing or rolling them back. Do not close connection."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_apply_and_replay",
+      "category": "correctness",
+      "description": "Apply and replay"
+    },
+    {
+      "id": "test_batch_duplicates_once",
+      "category": "correctness",
+      "description": "Batch duplicates once"
+    },
+    {
+      "id": "test_negative_stock_and_unrelated_sku",
+      "category": "correctness",
+      "description": "Negative stock and unrelated sku"
+    },
+    {
+      "id": "test_constraint_conflicting_replay_atomic",
+      "category": "constraint",
+      "description": "Constraint conflicting replay atomic"
+    },
+    {
+      "id": "test_constraint_unknown_sku_and_invalid_values",
+      "category": "constraint",
+      "description": "Constraint unknown sku and invalid values"
+    },
+    {
+      "id": "test_constraint_caller_transaction",
+      "category": "constraint",
+      "description": "Constraint caller transaction"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "ledger.py",
+    "find": "if previous != (sku, delta):",
+    "replace": "if False:",
+    "target_check": "test_constraint_conflicting_replay_atomic"
+  },
+  "business_context": {
+    "workflow": "Handheld scanners resend deliveries and returns after connection loss. Stock and the movement audit trail must agree.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-sqlite",
+      "postgres-insert"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "ledger.py",
+      "find": "if previous != (sku, delta):",
+      "replace": "if False:",
+      "target_check": "test_constraint_conflicting_replay_atomic"
+    },
+    {
+      "id": "business_secondary",
+      "file": "ledger.py",
+      "find": "SET quantity=quantity+?",
+      "replace": "SET quantity=?",
+      "target_check": "test_negative_stock_and_unrelated_sku"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

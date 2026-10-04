@@ -1,0 +1,8 @@
+{
+  "job_id": "tenant_query-sample",
+  "input": {
+    "tenant": "A",
+    "sort": "created_at",
+    "direction": "asc"
+  }
+}

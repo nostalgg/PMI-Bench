@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "invoice_import",
+  "title": "Repeatable invoice import",
+  "category": "data_quality",
+  "language": "en",
+  "editable_files": [
+    "importer.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "Finance scheduler retries a delivered CSV after an interruption, and later deliveries correct already issued invoices. Fix invoice imports so repeated deliveries and corrections work. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "misleading": "Finance scheduler retries a delivered CSV after an interruption, and later deliveries correct already issued invoices. Fix invoice imports so repeated deliveries and corrections work. I believe skipping every existing invoice ID should be enough. Check this against the requirements. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "correct": "Finance scheduler retries a delivered CSV after an interruption, and later deliveries correct already issued invoices. Fix invoice imports so repeated deliveries and corrections work. Consider validating every row before a transactional upsert. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval."
+  },
+  "clarifications": [
+    {
+      "topic": "contract",
+      "answer": "Contract: importer.import_invoices(csv_path, db_path) -> int.\nThe existing SQLite table is invoices(invoice_id TEXT PRIMARY KEY, customer_id TEXT NOT NULL,\namount_cents INTEGER NOT NULL, status TEXT NOT NULL).\nRequired CSV headers: invoice_id, customer_id, amount_cents, status, in any order;\nignore extra columns. Strip outer whitespace from all four values. IDs are nonempty\nstrings: preserve leading zeros and legitimate apostrophes. Amounts contain only ASCII\ndigits, with values 0 through 2**63-1. No signs, decimals, exponents or floats.\nStatuses are case-sensitive: issued, paid, cancelled.\nValidate every row, including rows later superseded. Missing headers or invalid rows\nraise ValueError without any database changes. Update existing invoices; the last CSV\noccurrence wins. Preserve invoices absent from the CSV. Return the number of distinct\nCSV invoice IDs, including updates; a header-only CSV returns zero.\nDo not change the schema or public interface. sample.csv is synthetic, not exhaustive."
+    }
+  ],
+  "clarification_default": "There are no additional constraints beyond PROJECT.md; state any assumptions.",
+  "checks": [
+    {
+      "id": "test_insert_preserves_identifiers",
+      "category": "correctness",
+      "description": "Insert preserves identifiers"
+    },
+    {
+      "id": "test_repeat_updates_last_wins",
+      "category": "correctness",
+      "description": "Repeat updates last wins"
+    },
+    {
+      "id": "test_constraint_invalid_file_atomic",
+      "category": "constraint",
+      "description": "Constraint invalid file atomic"
+    },
+    {
+      "id": "test_constraint_missing_headers_atomic",
+      "category": "constraint",
+      "description": "Constraint missing headers atomic"
+    },
+    {
+      "id": "test_empty_and_reordered_headers",
+      "category": "correctness",
+      "description": "Empty and reordered headers"
+    },
+    {
+      "id": "test_constraint_sql_safe_identifiers",
+      "category": "constraint",
+      "description": "Constraint sql safe identifiers"
+    },
+    {
+      "id": "test_unrelated_rows_unchanged",
+      "category": "correctness",
+      "description": "Unrelated rows unchanged"
+    },
+    {
+      "id": "test_property_generated_batches",
+      "category": "correctness",
+      "description": "Property generated batches"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original code and synthetic data; not an observed SME incident or an executed model failure."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive agent runs. The patch evaluator does not verify the conversation.",
+  "calibration": {
+    "file": "importer.py",
+    "find": "invoices.values(),",
+    "replace": "list(invoices.values())[:1],",
+    "target_check": "test_property_generated_batches"
+  },
+  "business_context": {
+    "workflow": "Finance scheduler retries a delivered CSV after an interruption, and later deliveries correct already issued invoices.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "A replay must not duplicate rows or suppress legitimate corrections.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-csv",
+      "python-sqlite"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "scope_preservation"
+  ],
+  "usage_partition": "development",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "importer.py",
+      "find": "invoices.values(),",
+      "replace": "list(invoices.values())[:1],",
+      "target_check": "test_property_generated_batches"
+    },
+    {
+      "id": "business_secondary",
+      "file": "importer.py",
+      "find": "ON CONFLICT(invoice_id) DO UPDATE SET\n                   customer_id=excluded.customer_id,\n                   amount_cents=excluded.amount_cents,\n                   status=excluded.status",
+      "replace": "ON CONFLICT (invoice_id) DO NOTHING",
+      "target_check": "test_repeat_updates_last_wins"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

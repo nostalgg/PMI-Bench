@@ -1,0 +1,11 @@
+{
+  "job_id": "cli_csv_export-sample",
+  "input": {
+    "rows": [
+      [
+        "001",
+        "29"
+      ]
+    ]
+  }
+}

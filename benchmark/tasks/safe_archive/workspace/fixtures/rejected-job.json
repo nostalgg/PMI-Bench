@@ -1,0 +1,11 @@
+{
+  "job_id": "safe_archive-rejected",
+  "input": {
+    "entries": [
+      [
+        "../escape",
+        "bad"
+      ]
+    ]
+  }
+}

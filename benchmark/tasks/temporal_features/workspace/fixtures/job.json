@@ -1,0 +1,29 @@
+{
+  "job_id": "temporal_features-sample",
+  "input": {
+    "rows": [
+      {
+        "id": "001",
+        "date": "2024-01-01",
+        "orders": 2,
+        "spend_cents": 100,
+        "target": 10
+      },
+      {
+        "id": "002",
+        "date": "2024-01-02",
+        "orders": 4,
+        "spend_cents": 300,
+        "target": 20
+      },
+      {
+        "id": "003",
+        "date": "2024-02-01",
+        "orders": null,
+        "spend_cents": 99999,
+        "target": null
+      }
+    ],
+    "cutoff": "2024-02-01"
+  }
+}

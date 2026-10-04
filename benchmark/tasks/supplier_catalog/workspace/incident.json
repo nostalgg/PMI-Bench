@@ -1,0 +1,16 @@
+{
+  "scenario_id": "supplier_catalog",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "The purchasing team receives a UTF-8 BOM, semicolon-delimited supplier delta feed. A parser update broke intake; manual retail prices must survive.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "catalog.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-csv",
+    "python-sqlite"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

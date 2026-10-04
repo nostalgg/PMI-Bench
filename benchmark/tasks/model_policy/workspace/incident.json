@@ -1,0 +1,15 @@
+{
+  "scenario_id": "model_policy",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "An SME mixes a private local endpoint with optional hosted models. A cheap hosted route must not bypass data classification, task capability or budget.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "routing.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "owasp-authorization"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

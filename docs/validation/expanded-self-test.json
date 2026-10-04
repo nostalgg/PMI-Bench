@@ -1,0 +1,2970 @@
+{
+  "benchmark_version": "0.2.0",
+  "runs": [
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "e156de7ef1c44d6286528b614aa59795",
+      "created_at": "2026-10-04T12:40:32.704325+00:00",
+      "task_id": "api_compatibility",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "e55270dc9bd0e860f203b431d3b59ca9f2b19268c680b97d0da89ab141512c78",
+      "submission_files": {
+        "PROJECT.md": "d6c3b1806521da2bb9960bb3e40c783fd7cb17885a687cd8250654a63d45d680",
+        "adapter.py": "ab819b0ed51cedb2d4a2ec290783045fdef92741e4fdc9dba309ef1ed5abb86c",
+        "vendor_v2.py": "4177b5978f328ab9f602cb3be96f6b3a069eec2e817be59f874c614f670a6058"
+      },
+      "task_sha256": "2f53ccfd48fef7a749a71597f89a6b40096010e87f6e167ae244a443c6f557b1",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_pagination_bounds",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_duplicates_and_order_preserved",
+          "category": "correctness",
+          "status": "error",
+          "detail": "AttributeError: 'Modern' object has no attribute 'list_records'"
+        },
+        {
+          "id": "test_input_pages_unchanged",
+          "category": "correctness",
+          "status": "error",
+          "detail": "AttributeError: 'Modern' object has no attribute 'list_records'"
+        },
+        {
+          "id": "test_legacy_pagination",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [{'id': '001'}] != [{'id': '001'}, {'id': '002'}]\n\nSecond list contains 1 additional elements.\nFirst extra element 1:\n{'id': '002'}\n\n- [{'id': '001'}]\n+ [{'id': '001'}, {'id': '002'}]"
+        },
+        {
+          "id": "test_modern_empty_intermediate_page",
+          "category": "correctness",
+          "status": "error",
+          "detail": "AttributeError: 'Modern' object has no attribute 'list_records'"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.786,
+      "counts": {
+        "pass": 0,
+        "fail": 2,
+        "error": 3,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "62ede3c2a1f84665a67cc3aeb584f146",
+      "created_at": "2026-10-04T12:40:35.493762+00:00",
+      "task_id": "api_compatibility",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "d64bcc183172b681fc5340d6210cb671a031c6ad644d065b3e61993110f0cc1e",
+      "submission_files": {
+        "PROJECT.md": "d6c3b1806521da2bb9960bb3e40c783fd7cb17885a687cd8250654a63d45d680",
+        "adapter.py": "d9fec0831e65ebe2659cb07e9b2cfcc6b63ee503be6e964068d26b2d2929cb6e",
+        "vendor_v2.py": "4177b5978f328ab9f602cb3be96f6b3a069eec2e817be59f874c614f670a6058"
+      },
+      "task_sha256": "2f53ccfd48fef7a749a71597f89a6b40096010e87f6e167ae244a443c6f557b1",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_pagination_bounds",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_duplicates_and_order_preserved",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_input_pages_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_legacy_pagination",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_modern_empty_intermediate_page",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.316,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 4,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "70a960f54b7f4847bc5ed6a77a51d8ef",
+      "created_at": "2026-10-04T12:40:37.812619+00:00",
+      "task_id": "api_compatibility",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "01dad0cbba7e0fda6cea910c34a8e7abe5999fb1ad4d6d952e41deb68ab87f4d",
+      "submission_files": {
+        "PROJECT.md": "d6c3b1806521da2bb9960bb3e40c783fd7cb17885a687cd8250654a63d45d680",
+        "adapter.py": "77bf242c2dc93568f1c216fea170a355651c76a0b9c0157bac4877748426c865",
+        "vendor_v2.py": "4177b5978f328ab9f602cb3be96f6b3a069eec2e817be59f874c614f670a6058"
+      },
+      "task_sha256": "2f53ccfd48fef7a749a71597f89a6b40096010e87f6e167ae244a443c6f557b1",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_pagination_bounds",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_duplicates_and_order_preserved",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_input_pages_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_legacy_pagination",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_modern_empty_intermediate_page",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [1] != [1, 2]\n\nSecond list contains 1 additional elements.\nFirst extra element 1:\n2\n\n- [1]\n+ [1, 2]"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 3.211,
+      "counts": {
+        "pass": 4,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "74a11ff5047245c788ffe9b3f6552ef9",
+      "created_at": "2026-10-04T12:40:41.025518+00:00",
+      "task_id": "config_upgrade",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "f49e9cb08ad42e0e59a2949089207e89f1d7c14f1f98a56ce95422929ca421fe",
+      "submission_files": {
+        "PROJECT.md": "f85f8545bfac0158162d59b83854a287ee9ce86c54cd87767ce2f47b41749eeb",
+        "configuration.py": "3c3c27a79aed38135085f0c7ff75f07e6741b888ccf63e86c64ed80343d43544"
+      },
+      "task_sha256": "3e9bfa7a09708b16d77748acbe0603c41ab38f0b34fa9e793f8e75b40a343b05",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_configuration",
+          "category": "constraint",
+          "status": "error",
+          "detail": "TypeError: 'NoneType' object does not support item assignment"
+        },
+        {
+          "id": "test_generated_timeouts",
+          "category": "correctness",
+          "status": "error",
+          "detail": "KeyError: 'connection'"
+        },
+        {
+          "id": "test_input_unchanged",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'schema_version': 2, 'endpoint': 'http://127.0.0.1:8000/v1'[34 chars]cal'} != {'schema_version': 1, 'endpoint': 'http://127.0.0.1:8000/v1'[34 chars]cal'}\n  {'endpoint': 'http://127.0.0.1:8000/v1',\n   'model': 'local',\n-  'schema_version': 2,\n?                    ^\n\n+  'schema_version': 1,\n?                    ^\n\n   'timeout_ms': 2500}"
+        },
+        {
+          "id": "test_timeout_units",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'sch[13 chars] 2, 'endpoint': 'http://127.0.0.1:8000/v1', 't[30 chars]cal'} != {'sch[13 chars] 2, 'model': 'local', 'connection': {'base_url[50 chars]2.5}}\n- {'endpoint': 'http://127.0.0.1:8000/v1',\n+ {'connection': {'base_url': 'http://127.0.0.1:8000/v1', 'timeout_seconds': 2.5},\n   'model': 'local',\n-  'schema_version': 2,\n?                     ^\n\n+  'schema_version': 2}\n?                     ^\n\n-  'timeout_ms': 2500}"
+        },
+        {
+          "id": "test_v2_preserved_without_aliases",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'sch[51 chars]'base_url': 'http://localhost:80/v1', 'timeout_seconds': 99}} != {'sch[51 chars]'base_url': 'http://localhost:80/v1', 'timeout_seconds': 0.25}}\n- {'connection': {'base_url': 'http://localhost:80/v1', 'timeout_seconds': 99},\n?                                                                          ^^\n\n+ {'connection': {'base_url': 'http://localhost:80/v1', 'timeout_seconds': 0.25},\n?                                                                          ^^^^\n\n   'model': 'custom',\n   'schema_version': 2}"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 4.327,
+      "counts": {
+        "pass": 0,
+        "fail": 3,
+        "error": 2,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "ebc2b2371df94f91b5d906dd8cd27d90",
+      "created_at": "2026-10-04T12:40:45.355174+00:00",
+      "task_id": "config_upgrade",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "414432fbe1a41aa64cc6452a0960b857220800d1a9f22addd33ba9269dcd367b",
+      "submission_files": {
+        "PROJECT.md": "f85f8545bfac0158162d59b83854a287ee9ce86c54cd87767ce2f47b41749eeb",
+        "configuration.py": "12f1f5e03cd3d9412c8f7f9abec2ad6ad43651579f2fead7d7070160d0d9b02e"
+      },
+      "task_sha256": "3e9bfa7a09708b16d77748acbe0603c41ab38f0b34fa9e793f8e75b40a343b05",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_configuration",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_generated_timeouts",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_input_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_timeout_units",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_v2_preserved_without_aliases",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.29,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 4,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "0c91cba9cb764c999e4fc98e018b081a",
+      "created_at": "2026-10-04T12:40:47.646980+00:00",
+      "task_id": "config_upgrade",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "24712a01360f065b3419c1651935e1f5a9bd11704f2d58c5979f2a49be845ed2",
+      "submission_files": {
+        "PROJECT.md": "f85f8545bfac0158162d59b83854a287ee9ce86c54cd87767ce2f47b41749eeb",
+        "configuration.py": "1290e3aa63ec1f9467fa27322d59e84586e6f5af0b6adfe6c1903ced1348b907"
+      },
+      "task_sha256": "3e9bfa7a09708b16d77748acbe0603c41ab38f0b34fa9e793f8e75b40a343b05",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_configuration",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_generated_timeouts",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 1 != 0.001"
+        },
+        {
+          "id": "test_input_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_timeout_units",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'sch[52 chars]ase_url': 'http://127.0.0.1:8000/v1', 'timeout_seconds': 2500}} != {'sch[52 chars]ase_url': 'http://127.0.0.1:8000/v1', 'timeout_seconds': 2.5}}\n- {'connection': {'base_url': 'http://127.0.0.1:8000/v1',\n+ {'connection': {'base_url': 'http://127.0.0.1:8000/v1', 'timeout_seconds': 2.5},\n?                                                        +++++++++++++++++++++++++\n\n-                 'timeout_seconds': 2500},\n   'model': 'local',\n   'schema_version': 2}"
+        },
+        {
+          "id": "test_v2_preserved_without_aliases",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.933,
+      "counts": {
+        "pass": 3,
+        "fail": 2,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 2,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "688ef81dbbc743af8501886a61ca9414",
+      "created_at": "2026-10-04T12:40:50.583412+00:00",
+      "task_id": "date_windows",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "3ef486c27f268271cc84c15289a1a60d4c32c3c5b9bb2e1b9d0a2443064e56ba",
+      "submission_files": {
+        "PROJECT.md": "db3e23645c25a0ae9d84b5d9790a8d7898c17175d1dea0410e623199a2aabe32",
+        "windows.py": "8d679ab1bd4a1c85b5d5ef36f48b98cdbd89b0c239222c2cf991131f7541b7eb"
+      },
+      "task_sha256": "5b9a2d86aca96dab830f30976103b883ee5a8940a76af98aa0c08c316205d2bf",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_timestamp",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_daylight_saving_offsets",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-03-31' != '2024-04-01'\n- 2024-03-31\n?       ^ ^\n+ 2024-04-01\n?       ^ ^\n"
+        },
+        {
+          "id": "test_equivalent_instants",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-01-01' != '2024-01-02'\n- 2024-01-01\n?          ^\n+ 2024-01-02\n?          ^\n"
+        },
+        {
+          "id": "test_local_midnight",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-01-01' != '2024-01-02'\n- 2024-01-01\n?          ^\n+ 2024-01-02\n?          ^\n"
+        },
+        {
+          "id": "test_previous_day",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-07-01' != '2024-06-30'\n- 2024-07-01\n?       ^  -\n+ 2024-06-30\n?       ^ +\n"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.437,
+      "counts": {
+        "pass": 0,
+        "fail": 5,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "2afc089ea1d74fff95a3675f8d7ac4cf",
+      "created_at": "2026-10-04T12:40:53.024657+00:00",
+      "task_id": "date_windows",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "e1c9becbfdb2e90ee9c07631e7dc6158d0bf33135be7cb6689e21054b94d90b1",
+      "submission_files": {
+        "PROJECT.md": "db3e23645c25a0ae9d84b5d9790a8d7898c17175d1dea0410e623199a2aabe32",
+        "windows.py": "801fbc9d0dbc2097407f938ccce382aef83444ca41062c2f2355ed1d22758533"
+      },
+      "task_sha256": "5b9a2d86aca96dab830f30976103b883ee5a8940a76af98aa0c08c316205d2bf",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_timestamp",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_daylight_saving_offsets",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_equivalent_instants",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_local_midnight",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_previous_day",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 4.33,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 4,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "58d9c77fe93d481c8b1e168f255df6fe",
+      "created_at": "2026-10-04T12:40:57.358604+00:00",
+      "task_id": "date_windows",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "42704898c094955b5b48308f4bbcb16ca3cb424aa5250f1f43a9c08cc3b49d76",
+      "submission_files": {
+        "PROJECT.md": "db3e23645c25a0ae9d84b5d9790a8d7898c17175d1dea0410e623199a2aabe32",
+        "windows.py": "cd804fea5377b6f9a8ee15968ddb01a635308c681179ce9cb927b38e18bf58c6"
+      },
+      "task_sha256": "5b9a2d86aca96dab830f30976103b883ee5a8940a76af98aa0c08c316205d2bf",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_timestamp",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_daylight_saving_offsets",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-03-31' != '2024-04-01'\n- 2024-03-31\n?       ^ ^\n+ 2024-04-01\n?       ^ ^\n"
+        },
+        {
+          "id": "test_equivalent_instants",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-01-01' != '2024-01-02'\n- 2024-01-01\n?          ^\n+ 2024-01-02\n?          ^\n"
+        },
+        {
+          "id": "test_local_midnight",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-01-01' != '2024-01-02'\n- 2024-01-01\n?          ^\n+ 2024-01-02\n?          ^\n"
+        },
+        {
+          "id": "test_previous_day",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: '2024-07-01' != '2024-06-30'\n- 2024-07-01\n?       ^  -\n+ 2024-06-30\n?       ^ +\n"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.356,
+      "counts": {
+        "pass": 0,
+        "fail": 5,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "14a3184bcbb140ab9b17adaef2871494",
+      "created_at": "2026-10-04T12:40:59.717562+00:00",
+      "task_id": "file_reconciliation",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "f894f4cc2f091c38f8639c90a9b59609cb5786f0637039aff6e8addd94af2700",
+      "submission_files": {
+        "PROJECT.md": "ffa5f243dad18eb8db7542fae2c7a9f41a4dd31345bd63a856f685b6bd0e1784",
+        "reconcile.py": "01bf5bda5aeebd78d6122aae53e23e241977e8c7fe49ce8790058bd7be931d56"
+      },
+      "task_sha256": "0d7feb8f47a4a454ef40ed4a1d6c8ec7f3bcda0033c27445afb25b887d428e0b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_ids_and_no_mutation",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_duplicates_are_events",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'missing': ['B'], 'unexpected': [], 'matched': 1} != {'matched': 2, 'missing': ['B'], 'unexpected': ['A']}\n- {'matched': 1, 'missing': ['B'], 'unexpected': []}\n?             ^\n\n+ {'matched': 2, 'missing': ['B'], 'unexpected': ['A']}\n?             ^                                   +++\n"
+        },
+        {
+          "id": "test_empty_and_identical",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'missing': [], 'unexpected': [], 'matched': 1} != {'matched': 2, 'missing': [], 'unexpected': []}\n- {'matched': 1, 'missing': [], 'unexpected': []}\n?             ^\n\n+ {'matched': 2, 'missing': [], 'unexpected': []}\n?             ^\n"
+        },
+        {
+          "id": "test_generated_multisets",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'missing': [], 'unexpected': [], 'matched': 3} != {'matched': 14, 'missing': ['B', 'B', 'C', 'C'], 'unexpected': ['A', 'A', 'A']}\n- {'matched': 3, 'missing': [], 'unexpected': []}\n+ {'matched': 14, 'missing': ['B', 'B', 'C', 'C'], 'unexpected': ['A', 'A', 'A']}"
+        },
+        {
+          "id": "test_sorted_string_identifiers",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'missing': ['002'], 'unexpected': ['1'], 'matched': 1} != {'matched': 1, 'missing': ['001', '002'], 'unexpected': ['1']}\n- {'matched': 1, 'missing': ['002'], 'unexpected': ['1']}\n+ {'matched': 1, 'missing': ['001', '002'], 'unexpected': ['1']}\n?                            +++++++\n"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.587,
+      "counts": {
+        "pass": 0,
+        "fail": 5,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "ba29006e3ab2483eb2a5b12b8dd4bce6",
+      "created_at": "2026-10-04T12:41:02.307332+00:00",
+      "task_id": "file_reconciliation",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "39ffe87f2a425868f2df1bb40a4e3ba3312014c00436c9dd5b1140e9f8c8b51d",
+      "submission_files": {
+        "PROJECT.md": "ffa5f243dad18eb8db7542fae2c7a9f41a4dd31345bd63a856f685b6bd0e1784",
+        "reconcile.py": "7d156c8035fbee8865f18e6f05b80e3c60d5312e16939613dae09193b700a39e"
+      },
+      "task_sha256": "0d7feb8f47a4a454ef40ed4a1d6c8ec7f3bcda0033c27445afb25b887d428e0b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_ids_and_no_mutation",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_duplicates_are_events",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_and_identical",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_generated_multisets",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_sorted_string_identifiers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.313,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 4,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "f3ef7863c71d49e9b7f73fbac70d9945",
+      "created_at": "2026-10-04T12:41:04.622356+00:00",
+      "task_id": "file_reconciliation",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "5513b5584420a424b0755ef661b4ea1d7f03f245b84e49b5b622c6c763507b09",
+      "submission_files": {
+        "PROJECT.md": "ffa5f243dad18eb8db7542fae2c7a9f41a4dd31345bd63a856f685b6bd0e1784",
+        "reconcile.py": "5c9f9700367a90dcd33603017e9f13ec5b87619607acf51a324ca9e84692efac"
+      },
+      "task_sha256": "0d7feb8f47a4a454ef40ed4a1d6c8ec7f3bcda0033c27445afb25b887d428e0b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_ids_and_no_mutation",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_duplicates_are_events",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'missing': ['B'], 'unexpected': ['A'], 'matched': 1} != {'matched': 2, 'missing': ['B'], 'unexpected': ['A']}\n- {'matched': 1, 'missing': ['B'], 'unexpected': ['A']}\n?             ^\n\n+ {'matched': 2, 'missing': ['B'], 'unexpected': ['A']}\n?             ^\n"
+        },
+        {
+          "id": "test_empty_and_identical",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'missing': [], 'unexpected': [], 'matched': 1} != {'matched': 2, 'missing': [], 'unexpected': []}\n- {'matched': 1, 'missing': [], 'unexpected': []}\n?             ^\n\n+ {'matched': 2, 'missing': [], 'unexpected': []}\n?             ^\n"
+        },
+        {
+          "id": "test_generated_multisets",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'missing': ['B', 'B', 'C', 'C'], 'unexpected': ['A', 'A', 'A'], 'matched': 3} != {'matched': 14, 'missing': ['B', 'B', 'C', 'C'], 'unexpected': ['A', 'A', 'A']}\n- {'matched': 3, 'missing': ['B', 'B', 'C', 'C'], 'unexpected': ['A', 'A', 'A']}\n?             ^\n\n+ {'matched': 14, 'missing': ['B', 'B', 'C', 'C'], 'unexpected': ['A', 'A', 'A']}\n?             ^^\n"
+        },
+        {
+          "id": "test_sorted_string_identifiers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.939,
+      "counts": {
+        "pass": 2,
+        "fail": 3,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "f732cd344eb04e4dbbcc5a927d95d248",
+      "created_at": "2026-10-04T12:41:07.564163+00:00",
+      "task_id": "invoice_import",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "6b44d9a2747af4e0b15e4d58e986cbebcc6292a18f776ddb5944cc7c98019a1c",
+      "submission_files": {
+        "PROJECT.md": "725b9026d94cc78132c4bf393b440ed4a6a84aea2cec545dbc9f60d56b4921f4",
+        "importer.py": "03a8ab39f77c0453df1b300fbf599bcb269f97b8455e5f595f0e9ca07985428a",
+        "sample.csv": "d063a7400ca1990bc3420f13411bda6a1eb28f9e9b42311d68596f323ddb2898"
+      },
+      "task_sha256": "3546b2eead61f687088b626756a8009e488522150e0546abf760f9a2d1f8d33b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_file_atomic",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised : ('', 'C', '1', 'paid')"
+        },
+        {
+          "id": "test_constraint_missing_headers_atomic",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_sql_safe_identifiers",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_and_reordered_headers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_insert_preserves_identifiers",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [(' 0007 ', ' 001 ', 12000, ' paid '), ('A', 'B', 0, 'issued')] != [('0007', '001', 12000, 'paid'), ('A', 'B', 0, 'issued')]\n\nFirst differing element 0:\n(' 0007 ', ' 001 ', 12000, ' paid ')\n('0007', '001', 12000, 'paid')\n\n- [(' 0007 ', ' 001 ', 12000, ' paid '), ('A', 'B', 0, 'issued')]\n?    -    -    -   -           -    -\n\n+ [('0007', '001', 12000, 'paid'), ('A', 'B', 0, 'issued')]"
+        },
+        {
+          "id": "test_property_generated_batches",
+          "category": "correctness",
+          "status": "error",
+          "detail": "IntegrityError: UNIQUE constraint failed: invoices.invoice_id"
+        },
+        {
+          "id": "test_repeat_updates_last_wins",
+          "category": "correctness",
+          "status": "error",
+          "detail": "IntegrityError: UNIQUE constraint failed: invoices.invoice_id"
+        },
+        {
+          "id": "test_unrelated_rows_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 3.413,
+      "counts": {
+        "pass": 3,
+        "fail": 3,
+        "error": 2,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 2,
+          "total": 5
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 3
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "9533cdf334bc44e894cf7c17af2ff5d3",
+      "created_at": "2026-10-04T12:41:10.979364+00:00",
+      "task_id": "invoice_import",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "2cd362269e59fab4b596dc5140218bea06d488c00a2a9a3418a770f9c13f3b91",
+      "submission_files": {
+        "PROJECT.md": "725b9026d94cc78132c4bf393b440ed4a6a84aea2cec545dbc9f60d56b4921f4",
+        "importer.py": "1cc5e406d04d5ae2cce6ad6aeba27ae3f681a4bcf9ff3b3bf7783e6e4f96b3b0",
+        "sample.csv": "d063a7400ca1990bc3420f13411bda6a1eb28f9e9b42311d68596f323ddb2898"
+      },
+      "task_sha256": "3546b2eead61f687088b626756a8009e488522150e0546abf760f9a2d1f8d33b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_file_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_missing_headers_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_sql_safe_identifiers",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_and_reordered_headers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_insert_preserves_identifiers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_property_generated_batches",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_repeat_updates_last_wins",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_unrelated_rows_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 4.324,
+      "counts": {
+        "pass": 8,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 5,
+          "total": 5
+        },
+        "constraint": {
+          "passed": 3,
+          "total": 3
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "5b9a0b09b10b4b8cb9f3956f4527b0ae",
+      "created_at": "2026-10-04T12:41:15.305973+00:00",
+      "task_id": "invoice_import",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "a97c77a03019a7ec74b4503efeab6930023d1a89b5e3abbd87fdd4b72ae52600",
+      "submission_files": {
+        "PROJECT.md": "725b9026d94cc78132c4bf393b440ed4a6a84aea2cec545dbc9f60d56b4921f4",
+        "importer.py": "ea30c22a00e2e64e3dadec36ea7e75768ffecb4fc0da776f7c3fdb15a0f32c14",
+        "sample.csv": "d063a7400ca1990bc3420f13411bda6a1eb28f9e9b42311d68596f323ddb2898"
+      },
+      "task_sha256": "3546b2eead61f687088b626756a8009e488522150e0546abf760f9a2d1f8d33b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_file_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_missing_headers_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_sql_safe_identifiers",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_and_reordered_headers",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_insert_preserves_identifiers",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('0007', '001', 12000, 'paid')] != [('0007', '001', 12000, 'paid'), ('A', 'B', 0, 'issued')]\n\nSecond list contains 1 additional elements.\nFirst extra element 1:\n('A', 'B', 0, 'issued')\n\n- [('0007', '001', 12000, 'paid')]\n+ [('0007', '001', 12000, 'paid'), ('A', 'B', 0, 'issued')]"
+        },
+        {
+          "id": "test_property_generated_batches",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('0004', 'C1', 78960, 'cancelled')] != [('0001', 'C1', 24888, 'cancelled'), ('0002', '[317 chars]id')]\n\nFirst differing element 0:\n('0004', 'C1', 78960, 'cancelled')\n('0001', 'C1', 24888, 'cancelled')\n\nSecond list contains 10 additional elements.\nFirst extra element 1:\n('0002', 'C3', 51375, 'paid')\n\n+ [('0001', 'C1', 24888, 'cancelled'),\n+  ('0002', 'C3', 51375, 'paid'),\n+  ('0003', 'C0', 44537, 'paid'),\n- [('0004', 'C1', 78960, 'cancelled')]\n? ^                                  ^\n\n+  ('0004', 'C1', 78960, 'cancelled'),\n? ^                                  ^\n\n+  ('0006', 'C1', 93007, 'cancelled'),\n+  ('0007', 'C0', 45950, 'issued'),\n+  ('0008', 'C3', 34496, 'issued'),\n+  ('0009', 'C3', 73508, 'issued'),\n+  ('0011', 'C2', 27087, 'issued'),\n+  ('0012', 'C1', 26910, 'cancelled'),\n+  ('0013', 'C2', 27565, 'paid')]"
+        },
+        {
+          "id": "test_repeat_updates_last_wins",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('A', 'C', 130, 'paid')] != [('A', 'C', 130, 'paid'), ('B', 'D', 1, 'paid')]\n\nSecond list contains 1 additional elements.\nFirst extra element 1:\n('B', 'D', 1, 'paid')\n\n- [('A', 'C', 130, 'paid')]\n+ [('A', 'C', 130, 'paid'), ('B', 'D', 1, 'paid')]"
+        },
+        {
+          "id": "test_unrelated_rows_unchanged",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.288,
+      "counts": {
+        "pass": 5,
+        "fail": 3,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 2,
+          "total": 5
+        },
+        "constraint": {
+          "passed": 3,
+          "total": 3
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "9b29113204914b12b6640e9185d1fbb2",
+      "created_at": "2026-10-04T12:41:17.597784+00:00",
+      "task_id": "local_ai_client",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "a7eedfb661fa8cd64cd6fc226711f9021fbf8795752277b43d78d81142ff17db",
+      "submission_files": {
+        "PROJECT.md": "a26f71c7bc0c34e7aa0c0e8ed4464a0426f9d09464af136864e167c9b6bb7521",
+        "client.py": "2c5de3bed792b26602fda7a34cb8dea659338552253aab7f0a66cc3df7d9945b"
+      },
+      "task_sha256": "66de5616fc81a0d5c2b4b2df00d8baee1b42d718b83ed6fa4ba57ea2909229c2",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_configured_model_and_endpoint",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 'default-model' != 'company-model-v2'\n- default-model\n+ company-model-v2\n"
+        },
+        {
+          "id": "test_constraint_ignore_proxy",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [{'method': 'POST', 'path': 'http://127.0.[153 chars]on'}] != []\n\nFirst list contains 1 additional elements.\nFirst extra element 0:\n{'method': 'POST', 'path': 'http://127.0.0.1:38085/v1/chat/completions', 'body': b'{\"model\": \"default-model\", \"messages\": [{\"role\": \"user\", \"content\": \"test\"}]}', 'content_type': 'application/json'}\n\n+ []\n- [{'body': b'{\"model\": \"default-model\", \"messages\": [{\"role\": \"user\", \"conten'\n-           b't\": \"test\"}]}',\n-   'content_type': 'application/json',\n-   'method': 'POST',\n-   'path': 'http://127.0.0.1:38085/v1/chat/completions'}]"
+        },
+        {
+          "id": "test_constraint_no_fallback",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_redirect",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: LocalAIError not raised"
+        },
+        {
+          "id": "test_constraint_no_sensitive_error_or_logs",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: 'SYNTHETIC_PRIVATE_INPUT_9843' unexpectedly found in 'Traceback (most recent call last):\\n  File \"/submission/client.py\", line 25, in summarize\\n    return json.load(response)[\"choices\"][0][\"message\"][\"content\"]\\n           ^^^^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/__init__.py\", line 293, in load\\n    return loads(fp.read(),\\n           ^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/__init__.py\", line 346, in loads\\n    return _default_decoder.decode(s)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/decoder.py\", line 338, in decode\\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/usr/local/lib/python3.12/json/decoder.py\", line 356, in raw_decode\\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\\n\\nThe above exception was the direct cause of the follo"
+        },
+        {
+          "id": "test_constraint_reject_invalid_configuration",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_reject_nonlocal_urls",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised : https://example.com:443/v1"
+        },
+        {
+          "id": "test_constraint_timeout_no_retry",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_invalid_responses",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: LocalAIError not raised"
+        },
+        {
+          "id": "test_localhost_and_slash",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 3.2,
+      "counts": {
+        "pass": 3,
+        "fail": 7,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 2,
+          "total": 7
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "2fe1b92aba1d497f94a2e8c567d2f36c",
+      "created_at": "2026-10-04T12:41:20.799783+00:00",
+      "task_id": "local_ai_client",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "95d9dc39954e92d0b5f22c9a7a7fc99b48c2e5a63574d3deb2cb3e9681b65e48",
+      "submission_files": {
+        "PROJECT.md": "a26f71c7bc0c34e7aa0c0e8ed4464a0426f9d09464af136864e167c9b6bb7521",
+        "client.py": "4923ec5f2d6c7b872688ea266d5481522a4170f6eb5a683e3b6210019c1e1562"
+      },
+      "task_sha256": "66de5616fc81a0d5c2b4b2df00d8baee1b42d718b83ed6fa4ba57ea2909229c2",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_configured_model_and_endpoint",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_ignore_proxy",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_fallback",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_redirect",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_sensitive_error_or_logs",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_invalid_configuration",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_nonlocal_urls",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_timeout_no_retry",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_invalid_responses",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_localhost_and_slash",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 4.093,
+      "counts": {
+        "pass": 10,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 7,
+          "total": 7
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "dc11c85358374e5e9f7ce528292e62bc",
+      "created_at": "2026-10-04T12:41:24.897138+00:00",
+      "task_id": "local_ai_client",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "867d8057824c1f618017d1547385a8a3f15c34412166cb0d6ae716d5874d4296",
+      "submission_files": {
+        "PROJECT.md": "a26f71c7bc0c34e7aa0c0e8ed4464a0426f9d09464af136864e167c9b6bb7521",
+        "client.py": "3bf80cf9e064c63cdcc9db860e00e8b92baad297be8e1192057bb84eca03763b"
+      },
+      "task_sha256": "66de5616fc81a0d5c2b4b2df00d8baee1b42d718b83ed6fa4ba57ea2909229c2",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_configured_model_and_endpoint",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_ignore_proxy",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_fallback",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_no_redirect",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: LocalAIError not raised"
+        },
+        {
+          "id": "test_constraint_no_sensitive_error_or_logs",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_invalid_configuration",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_reject_nonlocal_urls",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_timeout_no_retry",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_invalid_responses",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_localhost_and_slash",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 4.73,
+      "counts": {
+        "pass": 9,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 6,
+          "total": 7
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "d2f623c0634f4fc58b24d9f7c7628bb1",
+      "created_at": "2026-10-04T12:41:29.629634+00:00",
+      "task_id": "money_normalization",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "e4e6ac7131d16d6fd480b28d198771be042053b84a2f5cc5e70123acae4d2feb",
+      "submission_files": {
+        "PROJECT.md": "2c3baa7b1a8e233108accde2f28dad6ea951a7237b30ad572a0e11e1d4eeb180",
+        "money.py": "f1a9a58801a1bc414cf2cb5e01daedb30ce44ab72e2e9583c4e7999599696860"
+      },
+      "task_sha256": "fccb99b1249cdb54ce039c85d2d8fdb84ec89de0aa8c07c820bd8d4795c12bc5",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_amount",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised : '1.23'"
+        },
+        {
+          "id": "test_decimal_cents",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 28 != 29"
+        },
+        {
+          "id": "test_exact_large_amount",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 9223372036854775808 != 9223372036854775807"
+        },
+        {
+          "id": "test_generated_amounts",
+          "category": "correctness",
+          "status": "error",
+          "detail": "ValueError: could not convert string to float: '-4.566.224.790.33'"
+        },
+        {
+          "id": "test_grouping_and_refunds",
+          "category": "correctness",
+          "status": "error",
+          "detail": "ValueError: could not convert string to float: '1.234.56'"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.725,
+      "counts": {
+        "pass": 0,
+        "fail": 3,
+        "error": 2,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "ae8799e425e3476a90ebd9fd135d7bca",
+      "created_at": "2026-10-04T12:41:32.357650+00:00",
+      "task_id": "money_normalization",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "b8c3dfc6ed0036c87cd30c804bb10618f5aa3c4f2adebc29abdf7ed36a18f3e8",
+      "submission_files": {
+        "PROJECT.md": "2c3baa7b1a8e233108accde2f28dad6ea951a7237b30ad572a0e11e1d4eeb180",
+        "money.py": "ce8cd91b6be765c170cb134cdd40e234332cf0a4aae1ec2871c83177060226bb"
+      },
+      "task_sha256": "fccb99b1249cdb54ce039c85d2d8fdb84ec89de0aa8c07c820bd8d4795c12bc5",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_amount",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_decimal_cents",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_exact_large_amount",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_generated_amounts",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_grouping_and_refunds",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.283,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 4,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "d2a74a7f5448463d929a4df55154ecc2",
+      "created_at": "2026-10-04T12:41:34.643134+00:00",
+      "task_id": "money_normalization",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "23f85f4b454f39f2e7c4930e3fba5f83f24d5049348957a62d0daa472df32897",
+      "submission_files": {
+        "PROJECT.md": "2c3baa7b1a8e233108accde2f28dad6ea951a7237b30ad572a0e11e1d4eeb180",
+        "money.py": "865afbe904600f431ac2fd6ef8a6f9f94abdac72c404684cf4067117fe223f48"
+      },
+      "task_sha256": "fccb99b1249cdb54ce039c85d2d8fdb84ec89de0aa8c07c820bd8d4795c12bc5",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_invalid_amount",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised : '-92233720368547758,09'"
+        },
+        {
+          "id": "test_decimal_cents",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 28 != 29"
+        },
+        {
+          "id": "test_exact_large_amount",
+          "category": "correctness",
+          "status": "error",
+          "detail": "ValueError: Amount out of range"
+        },
+        {
+          "id": "test_generated_amounts",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 475706360914 != 475706360915"
+        },
+        {
+          "id": "test_grouping_and_refunds",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.624,
+      "counts": {
+        "pass": 1,
+        "fail": 3,
+        "error": 1,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "f623ff64e0d049f0bab7baa0a124434e",
+      "created_at": "2026-10-04T12:41:37.269400+00:00",
+      "task_id": "pii_redaction",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "2a1c322ce96dad65bddc5b6d2591c36f9c3cadf6061b5c306db8970156f84448",
+      "submission_files": {
+        "PROJECT.md": "2337b8485ae568305aa686ef78bf8a4e14350a49c070baa5f1269629d1f2cd36",
+        "redact.py": "6c22c3b95cebdb2a2d428586a28f73862759eea6e2ee0ad954f9f13ac66a2382"
+      },
+      "task_sha256": "f4745b9feae33c504c40cdd9d7786c8c0e8f791ed6707d07067b85075a230e4d",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_all_sensitive_fields",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'national_id': {'value': 'sensitive'}, 'ap[102 chars]ve'}} != {'email': '[REDACTED]', 'phone': '[REDACTED[108 chars]ED]'}\n- {'access_token': {'value': 'sensitive'},\n-  'api_key': {'value': 'sensitive'},\n-  'national_id': {'value': 'sensitive'},\n-  'password': {'value': 'sensitive'}}\n+ {'access_token': '[REDACTED]',\n+  'api_key': '[REDACTED]',\n+  'email': '[REDACTED]',\n+  'national_id': '[REDACTED]',\n+  'password': '[REDACTED]',\n+  'phone': '[REDACTED]'}"
+        },
+        {
+          "id": "test_case_insensitive_keys",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'EMAIL': 'x', 'Api_Key': 'x', 'Password': 'x'} != {'EMAIL': '[REDACTED]', 'Api_Key': '[REDACTED]', 'Password': '[REDACTED]'}\n- {'Api_Key': 'x', 'EMAIL': 'x', 'Password': 'x'}\n+ {'Api_Key': '[REDACTED]', 'EMAIL': '[REDACTED]', 'Password': '[REDACTED]'}"
+        },
+        {
+          "id": "test_constraint_invalid_and_no_logging",
+          "category": "constraint",
+          "status": "error",
+          "detail": "TypeError: pop expected at most 1 argument, got 2"
+        },
+        {
+          "id": "test_nested_lists",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'contacts': [{'email': 'synthetic@example.invalid'}]} != {'contacts': [{'email': '[REDACTED]'}], 'phone': '[REDACTED]'}\n- {'contacts': [{'email': 'synthetic@example.invalid'}]}\n+ {'contacts': [{'email': '[REDACTED]'}], 'phone': '[REDACTED]'}"
+        },
+        {
+          "id": "test_preserve_data_and_input",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'nam[22 chars]nt_cents': 29, 'metadata': {'active': False, 'optional': None}} != {'nam[22 chars]nt_cents': 29, 'metadata': {'active': True, 'optional': None}}\n  {'amount_cents': 29,\n-  'metadata': {'active': False, 'optional': None},\n?                         ^^^^\n\n+  'metadata': {'active': True, 'optional': None},\n?                         ^^^\n\n   'name': 'Synthetic'}"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.161,
+      "counts": {
+        "pass": 0,
+        "fail": 4,
+        "error": 1,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "67f8fa396d654c8f9223cce2a10561f1",
+      "created_at": "2026-10-04T12:41:39.432797+00:00",
+      "task_id": "pii_redaction",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "fa10a828b585d197537482a91618e4180cf1955f21611bdf9b2ffb53cb7f8d68",
+      "submission_files": {
+        "PROJECT.md": "2337b8485ae568305aa686ef78bf8a4e14350a49c070baa5f1269629d1f2cd36",
+        "redact.py": "0f09d1e64270fae983172b875a3a3d4d555fc0719e29a36c077ae2bcd5ce8251"
+      },
+      "task_sha256": "f4745b9feae33c504c40cdd9d7786c8c0e8f791ed6707d07067b85075a230e4d",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_all_sensitive_fields",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_case_insensitive_keys",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_invalid_and_no_logging",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_nested_lists",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_preserve_data_and_input",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.229,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 4,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "e96023a93280445dba05db7b19af5603",
+      "created_at": "2026-10-04T12:41:41.664142+00:00",
+      "task_id": "pii_redaction",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "69e02d8476e5ac9c80f4d1d85d6e54735cdb53dc593f449a0da134335728bfa9",
+      "submission_files": {
+        "PROJECT.md": "2337b8485ae568305aa686ef78bf8a4e14350a49c070baa5f1269629d1f2cd36",
+        "redact.py": "410674cf9bd40ce2e0aa60f76860cff0ddd260c0b45b658c0f31d43efc816257"
+      },
+      "task_sha256": "f4745b9feae33c504c40cdd9d7786c8c0e8f791ed6707d07067b85075a230e4d",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_all_sensitive_fields",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_case_insensitive_keys",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: {'EMAIL': 'x', 'Api_Key': 'x', 'Password': 'x'} != {'EMAIL': '[REDACTED]', 'Api_Key': '[REDACTED]', 'Password': '[REDACTED]'}\n- {'Api_Key': 'x', 'EMAIL': 'x', 'Password': 'x'}\n+ {'Api_Key': '[REDACTED]', 'EMAIL': '[REDACTED]', 'Password': '[REDACTED]'}"
+        },
+        {
+          "id": "test_constraint_invalid_and_no_logging",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_nested_lists",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_preserve_data_and_input",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.483,
+      "counts": {
+        "pass": 4,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 4
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "d43afbbeb515496ea6e0012cf9633a99",
+      "created_at": "2026-10-04T12:41:44.149085+00:00",
+      "task_id": "prompt_boundary",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "9b6173e1ee0197c03f914b0cb697dfe1dfa6acdb82149d605bc281fa127ee8a8",
+      "submission_files": {
+        "PROJECT.md": "d0dbc4051d9eaa2cbf1d245c6194ab0abef368160a458f758f00b23ec39ab7f6",
+        "prompts.py": "7afddc38e1318c2d2859a16d42df31982e50d27a60476f1c8f17c68dd3370a73"
+      },
+      "task_sha256": "faa67ac05c3886454b6472b9545f4c979ac16d2f8a34da4dd5ba276b09c7984b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_content_and_count_limits",
+          "category": "constraint",
+          "status": "error",
+          "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "id": "test_constraint_invalid_inputs",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_exact_roles_and_policy",
+          "category": "correctness",
+          "status": "error",
+          "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "id": "test_input_order_unicode_and_no_mutation",
+          "category": "correctness",
+          "status": "error",
+          "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "id": "test_untrusted_instructions_remain_data",
+          "category": "correctness",
+          "status": "error",
+          "detail": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.114,
+      "counts": {
+        "pass": 0,
+        "fail": 1,
+        "error": 4,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 2
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "49fcf70ae8b642c78cce8bab63cc0d74",
+      "created_at": "2026-10-04T12:41:46.265058+00:00",
+      "task_id": "prompt_boundary",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "6ac5534988f909b97df2267f765d28b2108fd9e6e447058c3049545b18668fdc",
+      "submission_files": {
+        "PROJECT.md": "d0dbc4051d9eaa2cbf1d245c6194ab0abef368160a458f758f00b23ec39ab7f6",
+        "prompts.py": "ac2c6fdc8cbb5159470e87b64ccd49f23149414410c9b989ce594fd1c2d4ada2"
+      },
+      "task_sha256": "faa67ac05c3886454b6472b9545f4c979ac16d2f8a34da4dd5ba276b09c7984b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_content_and_count_limits",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_invalid_inputs",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_exact_roles_and_policy",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_input_order_unicode_and_no_mutation",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_untrusted_instructions_remain_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.2,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 2,
+          "total": 2
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "4be11e56fac6422483f977c5ad2f46f1",
+      "created_at": "2026-10-04T12:41:48.467614+00:00",
+      "task_id": "prompt_boundary",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "6ea9c86bedf896b475adccaa8bad0dbb14e5070a0155d848000bc305119b37ef",
+      "submission_files": {
+        "PROJECT.md": "d0dbc4051d9eaa2cbf1d245c6194ab0abef368160a458f758f00b23ec39ab7f6",
+        "prompts.py": "c1c71e44dfa0603054d326575e2412d9c6d62e74ef5943608617c2b270380f0c"
+      },
+      "task_sha256": "faa67ac05c3886454b6472b9545f4c979ac16d2f8a34da4dd5ba276b09c7984b",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_content_and_count_limits",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: 'abcdef' != 'abc'\n- abcdef\n+ abc\n"
+        },
+        {
+          "id": "test_constraint_invalid_inputs",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_exact_roles_and_policy",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_input_order_unicode_and_no_mutation",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_untrusted_instructions_remain_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.31,
+      "counts": {
+        "pass": 4,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 2
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "0c51ea472e814ec6a9566afad0bb017f",
+      "created_at": "2026-10-04T12:41:50.779728+00:00",
+      "task_id": "safe_archive",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "a73e1c6842dadbf30c94a5992616d53d28ae9b920bce19a5b0823ac6d79800f5",
+      "submission_files": {
+        "PROJECT.md": "cde4235709ce007a675ef98135291d85ba819f94de0841cdb829812aff807490",
+        "extract.py": "e8cc685418f4d04a3e0d5d10836e2845fd56b76cb86e33c585e2756a47572259"
+      },
+      "task_sha256": "133ad914ee28aa0d9ebcdd5b59486287c661431d365283b79687d5eee583374f",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_limits_and_collisions",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_preserve_existing_atomic",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_symlinks",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_unsafe_paths_atomic",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_valid_files",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: ['a.txt', 'folder/', 'folder/b.bin'] != ['a.txt', 'folder/b.bin']\n\nFirst differing element 1:\n'folder/'\n'folder/b.bin'\n\nFirst list contains 1 additional elements.\nFirst extra element 2:\n'folder/b.bin'\n\n- ['a.txt', 'folder/', 'folder/b.bin']\n?          -----------\n\n+ ['a.txt', 'folder/b.bin']"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.813,
+      "counts": {
+        "pass": 0,
+        "fail": 5,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 1
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 4
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "2ce4fc698b334fc5ad045686b9b314f6",
+      "created_at": "2026-10-04T12:41:53.595546+00:00",
+      "task_id": "safe_archive",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "659970fe7cce4f485dc96d706c66c19ddf107c293837c4a318335234e205cbc5",
+      "submission_files": {
+        "PROJECT.md": "cde4235709ce007a675ef98135291d85ba819f94de0841cdb829812aff807490",
+        "extract.py": "ffe5dedac6200cb1c628489f1fcfcbd06d5fc9f0051bf2950796f1a1c3ded150"
+      },
+      "task_sha256": "133ad914ee28aa0d9ebcdd5b59486287c661431d365283b79687d5eee583374f",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_limits_and_collisions",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_preserve_existing_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_symlinks",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_unsafe_paths_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_valid_files",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 3.484,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 1
+        },
+        "constraint": {
+          "passed": 4,
+          "total": 4
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "80b6f372e85d4656b5bed4e5c7a72f72",
+      "created_at": "2026-10-04T12:41:57.081958+00:00",
+      "task_id": "safe_archive",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "80663b32626babd1a27dbab780f3c2fe7db77c525dfd31e23b7961913378e87c",
+      "submission_files": {
+        "PROJECT.md": "cde4235709ce007a675ef98135291d85ba819f94de0841cdb829812aff807490",
+        "extract.py": "428fd521ebec261673f4994e0468343f19881c9cf7db417b551a4816ee076954"
+      },
+      "task_sha256": "133ad914ee28aa0d9ebcdd5b59486287c661431d365283b79687d5eee583374f",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_limits_and_collisions",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_preserve_existing_atomic",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_symlinks",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_unsafe_paths_atomic",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_valid_files",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 3.106,
+      "counts": {
+        "pass": 4,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 1
+        },
+        "constraint": {
+          "passed": 3,
+          "total": 4
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "a0a11ad4c8c54a4fb92a949fe5abed7d",
+      "created_at": "2026-10-04T12:42:00.190554+00:00",
+      "task_id": "sales_report",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "c1fdcd99fd2ef4546a1a150fced9136b716cc07f99d8c555c245b8ac0dafc5ab",
+      "submission_files": {
+        "PROJECT.md": "7cd5ce9d68600cabdb95aaab4feb8160822b85740fef3bd243dd739b21b70966",
+        "report.sql": "809b1cb5fb5c510728cfe020f97acf45373d988771d220d0e6c54cfe2f36db01",
+        "sample.sql": "6db34654f471be1a2392f7e095dd692cbad215ff8742b72ae0736ec441e84764",
+        "schema.sql": "3ca30141f1fc0fb34804786198023763449a3f61d5f00a1775131d6b73b6f635"
+      },
+      "task_sha256": "a53f542ee1f70a9008a3d5eabec3b91f908bc865f042fd9f6203d1d0b026c3fb",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_read_only_query",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_customers_without_paid_orders",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [] != [('A', 'None', 0, 0, 0, 0), ('B', 'Cancell[76 chars], 0)]\n\nSecond list contains 4 additional elements.\nFirst extra element 0:\n('A', 'None', 0, 0, 0, 0)\n\n- []\n+ [('A', 'None', 0, 0, 0, 0),\n+  ('B', 'Cancelled', 0, 0, 0, 0),\n+  ('C', 'Pending', 0, 0, 0, 0),\n+  ('D', 'Empty order', 1, 0, 0, 0)]"
+        },
+        {
+          "id": "test_empty_database",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_equal_amount_events",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C', 'Shop', 4, 2000, 400, 1600)] != [('C', 'Shop', 1, 1000, 200, 800)]\n\nFirst differing element 0:\n('C', 'Shop', 4, 2000, 400, 1600)\n('C', 'Shop', 1, 1000, 200, 800)\n\n- [('C', 'Shop', 4, 2000, 400, 1600)]\n?                ^  ^     ^    ^^\n\n+ [('C', 'Shop', 1, 1000, 200, 800)]\n?                ^  ^     ^    ^\n"
+        },
+        {
+          "id": "test_multiple_orders_and_names",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: False is not true : Counts and cents must be integers"
+        },
+        {
+          "id": "test_property_generated_data",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C01', 'Name1', 1, 1992, 298, 1694), ('C02',[224 chars]605)] != [('C00', 'Name0', 2, 0, 0, 0), ('C01', 'Name1'[309 chars], 0)]\n\nFirst differing element 0:\n('C01', 'Name1', 1, 1992, 298, 1694)\n('C00', 'Name0', 2, 0, 0, 0)\n\nSecond list contains 3 additional elements.\nFirst extra element 7:\n('C07', 'Name1', 2, 3025, 1339, 1686)\n\nDiff is 880 characters long. Set self.maxDiff to None to see it."
+        },
+        {
+          "id": "test_totals_with_fanout",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C', 'Shop', 4, 4000, 600, 3400)] != [('C', 'Shop', 1, 2000, 300, 1700)]\n\nFirst differing element 0:\n('C', 'Shop', 4, 4000, 600, 3400)\n('C', 'Shop', 1, 2000, 300, 1700)\n\n- [('C', 'Shop', 4, 4000, 600, 3400)]\n?                ^  ^     ^    ^^\n\n+ [('C', 'Shop', 1, 2000, 300, 1700)]\n?                ^  ^     ^    ^^\n"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.275,
+      "counts": {
+        "pass": 2,
+        "fail": 5,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 1,
+          "total": 6
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "fdd70e417c0a46f088c1ed4e149afb4f",
+      "created_at": "2026-10-04T12:42:02.468622+00:00",
+      "task_id": "sales_report",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "3446a7e4dbd1aca911b13d8fa33a811b1a4d12ea70969be5cad67afedd4a5066",
+      "submission_files": {
+        "PROJECT.md": "7cd5ce9d68600cabdb95aaab4feb8160822b85740fef3bd243dd739b21b70966",
+        "report.sql": "d85edf6fc7790b33b62d5f586471b866ff64a3f483b22caf2845e82885184396",
+        "sample.sql": "6db34654f471be1a2392f7e095dd692cbad215ff8742b72ae0736ec441e84764",
+        "schema.sql": "3ca30141f1fc0fb34804786198023763449a3f61d5f00a1775131d6b73b6f635"
+      },
+      "task_sha256": "a53f542ee1f70a9008a3d5eabec3b91f908bc865f042fd9f6203d1d0b026c3fb",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_read_only_query",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_customers_without_paid_orders",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_database",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_equal_amount_events",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_multiple_orders_and_names",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_property_generated_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_totals_with_fanout",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.312,
+      "counts": {
+        "pass": 7,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 6,
+          "total": 6
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "40b390f7b66c48049f61c4d114acf36d",
+      "created_at": "2026-10-04T12:42:04.782622+00:00",
+      "task_id": "sales_report",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "f8a6946fa6bf904dc8e83a684e967a494bb505dae681ad66becccc220d01bebd",
+      "submission_files": {
+        "PROJECT.md": "7cd5ce9d68600cabdb95aaab4feb8160822b85740fef3bd243dd739b21b70966",
+        "report.sql": "32bd37b618e83e87100f43f147bdb5eca46cc4daf11a53fc453aff5924fbaf87",
+        "sample.sql": "6db34654f471be1a2392f7e095dd692cbad215ff8742b72ae0736ec441e84764",
+        "schema.sql": "3ca30141f1fc0fb34804786198023763449a3f61d5f00a1775131d6b73b6f635"
+      },
+      "task_sha256": "a53f542ee1f70a9008a3d5eabec3b91f908bc865f042fd9f6203d1d0b026c3fb",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_read_only_query",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_customers_without_paid_orders",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_empty_database",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_equal_amount_events",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [('C', 'Shop', 1, 1000, 100, 900)] != [('C', 'Shop', 1, 1000, 200, 800)]\n\nFirst differing element 0:\n('C', 'Shop', 1, 1000, 100, 900)\n('C', 'Shop', 1, 1000, 200, 800)\n\n- [('C', 'Shop', 1, 1000, 100, 900)]\n?                         ^    ^\n\n+ [('C', 'Shop', 1, 1000, 200, 800)]\n?                         ^    ^\n"
+        },
+        {
+          "id": "test_multiple_orders_and_names",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_property_generated_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_totals_with_fanout",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.851,
+      "counts": {
+        "pass": 6,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 5,
+          "total": 6
+        },
+        "constraint": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "66ae751c94ba476ebc4ebbc2cb5eea8f",
+      "created_at": "2026-10-04T12:42:07.635983+00:00",
+      "task_id": "schema_migration",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "346258b2c210887cc392d5aae7952818737debd05ae51c89225414273691c149",
+      "submission_files": {
+        "PROJECT.md": "73da6a7d85beaa833a0cbab294ec03d3267d4fdd70ff74b6b2d996d0bb354e14",
+        "migration.py": "dcb8c0c309abc22d804cf60543f4a696131e3242e5c221bcf6ab878db230bac2"
+      },
+      "task_sha256": "023d0d73c43095ca3fcd17bc4a77292d1561a094ddf107f2b7dc05a58323f4b4",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_caller_transaction_preserved",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_constraint_future_version_unchanged",
+          "category": "constraint",
+          "status": "fail",
+          "detail": "AssertionError: ValueError not raised"
+        },
+        {
+          "id": "test_idempotence_preserves_currency",
+          "category": "correctness",
+          "status": "error",
+          "detail": "TypeError: 'NoneType' object is not subscriptable"
+        },
+        {
+          "id": "test_preserves_database_objects",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [] != [('001',)]\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n('001',)\n\n- []\n+ [('001',)]"
+        },
+        {
+          "id": "test_upgrade_preserves_data",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: Lists differ: [] != [('001', 'paid', 'EUR'), ('002', 'pending', 'EUR')]\n\nSecond list contains 2 additional elements.\nFirst extra element 0:\n('001', 'paid', 'EUR')\n\n- []\n+ [('001', 'paid', 'EUR'), ('002', 'pending', 'EUR')]"
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.677,
+      "counts": {
+        "pass": 0,
+        "fail": 4,
+        "error": 1,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 0,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 0,
+          "total": 2
+        }
+      },
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "b92e5dd5d25e4aa0afb8c7c4642f77fb",
+      "created_at": "2026-10-04T12:42:10.314767+00:00",
+      "task_id": "schema_migration",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "5ce585772f33bab5ca9c5e4d58cb2df580a7ecf3fb685d6a21a388c2e9716d21",
+      "submission_files": {
+        "PROJECT.md": "73da6a7d85beaa833a0cbab294ec03d3267d4fdd70ff74b6b2d996d0bb354e14",
+        "migration.py": "04b025a34b166b9daefabadf7cff88b9f288646594816033da972b316ede2aae"
+      },
+      "task_sha256": "023d0d73c43095ca3fcd17bc4a77292d1561a094ddf107f2b7dc05a58323f4b4",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_caller_transaction_preserved",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_future_version_unchanged",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_idempotence_preserves_currency",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_preserves_database_objects",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_upgrade_preserves_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": true,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 0,
+      "status": "passed",
+      "wall_seconds": 2.175,
+      "counts": {
+        "pass": 5,
+        "fail": 0,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 3,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 2,
+          "total": 2
+        }
+      },
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true
+    },
+    {
+      "schema_version": 1,
+      "benchmark_version": "0.2.0",
+      "run_id": "ab6cefc07f1e4120ba8ea0154ea9f170",
+      "created_at": "2026-10-04T12:42:12.492136+00:00",
+      "task_id": "schema_migration",
+      "variant": "neutral",
+      "image": "python@sha256:593bd06efe90efa80dc4eee3948be7c0fde4134606dd40d8dd8dbcade98e669c",
+      "submission_sha256": "7bdb41c480ec8d95998036b2d7d4faeb13c615c0f59c743db29167a995e5c372",
+      "submission_files": {
+        "PROJECT.md": "73da6a7d85beaa833a0cbab294ec03d3267d4fdd70ff74b6b2d996d0bb354e14",
+        "migration.py": "84c6eed70bf90f2f60ddbb4e67da231067447ecf14a45f2e44008c52258b062a"
+      },
+      "task_sha256": "023d0d73c43095ca3fcd17bc4a77292d1561a094ddf107f2b7dc05a58323f4b4",
+      "evaluator_sha256": "bbff9ba5383c9e0257e21bd5e7187636ba781b49bc8c83aa9d6fbf1a4de96776",
+      "scope_violations": [],
+      "checks": [
+        {
+          "id": "test_constraint_caller_transaction_preserved",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_constraint_future_version_unchanged",
+          "category": "constraint",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_idempotence_preserves_currency",
+          "category": "correctness",
+          "status": "fail",
+          "detail": "AssertionError: 'EUR' != 'USD'\n- EUR\n+ USD\n"
+        },
+        {
+          "id": "test_preserves_database_objects",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        },
+        {
+          "id": "test_upgrade_preserves_data",
+          "category": "correctness",
+          "status": "pass",
+          "detail": ""
+        }
+      ],
+      "accepted": false,
+      "agent_behavior": {
+        "plan_approval": "not_measured",
+        "sycophancy": "not_measured",
+        "maintainability": "requires_human_review",
+        "model_cost": null
+      },
+      "container_exit_code": 1,
+      "status": "failed",
+      "wall_seconds": 2.654,
+      "counts": {
+        "pass": 4,
+        "fail": 1,
+        "error": 0,
+        "skip": 0
+      },
+      "scores": {
+        "correctness": {
+          "passed": 2,
+          "total": 3
+        },
+        "constraint": {
+          "passed": 2,
+          "total": 2
+        }
+      },
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true
+    }
+  ],
+  "self_test_passed": true
+}

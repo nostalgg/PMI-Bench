@@ -1,0 +1,274 @@
+{
+  "benchmark_version": "0.4.0",
+  "track": "supplementary_dependency_conformance",
+  "profile_image_id": "sha256:2c3010d08d04b37995a26a8139461a6b63093acf28570a22012a6eb3c944096d",
+  "postgres_image": "postgres@sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297",
+  "requirements_sha256": "b59e1557ef521f1170691f3fdc842b8ad185b63b408b4d09d03976640495cd75",
+  "worker_sha256": "e46ab0f225d5cc9b67e56af1b29d350c1bcad53f8da64fe930b4c1c21a94e99a",
+  "reference_checks": 18,
+  "runs": [
+    {
+      "task_id": "inventory_ledger",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_replay",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 56, in test_replay\n    self.assertEqual(self.apply(self.db,[self.move]),0)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/ledger.py\", line 27, in apply_movements\n    connection.execute('INSERT INTO movements VALUES(?,?,?)', (event_id, sku, delta))\n  File \"/evaluator/worker.py\", line 31, in execute\n    return self.connection.execute(sql.replace('?', '%s'), parameters)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/psycopg/connection.py\", line 269, in execute\n    raise ex.with_traceback(None)\npsycopg.errors.UniqueViolation: duplicate key value violates unique constraint \"movements_pkey\"\nDETAIL:  Key (event_id)=(delivery) already exists.\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "be663776499ecdd435d3e81d75ef13a201afcc53e58fc83f1f66525a64c03edb",
+      "task_sha256": "5f7de3009a9665c315a0deb9abba83c92efb9d1a4062e59691901ec52039236c"
+    },
+    {
+      "task_id": "inventory_ledger",
+      "tests_run": 3,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "f1bdd396bd7c43ea31d2b8a9efa021f2ddb3838cc9fa73efa1276edd8da1182b",
+      "task_sha256": "5f7de3009a9665c315a0deb9abba83c92efb9d1a4062e59691901ec52039236c"
+    },
+    {
+      "task_id": "inventory_ledger",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_conflict",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 61, in test_conflict\n    with self.assertRaises(ValueError): self.apply(self.db,[{**self.move,'delta':6}])\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "2964fbcab65420eb5dc536eb4e9f06859b91c6afac7186be9345c078137d6298",
+      "task_sha256": "5f7de3009a9665c315a0deb9abba83c92efb9d1a4062e59691901ec52039236c"
+    },
+    {
+      "task_id": "incremental_sync",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_replay",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 79, in test_replay\n    self.assertEqual(self.apply(self.db,[self.event]),0)\nAssertionError: 1 != 0\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "7ad367d26555d09a79242cea126aa76f6ead4ada6faf650a5d3cbaa8cb0a5f06",
+      "task_sha256": "20e4ba454c31413a75cf7bcaf09ea3524bad38e7979df2eb27857f7e3fb448cf"
+    },
+    {
+      "task_id": "incremental_sync",
+      "tests_run": 3,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "70b8221d0e6458832964e7b253340d456901b3cc4ff889e9d35967cfa2048ab4",
+      "task_sha256": "20e4ba454c31413a75cf7bcaf09ea3524bad38e7979df2eb27857f7e3fb448cf"
+    },
+    {
+      "task_id": "incremental_sync",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_order_and_delete",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 83, in test_order_and_delete\n    self.assertEqual(self.db.execute('SELECT * FROM replica').fetchall(),[])\nAssertionError: Lists differ: [('001', 'ok')] != []\n\nFirst list contains 1 additional elements.\nFirst extra element 0:\n('001', 'ok')\n\n- [('001', 'ok')]\n+ []\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "aaac27b9f452c821abdd96c5e3fe36f236adab8b30d5f823161ad2f080c1070a",
+      "task_sha256": "20e4ba454c31413a75cf7bcaf09ea3524bad38e7979df2eb27857f7e3fb448cf"
+    },
+    {
+      "task_id": "scd_history",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_change",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 99, in test_change\n    self.assertEqual(self.apply(self.db,[{'customer_id':'001','name':'New'}],'2024-02-01'),1)\nAssertionError: 0 != 1\n"
+        },
+        {
+          "test": "test_close_absent",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 103, in test_close_absent\n    self.assertEqual(self.apply(self.db,[],'2024-02-01'),1)\nAssertionError: 0 != 1\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "90f4bdb1ca842df439e5d2e2f2ac589885624b06f7ec0781cb5a295f3bf86455",
+      "task_sha256": "062deb7194e561388b6a352c7cbc9f95b3ead27b69e1317b83cdf978643c5297"
+    },
+    {
+      "task_id": "scd_history",
+      "tests_run": 3,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "3907f31df9fe378c33cbe1acf5f164d558035c5cd88d8f7e6e6c1f0be1df1c0e",
+      "task_sha256": "062deb7194e561388b6a352c7cbc9f95b3ead27b69e1317b83cdf978643c5297"
+    },
+    {
+      "task_id": "scd_history",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_close_absent",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 103, in test_close_absent\n    self.assertEqual(self.apply(self.db,[],'2024-02-01'),1)\nAssertionError: 0 != 1\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "212df354d80e7226bd6078c9b8a85bb3fe9e3c2ca21de2e3bd3450f2c5f09b0c",
+      "task_sha256": "062deb7194e561388b6a352c7cbc9f95b3ead27b69e1317b83cdf978643c5297"
+    },
+    {
+      "task_id": "document_cache",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_changed_input",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 128, in test_changed_input\n    self.assertEqual(self.apply(self.db,[{**self.rows[0],'text':'other'}],self.classify,'private'),1)\nAssertionError: 0 != 1\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "5da2244d254302d94f4bfb67b7509c45359221098db817b450f71b8780e9d922",
+      "task_sha256": "38b2fe4f8b3883f2a6b814ece62052dea1aa2c5f6120765eec9a7569eedd64bd"
+    },
+    {
+      "task_id": "document_cache",
+      "tests_run": 3,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "324a8a03ea0ba6c463004f60f3fd12360bb3aecda930dfadea05d6be75b8f90a",
+      "task_sha256": "38b2fe4f8b3883f2a6b814ece62052dea1aa2c5f6120765eec9a7569eedd64bd"
+    },
+    {
+      "task_id": "document_cache",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_alignment",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 124, in test_alignment\n    self.assertEqual(self.db.execute('SELECT record_id,label FROM enrichment ORDER BY record_id').fetchall(),[('001','invoice'),('002','credit_note')])\nAssertionError: Lists differ: [('001', 'invoice'), ('002', 'invoice')] != [('001', 'invoice'), ('002', 'credit_note')]\n\nFirst differing element 1:\n('002', 'invoice')\n('002', 'credit_note')\n\n- [('001', 'invoice'), ('002', 'invoice')]\n?                                 - ^^\n\n+ [('001', 'invoice'), ('002', 'credit_note')]\n?                               ++++ ++  ^\n\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "44685744d2c9e323430eb39234bbf1789ca4f6fe7bed830fb5ad6638344a0d35",
+      "task_sha256": "38b2fe4f8b3883f2a6b814ece62052dea1aa2c5f6120765eec9a7569eedd64bd"
+    },
+    {
+      "task_id": "supplier_catalog",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_dataframe_producer",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 154, in test_dataframe_producer\n    self.assertEqual(self.apply(self.csv,self.db),1)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/catalog.py\", line 11, in import_catalog\n    raise ValueError('Missing supplier columns')\nValueError: Missing supplier columns\n"
+        },
+        {
+          "test": "test_replay",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 158, in test_replay\n    self.apply(self.csv,self.db); self.apply(self.csv,self.db)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/catalog.py\", line 11, in import_catalog\n    raise ValueError('Missing supplier columns')\nValueError: Missing supplier columns\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "c8e0f160b99fee6d49980b9c6176b0d49883c23117049f0bc6fce625a69e2b01",
+      "task_sha256": "40797fa27aec8723d31ad00d6e590bde12e57829f57303ec267e2e9ac029b5a6"
+    },
+    {
+      "task_id": "supplier_catalog",
+      "tests_run": 3,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "8943048e844236c1b05450fc17fa1d5415a147937468508452f4f655b5adc897",
+      "task_sha256": "40797fa27aec8723d31ad00d6e590bde12e57829f57303ec267e2e9ac029b5a6"
+    },
+    {
+      "task_id": "supplier_catalog",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_dataframe_producer",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 155, in test_dataframe_producer\n    self.assertEqual(self.row(),('001','updated',250,999,0))\nAssertionError: Tuples differ: ('001', 'updated', 250, 250, 0) != ('001', 'updated', 250, 999, 0)\n\nFirst differing element 3:\n250\n999\n\n- ('001', 'updated', 250, 250, 0)\n?                         ^^^\n\n+ ('001', 'updated', 250, 999, 0)\n?                         ^^^\n\n"
+        },
+        {
+          "test": "test_replay",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 159, in test_replay\n    self.assertEqual(self.row()[0],'001'); self.assertEqual(self.row()[3],999)\n                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 250 != 999\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "5c84d33098ecb52d3648b875756cb22168a97a060ca162e2e9d9e882d283b5db",
+      "task_sha256": "40797fa27aec8723d31ad00d6e590bde12e57829f57303ec267e2e9ac029b5a6"
+    },
+    {
+      "task_id": "temporal_features",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_cutoff_and_labels",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 177, in setUp\n    self.result = self.apply(self.frame.where(self.frame.notna(),None).to_dict('records'),'2024-02-01')\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/features.py\", line 23, in prepare_features\n    raise ValueError('Invalid feature input') from None\nValueError: Invalid feature input\n"
+        },
+        {
+          "test": "test_downstream_pipeline",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 177, in setUp\n    self.result = self.apply(self.frame.where(self.frame.notna(),None).to_dict('records'),'2024-02-01')\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/features.py\", line 23, in prepare_features\n    raise ValueError('Invalid feature input') from None\nValueError: Invalid feature input\n"
+        },
+        {
+          "test": "test_training_imputer_agreement",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 177, in setUp\n    self.result = self.apply(self.frame.where(self.frame.notna(),None).to_dict('records'),'2024-02-01')\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/submission/features.py\", line 23, in prepare_features\n    raise ValueError('Invalid feature input') from None\nValueError: Invalid feature input\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "baseline",
+      "expected_outcome_observed": true,
+      "submission_sha256": "f65b83d329b6e3aae2981170afe1ea9dd814b6140197e52c3b03ae23fd04f677",
+      "task_sha256": "504ad87e7c7b8e8f702166ef7344fff623fef1a0d3cbfad3b560e24349621cea"
+    },
+    {
+      "task_id": "temporal_features",
+      "tests_run": 3,
+      "failures": [],
+      "accepted": true,
+      "candidate_kind": "reference",
+      "expected_outcome_observed": true,
+      "submission_sha256": "687b5a327e61acf8e9388e3859e2f4f64bb71316b19f2f3a549af7ab3012fa0f",
+      "task_sha256": "504ad87e7c7b8e8f702166ef7344fff623fef1a0d3cbfad3b560e24349621cea"
+    },
+    {
+      "task_id": "temporal_features",
+      "tests_run": 3,
+      "failures": [
+        {
+          "test": "test_training_imputer_agreement",
+          "detail": "Traceback (most recent call last):\n  File \"/evaluator/worker.py\", line 183, in test_training_imputer_agreement\n    self.assertEqual(imputer.statistics_.tolist(),[self.result['medians'][c] for c in columns])\nAssertionError: Lists differ: [3.0, 200.0] != [3.0, 300]\n\nFirst differing element 1:\n200.0\n300\n\n- [3.0, 200.0]\n?       ^  --\n\n+ [3.0, 300]\n?       ^\n\n"
+        }
+      ],
+      "accepted": false,
+      "candidate_kind": "mutation",
+      "expected_outcome_observed": true,
+      "submission_sha256": "8714888ab88838a6bc4cdd1c0cc8581e5ed9580139596061a27ac64b29df9ec8",
+      "task_sha256": "504ad87e7c7b8e8f702166ef7344fff623fef1a0d3cbfad3b560e24349621cea"
+    }
+  ],
+  "self_test_passed": true,
+  "agent_results": false,
+  "limits": "Small dialect-binding adapter; not full PostgreSQL equivalence, concurrency or operational deployment."
+}

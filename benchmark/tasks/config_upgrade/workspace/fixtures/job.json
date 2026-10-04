@@ -1,0 +1,11 @@
+{
+  "job_id": "config_upgrade-sample",
+  "input": {
+    "config": {
+      "schema_version": 1,
+      "endpoint": "http://127.0.0.1:8000/v1",
+      "timeout_ms": 2500,
+      "model": "private"
+    }
+  }
+}

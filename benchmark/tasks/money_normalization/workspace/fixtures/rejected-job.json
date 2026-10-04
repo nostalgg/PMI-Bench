@@ -1,0 +1,9 @@
+{
+  "job_id": "money_normalization-rejected",
+  "input": {
+    "amounts": [
+      "1,00",
+      "1.23"
+    ]
+  }
+}

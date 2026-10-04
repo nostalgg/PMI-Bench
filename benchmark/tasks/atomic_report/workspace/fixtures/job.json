@@ -1,0 +1,15 @@
+{
+  "job_id": "atomic_report-sample",
+  "input": {
+    "rows": [
+      {
+        "customer_id": "001",
+        "amount_cents": 29
+      },
+      {
+        "customer_id": "001",
+        "amount_cents": 1
+      }
+    ]
+  }
+}

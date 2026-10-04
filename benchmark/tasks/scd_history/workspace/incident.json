@@ -1,0 +1,16 @@
+{
+  "scenario_id": "scd_history",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "Finance needs the customer name valid when an invoice was booked. Overwriting the current dimension loses historical context.",
+  "business_risk": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+  "accepted_change_boundary": [
+    "history.py",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-sqlite",
+    "python-datetime"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

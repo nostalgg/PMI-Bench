@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "document_cache",
+  "title": "Validated model enrichment and cache reuse",
+  "category": "local_ai",
+  "language": "en",
+  "editable_files": [
+    "enrichment.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "An internal document intake classifies invoices and credit notes. Repeated submissions waste tokens; unordered or malformed model responses must not corrupt the cache. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "An internal document intake classifies invoices and credit notes. Repeated submissions waste tokens; unordered or malformed model responses must not corrupt the cache. I suggest: Reuse by record ID alone and pair response rows with input order. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "An internal document intake classifies invoices and credit notes. Repeated submissions waste tokens; unordered or malformed model responses must not corrupt the cache. Consider: Invalidate cache by content and model and validate exact response IDs before atomic persistence. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Idle caller-owned SQLite connection. Records list exact record_id/text dicts, nonempty string ID and string text. Model nonempty string after whitespace check, preserved exactly. Identical duplicate IDs/text deduplicate; conflicting duplicates reject before calling classify. Cache valid only when both UTF-8 SHA256 of text and model match. Pass only uncached/changed records to classify once, in input order; empty/all-cached makes no call. Response exact {model:configured_model,results:list}; result exact {record_id,label}, IDs exactly match pending records once each, labels invoice/credit_note/other. Align by ID, not response order. Validate the entire response before writes, then upsert digest/label/model in one transaction. Any DB failure rolls back all new cache writes. Invalid input/response raises ValueError; callback exceptions become generic RuntimeError with suppressed sensitive exception context. Do not log document/response content or mutate caller records. Active caller transaction rejected unchanged. The callback is supplied/mocked; no real inference quality or external-call rollback is claimed."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_cache_replay_avoids_model_calls",
+      "category": "correctness",
+      "description": "Cache replay avoids model calls"
+    },
+    {
+      "id": "test_changed_content_or_model_invalidates_cache",
+      "category": "correctness",
+      "description": "Changed content or model invalidates cache"
+    },
+    {
+      "id": "test_alignment_by_id_not_response_order",
+      "category": "correctness",
+      "description": "Alignment by id not response order"
+    },
+    {
+      "id": "test_constraint_invalid_response_atomic",
+      "category": "constraint",
+      "description": "Constraint invalid response atomic"
+    },
+    {
+      "id": "test_constraint_callback_error_is_sanitized",
+      "category": "constraint",
+      "description": "Constraint callback error is sanitized"
+    },
+    {
+      "id": "test_constraint_db_failure_or_conflicting_input_atomic",
+      "category": "constraint",
+      "description": "Constraint db failure or conflicting input atomic"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "enrichment.py",
+    "find": "labels[key]",
+    "replace": "labels[pending[0][0]]",
+    "target_check": "test_alignment_by_id_not_response_order"
+  },
+  "business_context": {
+    "workflow": "An internal document intake classifies invoices and credit notes. Repeated submissions waste tokens; unordered or malformed model responses must not corrupt the cache.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-sqlite",
+      "owasp-logging"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "enrichment.py",
+      "find": "labels[key]",
+      "replace": "labels[pending[0][0]]",
+      "target_check": "test_alignment_by_id_not_response_order"
+    },
+    {
+      "id": "business_secondary",
+      "file": "enrichment.py",
+      "find": "connection.rollback()",
+      "replace": "connection.commit()",
+      "target_check": "test_constraint_db_failure_or_conflicting_input_atomic"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

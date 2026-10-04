@@ -1,0 +1,27 @@
+task_id,title,category,usage_partition,context_depth,checks,editable_files,source_refs
+api_compatibility,Vendor API pagination compatibility,code_versions,evaluation,integrated_workflow,8,adapter.py;workflow.py,
+atomic_report,Atomic publication of finance reports,bug_fixing,evaluation,integrated_workflow,9,publish.py;workflow.py,python-csv
+cli_csv_export,Scheduled export CLI compatibility,code_versions,evaluation,integrated_workflow,9,tool.py;workflow.py,python-csv
+config_upgrade,Configuration versions and timeout units,code_versions,development,integrated_workflow,8,configuration.py;workflow.py,
+csv_formula,Spreadsheet-safe contact export,security,evaluation,integrated_workflow,9,contacts.py;workflow.py,owasp-csv;python-csv
+customer_matching,CRM identity matching with ambiguity,data_quality,evaluation,integrated_workflow,9,matching.py;workflow.py,
+date_windows,Timezone-aware reporting dates,bug_fixing,development,integrated_workflow,8,windows.py;workflow.py,python-datetime
+document_cache,Validated model enrichment and cache reuse,local_ai,evaluation,integrated_workflow,9,enrichment.py;workflow.py,python-sqlite;owasp-logging
+export_schema,Versioned finance export schemas,code_versions,evaluation,integrated_workflow,9,exporter.py;workflow.py,python-csv
+file_reconciliation,Duplicate-aware batch reconciliation,bug_fixing,evaluation,integrated_workflow,8,reconcile.py;workflow.py,python-csv
+incremental_sync,Atomic source replication checkpoint,database,evaluation,integrated_workflow,9,sync.py;workflow.py,python-sqlite;postgres-insert
+inventory_ledger,Replay-safe warehouse movements,data_quality,evaluation,integrated_workflow,9,ledger.py;workflow.py,python-sqlite;postgres-insert
+invoice_import,Repeatable invoice import,data_quality,development,integrated_workflow,11,importer.py;workflow.py,python-csv;python-sqlite
+local_ai_client,Local AI client with network boundaries,local_ai,development,integrated_workflow,13,client.py;workflow.py,python-urllib;owasp-logging
+model_policy,Data-boundary and budget model routing,local_ai,evaluation,integrated_workflow,9,routing.py;workflow.py,owasp-authorization
+money_normalization,Exact European monetary values,data_quality,evaluation,integrated_workflow,8,money.py;workflow.py,python-csv
+pii_redaction,Nested structured-log redaction,security,development,integrated_workflow,8,redact.py;workflow.py,owasp-logging
+prompt_boundary,Trusted policy and untrusted documents,local_ai,evaluation,integrated_workflow,8,prompts.py;workflow.py,owasp-prompt-boundary
+receivables_aging,As-of receivables with partial payments,database,evaluation,integrated_workflow,9,aging.sql;workflow.py,python-sqlite;python-datetime
+safe_archive,Validated administrative ZIP intake,security,evaluation,integrated_workflow,8,extract.py;workflow.py,python-zipfile
+sales_report,Sales totals without join fanout,database,development,integrated_workflow,10,report.sql;workflow.py,python-sqlite
+scd_history,Customer history from full snapshots,database,evaluation,integrated_workflow,9,history.py;workflow.py,python-sqlite;python-datetime
+schema_migration,Non-destructive SQLite schema upgrade,database,evaluation,integrated_workflow,8,migration.py;workflow.py,python-sqlite
+supplier_catalog,Supplier catalog with manual pricing,data_quality,evaluation,integrated_workflow,9,catalog.py;workflow.py,python-csv;python-sqlite
+temporal_features,Training-only preprocessing for forecasts,bug_fixing,evaluation,integrated_workflow,9,features.py;workflow.py,sklearn-pitfalls
+tenant_query,Tenant-scoped administrative queries,security,evaluation,integrated_workflow,9,queries.py;workflow.py,python-sqlite;owasp-authorization

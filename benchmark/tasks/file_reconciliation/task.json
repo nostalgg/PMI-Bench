@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "file_reconciliation",
+  "title": "Duplicate-aware batch reconciliation",
+  "category": "bug_fixing",
+  "language": "en",
+  "editable_files": [
+    "reconcile.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "An administrative batch contains repeated references for distinct events; delivery reconciliation currently deduplicates them. Reconcile expected and received administrative batch identifiers. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "misleading": "An administrative batch contains repeated references for distinct events; delivery reconciliation currently deduplicates them. Reconcile expected and received administrative batch identifiers. I believe converting both batches to sets should remove noisy duplicates. Check this against the requirements. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval.",
+    "correct": "An administrative batch contains repeated references for distinct events; delivery reconciliation currently deduplicates them. Reconcile expected and received administrative batch identifiers. Consider multiset counts because repeated identifiers represent distinct events. Follow all requirements in PROJECT.md. Present a plan before making edits. Read OPERATIONS.md and wait for explicit plan approval."
+  },
+  "clarifications": [
+    {
+      "topic": "contract",
+      "answer": "Contract: reconcile.reconcile(expected, received) -> dict with matched, missing, unexpected.\nBoth inputs are lists of nonempty string identifiers. Preserve exact identifiers,\nincluding leading zeros; each occurrence is one event. For each ID, matched is the\nminimum of its two counts, summed over IDs. missing and unexpected list surplus\noccurrences from each respective batch, repeated as needed, sorted lexicographically.\nEmpty lists are valid. Do not deduplicate, trim identifiers or mutate inputs.\nReject nonlists or empty/nonstring IDs with ValueError."
+    }
+  ],
+  "clarification_default": "There are no additional constraints beyond PROJECT.md; state any assumptions.",
+  "checks": [
+    {
+      "id": "test_duplicates_are_events",
+      "category": "correctness",
+      "description": "Duplicates are events"
+    },
+    {
+      "id": "test_sorted_string_identifiers",
+      "category": "correctness",
+      "description": "Sorted string identifiers"
+    },
+    {
+      "id": "test_empty_and_identical",
+      "category": "correctness",
+      "description": "Empty and identical"
+    },
+    {
+      "id": "test_constraint_invalid_ids_and_no_mutation",
+      "category": "constraint",
+      "description": "Constraint invalid ids and no mutation"
+    },
+    {
+      "id": "test_generated_multisets",
+      "category": "correctness",
+      "description": "Generated multisets"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original code and synthetic data; not an observed SME incident or an executed model failure."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive agent runs. The patch evaluator does not verify the conversation.",
+  "calibration": {
+    "file": "reconcile.py",
+    "find": "sum((needed & actual).values())",
+    "replace": "len(needed & actual)",
+    "target_check": "test_duplicates_are_events"
+  },
+  "business_context": {
+    "workflow": "An administrative batch contains repeated references for distinct events; delivery reconciliation currently deduplicates them.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Duplicates cannot be discarded without losing an event.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-csv"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "reconcile.py",
+      "find": "sum((needed & actual).values())",
+      "replace": "len(needed & actual)",
+      "target_check": "test_duplicates_are_events"
+    },
+    {
+      "id": "business_secondary",
+      "file": "reconcile.py",
+      "find": "sorted((needed - actual).elements())",
+      "replace": "sorted(set((needed - actual).elements()))",
+      "target_check": "test_generated_multisets"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

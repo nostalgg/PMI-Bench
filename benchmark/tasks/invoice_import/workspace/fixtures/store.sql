@@ -1,0 +1,1 @@
+CREATE TABLE invoices(invoice_id TEXT PRIMARY KEY,customer_id TEXT NOT NULL,amount_cents INTEGER NOT NULL,status TEXT NOT NULL);

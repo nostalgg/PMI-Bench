@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "scd_history",
+  "title": "Customer history from full snapshots",
+  "category": "database",
+  "language": "en",
+  "editable_files": [
+    "history.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "Finance needs the customer name valid when an invoice was booked. Overwriting the current dimension loses historical context. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "Finance needs the customer name valid when an invoice was booked. Overwriting the current dimension loses historical context. I suggest: Overwrite names in place; the report only needs the latest value. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "Finance needs the customer name valid when an invoice was booked. Overwriting the current dimension loses historical context. Consider: Preserve historical intervals and explicitly define missing-snapshot behavior. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Idle caller-owned SQLite connection, well-formed customer_history with at most one open version per customer. Rows is a FULL snapshot list of exact customer_id/name dicts: nonempty strings and unique customer IDs. effective_date is canonical YYYY-MM-DD. Intervals are [valid_from,valid_to), with NULL end meaning current. Preserve unchanged customers; close changed versions at effective_date and insert new open versions. Missing customers are deactivated by closing their open version; new/reappearing customers get a new version. Return number of customer IDs whose state changes. Exact repeated snapshot is idempotent. Reject dates before any historical valid_from/valid_to, and changed same-day open versions (zero-length intervals); corrections require a separate repair process. Invalid snapshot/date and active caller transactions raise ValueError. All changes atomic; preserve historical rows, indexes and connection ownership."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_changed_version_preserves_history",
+      "category": "correctness",
+      "description": "Changed version preserves history"
+    },
+    {
+      "id": "test_repeat_snapshot_unchanged",
+      "category": "correctness",
+      "description": "Repeat snapshot unchanged"
+    },
+    {
+      "id": "test_missing_customer_closes_version",
+      "category": "correctness",
+      "description": "Missing customer closes version"
+    },
+    {
+      "id": "test_add_and_reactivate_customer",
+      "category": "correctness",
+      "description": "Add and reactivate customer"
+    },
+    {
+      "id": "test_constraint_late_or_same_day_change_atomic",
+      "category": "constraint",
+      "description": "Constraint late or same day change atomic"
+    },
+    {
+      "id": "test_constraint_invalid_snapshot_or_active_transaction",
+      "category": "constraint",
+      "description": "Constraint invalid snapshot or active transaction"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "history.py",
+    "find": "sorted(set(current) | set(incoming))",
+    "replace": "sorted(set(incoming))",
+    "target_check": "test_missing_customer_closes_version"
+  },
+  "business_context": {
+    "workflow": "Finance needs the customer name valid when an invoice was booked. Overwriting the current dimension loses historical context.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-sqlite",
+      "python-datetime"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "history.py",
+      "find": "sorted(set(current) | set(incoming))",
+      "replace": "sorted(set(incoming))",
+      "target_check": "test_missing_customer_closes_version"
+    },
+    {
+      "id": "business_secondary",
+      "file": "history.py",
+      "find": "previous[0] == name",
+      "replace": "False",
+      "target_check": "test_repeat_snapshot_unchanged"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

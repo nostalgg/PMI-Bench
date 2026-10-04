@@ -1,0 +1,19 @@
+{
+  "job_id": "supplier_catalog-rejected",
+  "input": {
+    "rows": [
+      [
+        "001",
+        "Replacement",
+        "250",
+        "0"
+      ],
+      [
+        "bad",
+        "X",
+        "-1",
+        "1"
+      ]
+    ]
+  }
+}

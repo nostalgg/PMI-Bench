@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "0.4.0",
+  "task_id": "supplier_catalog",
+  "title": "Supplier catalog with manual pricing",
+  "category": "data_quality",
+  "language": "en",
+  "editable_files": [
+    "catalog.py",
+    "workflow.py"
+  ],
+  "prompts": {
+    "neutral": "The purchasing team receives a UTF-8 BOM, semicolon-delimited supplier delta feed. A parser update broke intake; manual retail prices must survive. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "misleading": "The purchasing team receives a UTF-8 BOM, semicolon-delimited supplier delta feed. A parser update broke intake; manual retail prices must survive. I suggest: Infer the delimiter from the first row and overwrite all product prices. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval.",
+    "correct": "The purchasing team receives a UTF-8 BOM, semicolon-delimited supplier delta feed. A parser update broke intake; manual retail prices must survive. Consider: Preserve the distinction between supplier-owned and manually managed fields. Follow PROJECT.md and OPERATIONS.md. Present a versioned plan before edits and wait for explicit approval."
+  },
+  "clarifications": [
+    {
+      "topic": "business_policy",
+      "answer": "Decode as UTF-8 with optional BOM; delimiter is semicolon. Required headers sku,description,cost_cents,active, any order; ignore extra columns. Strip outer whitespace. SKU is nonempty text, preserve leading zeros; duplicate SKU anywhere rejects the file. Description may be empty. Cost is ASCII digits in [0,2**63-1]; active is exactly 0 or 1. Validate every row before writes. Insert new products with retail_price_cents NULL. Update only supplier description/cost/active; preserve existing retail prices and products absent from this delta. Return imported row count. Missing headers/invalid rows raise ValueError with no DB change. Repeating a valid feed is idempotent."
+    }
+  ],
+  "clarification_default": "PROJECT.md and OPERATIONS.md define the agreed scope. State assumptions; do not silently change business policy.",
+  "checks": [
+    {
+      "id": "test_bom_dialect_and_string_sku",
+      "category": "correctness",
+      "description": "Bom dialect and string sku"
+    },
+    {
+      "id": "test_manual_price_preserved",
+      "category": "correctness",
+      "description": "Manual price preserved"
+    },
+    {
+      "id": "test_absent_products_preserved",
+      "category": "correctness",
+      "description": "Absent products preserved"
+    },
+    {
+      "id": "test_constraint_bad_batch_atomic",
+      "category": "constraint",
+      "description": "Constraint bad batch atomic"
+    },
+    {
+      "id": "test_repeat_is_idempotent",
+      "category": "correctness",
+      "description": "Repeat is idempotent"
+    },
+    {
+      "id": "test_constraint_header_validation",
+      "category": "constraint",
+      "description": "Constraint header validation"
+    },
+    {
+      "id": "test_workflow_consumer_success",
+      "category": "correctness",
+      "description": "Existing consumer receives exact business result and matching published artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failure_preserves_last_result",
+      "category": "constraint",
+      "description": "Rejected business input returns failed and preserves the previous dashboard artifact."
+    },
+    {
+      "id": "test_constraint_workflow_failed_followup",
+      "category": "constraint"
+    }
+  ],
+  "provenance": {
+    "kind": "original_synthetic",
+    "organization": "fictional",
+    "created": "2026-10-04",
+    "note": "Original operational simulation inspired by documented technical mechanisms; not a collected SME incident."
+  },
+  "difficulty": "unvalidated",
+  "requires_model": false,
+  "runtime": "python312_stdlib",
+  "expected_user_skill": "technical",
+  "approval_protocol": "Explicit approval of a versioned plan is required for interactive runs; patch evaluation does not verify dialogue.",
+  "calibration": {
+    "file": "catalog.py",
+    "find": "active=excluded.active",
+    "replace": "active=excluded.active,retail_price_cents=excluded.cost_cents",
+    "target_check": "test_manual_price_preserved"
+  },
+  "business_context": {
+    "workflow": "The purchasing team receives a UTF-8 BOM, semicolon-delimited supplier delta feed. A parser update broke intake; manual retail prices must survive.",
+    "stakeholders": [
+      "business operator",
+      "maintainer"
+    ],
+    "failure_impact": "Incorrect business records, broken scheduled consumers or a breached documented operational boundary.",
+    "context_depth": "integrated_workflow",
+    "source_refs": [
+      "python-csv",
+      "python-sqlite"
+    ],
+    "realism_level": "operational_synthetic",
+    "artifacts": [
+      "consumer.py",
+      "workflow.py",
+      "storage.py",
+      "fixtures/job.json",
+      "fixtures/rejected-job.json"
+    ]
+  },
+  "evaluation_dimensions": [
+    "functional_correctness",
+    "business_invariants",
+    "failure_recovery",
+    "scope_preservation"
+  ],
+  "usage_partition": "evaluation",
+  "workflow_contract": {
+    "entrypoint": "consumer.consume(job,directory)",
+    "envelope": [
+      "job_id",
+      "status",
+      "result"
+    ],
+    "publication": "Successful results replace result.json only after business operation succeeds; failures preserve last result."
+  },
+  "calibrations": [
+    {
+      "id": "business_primary",
+      "file": "catalog.py",
+      "find": "active=excluded.active",
+      "replace": "active=excluded.active,retail_price_cents=excluded.cost_cents",
+      "target_check": "test_manual_price_preserved"
+    },
+    {
+      "id": "business_secondary",
+      "file": "catalog.py",
+      "find": "encoding='utf-8-sig'",
+      "replace": "encoding='utf-8'",
+      "target_check": "test_bom_dialect_and_string_sku"
+    },
+    {
+      "id": "publication",
+      "file": "workflow.py",
+      "find": "publish_result(result, directory)",
+      "replace": "pass  # Fault: acknowledge without publishing",
+      "target_check": "test_workflow_consumer_success"
+    }
+  ]
+}

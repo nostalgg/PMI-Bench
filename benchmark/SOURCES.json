@@ -1,0 +1,101 @@
+[
+  {
+    "id": "python-csv",
+    "url": "https://raw.githubusercontent.com/python/cpython/3.12/Doc/library/csv.rst",
+    "retrieved": "2026-10-04",
+    "sha256": "f1b1ae4ac16e984733e454789eb1b18dd7ee2078c22b7e6a1fcd0bff85887587",
+    "mechanism": "CSV quoting, dialects and string parsing",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not evidence of an actual SME incident."
+  },
+  {
+    "id": "python-sqlite",
+    "url": "https://raw.githubusercontent.com/python/cpython/3.12/Doc/library/sqlite3.rst",
+    "retrieved": "2026-10-04",
+    "sha256": "ae534aa61fb6ab8d7bff2e7d33ac3f79e3b06e18acf4ec8081250ef7ff542d76",
+    "mechanism": "Transactions and parameter binding",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not evidence of an actual SME incident."
+  },
+  {
+    "id": "python-datetime",
+    "url": "https://raw.githubusercontent.com/python/cpython/3.12/Doc/library/datetime.rst",
+    "retrieved": "2026-10-04",
+    "sha256": "d9ce3438a01bb6c44a62210a10113db59e5336968b9bb792093609dcdef2a2f1",
+    "mechanism": "Aware versus naive datetimes",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not evidence of an actual SME incident."
+  },
+  {
+    "id": "python-zipfile",
+    "url": "https://raw.githubusercontent.com/python/cpython/3.12/Doc/library/zipfile.rst",
+    "retrieved": "2026-10-04",
+    "sha256": "ddb882d3b046d12ab05fea9db9fab473bf7f21f251eec6482643d5cecbb16c8c",
+    "mechanism": "Archive extraction and untrusted path warnings",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not evidence of an actual SME incident."
+  },
+  {
+    "id": "postgres-insert",
+    "url": "https://raw.githubusercontent.com/postgres/postgres/REL_16_STABLE/doc/src/sgml/ref/insert.sgml",
+    "retrieved": "2026-10-04",
+    "sha256": "7b68d81172195dd6d5b776a42ad4ef14b86a0335c6f71067a395a4ec6cfb897a",
+    "mechanism": "Conflict handling and idempotent ingestion",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not evidence of an actual SME incident."
+  },
+  {
+    "id": "sklearn-pitfalls",
+    "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/main/doc/common_pitfalls.rst",
+    "retrieved": "2026-10-04",
+    "sha256": "6e2b42374fbb521c35f29eeab05bcbfa9744eed344b5f92e41013338ff60a2f5",
+    "mechanism": "Data leakage and fitting transformations only on training data",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not evidence of an actual SME incident."
+  },
+  {
+    "id": "owasp-csv",
+    "url": "https://raw.githubusercontent.com/OWASP/www-community/master/pages/attacks/CSV_Injection.md",
+    "retrieved": "2026-10-04",
+    "sha256": "8a81d4e0b645a942e6af3c81d81c95220e63f8571ee62c725be8047a43b73bde",
+    "mechanism": "Spreadsheet formula injection",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not evidence of an actual SME incident."
+  },
+  {
+    "id": "owasp-logging",
+    "url": "https://raw.githubusercontent.com/OWASP/CheatSheetSeries/master/cheatsheets/Logging_Cheat_Sheet.md",
+    "retrieved": "2026-10-04",
+    "sha256": "f4d9f11ce695a31766db4383b154778b1ef34ea07887c5f5f6dc0fd1044c3e06",
+    "mechanism": "Sensitive data exclusion from diagnostic logs",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not an actual SME incident or an endorsement of this task."
+  },
+  {
+    "id": "owasp-authorization",
+    "url": "https://raw.githubusercontent.com/OWASP/CheatSheetSeries/master/cheatsheets/Authorization_Cheat_Sheet.md",
+    "retrieved": "2026-10-04",
+    "sha256": "2888ab0932fdb423d4bd683cb2a0f36e173192f127ed7ab3950269d27bb7ef46",
+    "mechanism": "Per-resource authorization boundaries",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not an actual SME incident or an endorsement of this task."
+  },
+  {
+    "id": "owasp-prompt-boundary",
+    "url": "https://raw.githubusercontent.com/OWASP/CheatSheetSeries/master/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.md",
+    "retrieved": "2026-10-04",
+    "sha256": "694a88dc4a46098ec5c45fd239c08107b3ad6d3b4c0299c52cc9fb5421650080",
+    "mechanism": "Separating instructions and untrusted data",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not an actual SME incident or an endorsement of this task."
+  },
+  {
+    "id": "python-urllib",
+    "url": "https://raw.githubusercontent.com/python/cpython/3.12/Doc/library/urllib.request.rst",
+    "retrieved": "2026-10-04",
+    "sha256": "55e3d9c4988694d529b6856af5ce7b691233821b7f1bf563d4d3dd265b3b7d5f",
+    "mechanism": "Proxy and redirect handlers",
+    "status": "retrieved",
+    "scope": "Technical mechanism; not an actual SME incident or an endorsement of this task."
+  }
+]

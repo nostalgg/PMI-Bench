@@ -1,0 +1,15 @@
+{
+  "scenario_id": "sales_report",
+  "provenance": "synthetic_operational_handover",
+  "reported_symptom": "A monthly customer report combines orders, items and multiple refunds. Finance reports doubled amounts on multi-item orders.",
+  "business_risk": "Equal-valued events must remain distinct; customers without sales remain visible.",
+  "accepted_change_boundary": [
+    "report.sql",
+    "workflow.py"
+  ],
+  "technical_reference_ids": [
+    "python-sqlite"
+  ],
+  "observed_company_incident": false,
+  "workflow_symptom": "Rejected business jobs are marked completed; the consumer rejects the incompatible receipt. Preserve the last valid published artifact."
+}

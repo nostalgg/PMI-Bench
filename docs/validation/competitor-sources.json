@@ -1,0 +1,51 @@
+[
+  {
+    "source": "swebench",
+    "url": "https://raw.githubusercontent.com/SWE-bench/SWE-bench/main/README.md",
+    "retrieved": "2026-10-04",
+    "sha256": "06841624d7b5130dfe3cc6714642e9a8fd2a608c95c66ae0180e409f12b73aaa",
+    "evidence": "README design/scope; no independently reproduced performance result"
+  },
+  {
+    "source": "ds1000",
+    "url": "https://raw.githubusercontent.com/xlang-ai/DS-1000/main/README.md",
+    "retrieved": "2026-10-04",
+    "sha256": "d4a2aa98c7d0f8c7103e4bc4db641f0a15f772ee579332e036b6813700bfb806",
+    "evidence": "README design/scope; no independently reproduced performance result"
+  },
+  {
+    "source": "spider2",
+    "url": "https://raw.githubusercontent.com/xlang-ai/Spider2/main/README.md",
+    "retrieved": "2026-10-04",
+    "sha256": "fb431e69c4988ed651621abd7aafe4709a11ce185189cd604eaab87752c570cb",
+    "evidence": "README design/scope; no independently reproduced performance result"
+  },
+  {
+    "source": "bigcodebench",
+    "url": "https://raw.githubusercontent.com/bigcode-project/bigcodebench/main/README.md",
+    "retrieved": "2026-10-04",
+    "sha256": "4aa8cbfa3111e92db886583d554a3c9e8f14561d47261d6441c069835e3bdc28",
+    "evidence": "README design/scope; no independently reproduced performance result"
+  },
+  {
+    "source": "terminalbench",
+    "url": "https://raw.githubusercontent.com/laude-institute/terminal-bench/main/README.md",
+    "retrieved": "2026-10-04",
+    "sha256": "c4b77ef934ae210f3c712e7bab30f460ff35e125aa83affc30c9e7dd6317cdf1",
+    "evidence": "README design/scope; no independently reproduced performance result"
+  },
+  {
+    "source": "mini-swe-agent",
+    "url": "https://raw.githubusercontent.com/SWE-agent/mini-swe-agent/main/README.md",
+    "retrieved": "2026-10-04",
+    "sha256": "9982d90b7566f2f3fa5e9811b475d5e8e2a84e2df80cf3f1e4be6e820b129835",
+    "evidence": "README design/scope; no independently reproduced performance result"
+  },
+  {
+    "source": "openhands",
+    "url": "https://raw.githubusercontent.com/OpenHands/software-agent-sdk/main/README.md",
+    "retrieved": "2026-10-04",
+    "sha256": "95094c9745c7cc58136d4eaa1688fb6038aafefec2be05344293f6df7e55dbf8",
+    "evidence": "README design/scope; no independently reproduced performance result"
+  }
+]

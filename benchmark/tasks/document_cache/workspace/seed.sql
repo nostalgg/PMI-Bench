@@ -1,0 +1,2 @@
+-- Original synthetic starting records; not expected output.
+-- Fresh cache; no existing enrichment rows.
