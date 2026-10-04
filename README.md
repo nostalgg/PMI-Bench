@@ -1,14 +1,11 @@
 # PMI Bench — SME data and code maintenance
 
-An original synthetic benchmark for maintaining data workflows in small and medium
+Weekend project of a benchmark for maintaining data workflows in small and medium
 enterprises: imports, databases, reporting, compatibility, security and local AI
-integration. The portfolio deliverable is the dataset, executable harness and
-inspectable validation evidence. The proposed LangGraph agent is a future experiment.
+integration.
 
 **Release 0.4.0: 26 scenarios, 78 correlated request variants, 232 patch checks.**
-Each scenario has two editable files, a protected consumer, persistent/scratch storage,
-a scheduled workflow, business fixtures and operational handover. Requests are neutral,
-misleading and correct suggestions about the same problem. They are not 78 independent tasks.
+Each scenario has two editable files, a protected consumer, persistent/scratch storage, a scheduled workflow, business fixtures and operational handover. They are not just an isolated function to be fixed, but small environments with dependencies, state and workflow. Requests are neutral, misleading and correct suggestions about the same problem. They are not 78 independent tasks.
 
 | Family | Scenarios | Checks | Examples |
 | --- | ---: | ---: | --- |
@@ -41,8 +38,7 @@ uv run pmi-bench self-test --output runs/calibration-04.json
 
 Calibration runs 130 Docker evaluations: 26 flawed starts, 26 references and 78 targeted
 regressions. Each mutation must fail its designated check; infrastructure errors do
-not qualify. No model or paid API is used. Three integration checks per scenario
-verify its consumer result, failure receipt and failed follow-up after a successful job.
+not qualify. Three integration checks per scenario verify its consumer result, failure receipt and failed follow-up after a successful job.
 The extra checks share one publication contract and do not constitute independent scenarios.
 
 ## Solve and run a workflow
@@ -108,12 +104,6 @@ English exports contain starting workspaces, descriptions, source attribution, d
 fixtures, licenses and deterministic hashes; exclude reference solutions, mutations
 and executable evaluators. [Kaggle preparation](publication/kaggle/README.md).
 
-Six public development groups and twenty public evaluation groups are fixed before
-model trials. Keep all three variants together. The public suite is not resistant to
-contamination or gaming. There are **zero real model/agent trials**. Pinned mini-SWE-agent
-and Aider adapters are retained for later comparisons with an approval gate; no GLM
-model or multi-agent advantage has been empirically established.
-
 ## Limits and licenses
 
 These are authored, AI-assisted operational simulations, not collected SME incidents.
@@ -122,6 +112,6 @@ history are small; dbt, distributed concurrency, production integration and real
 inference are absent. The common integration wrapper improves composition testing but
 adds repetitive structure. Security checks are narrow and do not certify deployment.
 Docker runs bounded nonroot candidates with read-only mounts and no host credentials or
-socket; the public evaluator is readable, so this is a cooperative research harness.
+socket.
 
 Code: **Apache 2.0**. Data/documentation: **CC BY 4.0**. [License allocation](LICENSING.md).
